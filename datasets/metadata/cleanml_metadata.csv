@@ -1,0 +1,6 @@
+source,dataset_name,corruption_type,version,rows,columns,missing_cells,missing_percent
+cleanml,Airbnb,raw,raw,33145,40,23766,1.7925780660733142
+cleanml,EEG,raw,raw,14980,15,0,0.0
+cleanml,Credit,raw,raw,150000,11,33655,2.03969696969697
+cleanml,Movie,raw,raw,9329,8,2,0.0026798156286847465
+cleanml,Restaurant,raw,raw,12007,11,0,0.0

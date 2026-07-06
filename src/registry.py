@@ -18,9 +18,36 @@ UCI_DATASETS = {
     "online_shoppers": 468,
     "taiwanese_bankruptcy": 572,
     "polish_bankruptcy": 365,
+    "diabetes_readmission": 296
 }
 
 FOLKTABLES_DATASETS = {
     "ACSIncome": "income",
     "ACSPublicCoverage": "public_coverage",
 }
+
+CLEANML_DATASETS = {
+    "Airbnb": "datasets/cleanml/Airbnb",
+    "EEG": "datasets/cleanml/EEG",
+    "Credit": "datasets/cleanml/Credit",
+    "Movie": "datasets/cleanml/Movie",
+    "Restaurant": "datasets/cleanml/Restaurant",
+}
+
+KAGGLE_DATASETS = {
+    "assistments": {
+        "kaggle_dataset": "nicolaswattiez/skillbuilder-data-2009-2010"
+    }
+}
+
+'''
+TableShift Datasets:
+
+| Dataset              | Source     |
+| -------------------- | ---------- |
+| diabetes_readmission | UCI 296    |
+| assistments          | Kaggle     | https://www.kaggle.com/datasets/nicolaswattiez/skillbuilder-data-2009-2010
+| ACSIncome            | Folktables |
+| ACSPublicCoverage    | Folktables |
+| HELOC                | OpenML     |
+'''

@@ -1,11 +1,13 @@
-from src.loaders.openml_loader import OpenMLLoader, extract_metadata
+from src.loaders.cleanml_loader import CleanMLLoader
 
-loader = OpenMLLoader()
+loader = CleanMLLoader()
 
-df, dataset = loader.load_dataset(1461)
+df = loader.load_csv(
+    dataset_name="Airbnb",
+    subfolder="raw",
+    filename="dirty_train.csv"
+)
 
-metadata = extract_metadata(dataset, df)
+print(df.shape)
 
-print(metadata)
-
-loader.save_dataset(df, "bank_marketing")
+print(df.head())
