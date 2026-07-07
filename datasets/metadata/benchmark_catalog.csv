@@ -1,0 +1,25 @@
+source,dataset_id,dataset_name,rows,columns,feature_count,target,missing_cells,missing_percent
+openml,1489,phoneme,5404,6,5,Class,0,0.0
+openml,1461,bank-marketing,45211,17,16,Class,0,0.0
+openml,1120,MagicTelescope,19020,11,10,class:,0,0.0
+openml,40701,churn,5000,21,20,class,0,0.0
+openml,45023,heloc,10000,23,22,RiskPerformance,0,0.0
+openml,151,electricity,45312,9,8,class,0,0.0
+openml,1053,jm1,10885,22,21,defects,25,0.0104397210506535
+openml,42803,road-safety,363243,67,66,Sex_of_Driver,2181757,8.96467029328379
+openml,41162,kick,72983,33,32,IsBadBuy,149271,6.197831873674193
+openml,298,coil2000,9822,86,85,CARAVAN,0,0.0
+openml,1500,seismic-bumps,210,8,7,Class,0,0.0
+openml,821,house_16H,22784,17,16,binaryClass,0,0.0
+uci,350,Default of Credit Card Clients,30000,24,23,Y,0,0.0
+uci,468,Online Shoppers Purchasing Intention Dataset,12330,18,17,Revenue,0,0.0
+uci,572,Taiwanese Bankruptcy Prediction,6819,96,95,Bankrupt?,0,0.0
+uci,365,Polish Companies Bankruptcy,43405,66,65,class,41322,1.442439601637851
+folktables,,ACSIncome,195665,11,10,target,0,0.0
+folktables,,ACSPublicCoverage,138554,20,19,target,0,0.0
+cleanml,,Airbnb,33145,40,,,23766,1.7925780660733142
+cleanml,,EEG,14980,15,,,0,0.0
+cleanml,,Credit,150000,11,,,33655,2.03969696969697
+cleanml,,Movie,9329,8,,,2,0.0026798156286847
+cleanml,,Restaurant,12007,11,,,0,0.0
+tableshift,,assistments,6123270,35,34,correct,13426647,6.264928473091759

@@ -1,0 +1,12 @@
+openml_metadata.csv,uci_metadata.csv,folktables_metadata.csv,cleanml_metadata.csv,tableshift_metadata.csv
+source,source,source,source,source
+dataset_id,dataset_id,dataset_name,dataset_name,dataset_name
+dataset_name,dataset_name,rows,corruption_type,rows
+rows,rows,columns,version,columns
+columns,columns,target,rows,target
+target,target,missing_cells,columns,domain_split_variable
+missing_cells,missing_cells,missing_percent,missing_cells,feature_count
+missing_percent,missing_percent,feature_count,missing_percent,missing_cells
+feature_count,feature_count,,,missing_percent
+,,,,numerical_features
+,,,,categorical_features

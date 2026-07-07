@@ -40,6 +40,20 @@ KAGGLE_DATASETS = {
     }
 }
 
+TABLESHIFT_DATASETS = {
+
+    "assistments": {
+        "path": (
+            "datasets/kaggle/assistments/"
+            "2012-2013-data-with-predictions-4-final.csv"
+        ),
+        "target": "correct",
+        "domain_split_variable": "school_id"
+    }
+
+}
+
+
 '''
 TableShift Datasets:
 

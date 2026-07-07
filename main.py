@@ -1,13 +1,35 @@
-from src.loaders.cleanml_loader import CleanMLLoader
+import pandas as pd
+from pathlib import Path
 
-loader = CleanMLLoader()
+METADATA_DIR = Path("datasets/metadata")
 
-df = loader.load_csv(
-    dataset_name="Airbnb",
-    subfolder="raw",
-    filename="dirty_train.csv"
+files = [
+    "openml_metadata.csv",
+    "uci_metadata.csv",
+    "folktables_metadata.csv",
+    "cleanml_metadata.csv",
+    "tableshift_metadata.csv"
+]
+
+all_columns = {}
+
+for file in files:
+    df = pd.read_csv(METADATA_DIR / file)
+
+    all_columns[file] = list(df.columns)
+
+max_cols = max(len(cols) for cols in all_columns.values())
+
+comparison = {}
+
+for file, cols in all_columns.items():
+    comparison[file] = cols + [""] * (max_cols - len(cols))
+
+comparison_df = pd.DataFrame(comparison)
+
+comparison_df.to_csv(
+    METADATA_DIR / "metadata_column_comparison.csv",
+    index=False
 )
 
-print(df.shape)
-
-print(df.head())
+print(comparison_df)
