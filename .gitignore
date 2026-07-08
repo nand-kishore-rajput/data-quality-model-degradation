@@ -225,5 +225,6 @@ datasets/raw/
 datasets/cleanml/
 datasets/processed/
 datasets/corrupted/
+datasets/kaggle/
 
 *.parquet
