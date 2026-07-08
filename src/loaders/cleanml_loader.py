@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from src.registry import CLEANML_DATASET_INFO
 
 
 class CleanMLLoader:
@@ -51,7 +52,7 @@ class CleanMLLoader:
 
         return path
     
-    
+
 def extract_metadata(
     dataset_name,
     corruption_type,
@@ -59,11 +60,28 @@ def extract_metadata(
     df
 ):
 
+    dataset_info = CLEANML_DATASET_INFO.get(
+        dataset_name,
+        {}
+    )
+
+    target = dataset_info.get("target")
+
     metadata = {
 
         "source": "cleanml",
 
         "dataset_name": dataset_name,
+
+        "target": target,
+
+        "task_type": dataset_info.get(
+            "task_type"
+        ),
+
+        "target_definition": dataset_info.get(
+            "target_definition"
+        ),
 
         "corruption_type": corruption_type,
 
@@ -72,6 +90,12 @@ def extract_metadata(
         "rows": len(df),
 
         "columns": df.shape[1],
+
+        "feature_count": (
+            df.shape[1] - 1
+            if target and target in df.columns
+            else None
+        ),
 
         "missing_cells": int(
             df.isna().sum().sum()

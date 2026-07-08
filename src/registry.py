@@ -6,10 +6,10 @@ OPENML_DATASETS = {
     "heloc": 45023,
     "electricity": 151,
     "jm1": 1053,
-    "road_safety": 42803,
+    "road_safety": 44038,
     "kick": 41162,
     "coil2000": 298,
-    "seismic_bumps": 1500,
+    "seismic_bumps": 46956,
     "house_16H": 821,
 }
 
@@ -34,12 +34,6 @@ CLEANML_DATASETS = {
     "Restaurant": "datasets/cleanml/Restaurant",
 }
 
-KAGGLE_DATASETS = {
-    "assistments": {
-        "kaggle_dataset": "nicolaswattiez/skillbuilder-data-2009-2010"
-    }
-}
-
 TABLESHIFT_DATASETS = {
 
     "assistments": {
@@ -60,7 +54,7 @@ TableShift Datasets:
 | Dataset              | Source     |
 | -------------------- | ---------- |
 | diabetes_readmission | UCI 296    |
-| assistments          | Kaggle     | https://www.kaggle.com/datasets/nicolaswattiez/skillbuilder-data-2009-2010
+| assistments          | Kaggle     | https://www.kaggle.com/datasets/nicolaswattiez/skillbuilder-data-2009-2010/https://sites.google.com/site/assistmentsdata/datasets/2012-13-school-data-with-affect
 | ACSIncome            | Folktables |
 | ACSPublicCoverage    | Folktables |
 | HELOC                | OpenML     |

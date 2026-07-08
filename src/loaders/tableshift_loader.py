@@ -4,7 +4,7 @@ import pandas as pd
 
 class TableShiftLoader:
 
-    def __init__(self, raw_data_dir="datasets/raw"):
+    def __init__(self, raw_data_dir="datasets/raw/tableshift"):
 
         self.raw_data_dir = raw_data_dir
 
