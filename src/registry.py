@@ -3,10 +3,10 @@ OPENML_DATASETS = {
     "bank_marketing": 1461,
     "magic_telescope": 1120,
     "churn": 40701,
-    "heloc": 45023,
+    "heloc": 46932,
     "electricity": 151,
     "jm1": 1053,
-    "road_safety": 44038,
+    "road_safety": 42803,
     "kick": 41162,
     "coil2000": 298,
     "seismic_bumps": 46956,
@@ -32,6 +32,29 @@ CLEANML_DATASETS = {
     "Credit": "datasets/cleanml/Credit",
     "Movie": "datasets/cleanml/Movie",
     "Restaurant": "datasets/cleanml/Restaurant",
+}
+
+CLEANML_DATASET_INFO = {
+    "Airbnb": {
+        "target": "Rating",
+        "task_type": "binary_classification"
+    },
+    "EEG": {
+        "target": "Eye",
+        "task_type": "binary_classification"
+    },
+    "Credit": {
+        "target": "SeriousDlqin2yrs",
+        "task_type": "binary_classification"
+    },
+    "Movie": {
+        "target": "Rating",
+        "task_type": "binary_classification"
+    },
+    "Restaurant": {
+        "target": "is_match",
+        "task_type": "binary_classification"
+    }
 }
 
 TABLESHIFT_DATASETS = {

@@ -1,0 +1,18 @@
+dataset,source,auc_mean,auc_std,n_rows,n_features,minority_pct,status,notes
+phoneme,openml,0.9541,0.0032,5404,5,29.35,FAIL_TOO_HIGH,"Target remap 1->0, 2->1"
+bank-marketing,openml,0.8013,0.0093,45211,15,11.7,PASS,"Drop V12 (duration leakage). Target remap 1->0, 2->1"
+MagicTelescope,openml,0.9383,0.0028,19020,10,35.16,FAIL_TOO_HIGH,Target string g/h -> 0/1
+churn,openml,0.9241,0.0201,5000,19,14.14,FAIL_TOO_HIGH,Drop phone_number if present. Cat cols label-encoded
+heloc,openml,0.7903,0.0108,10459,23,52.19,PASS,"Target Bad->1, Good->0. Sentinels left as numeric for screening"
+electricity,openml,0.9036,0.003,45312,7,42.45,PASS,"Drop date (temporal). Target DOWN->0, UP->1"
+jm1,openml,0.7425,0.0132,10885,21,19.35,PASS,Target bool -> int. 25 NaN cells handled by XGBoost
+road-safety,openml,0.8828,0.0012,50000,64,30.51,PASS,Filter target to Male/Female. Drop ID cols. Subsample 363k->50k
+kick,openml,0.7746,0.0061,50000,31,12.3,PASS,Subsample 72k->50k. High-card cats label-encoded
+default_credit,uci,0.7807,0.0052,30000,23,22.12,PASS,All numeric. Cleanest dataset in corpus
+online_shoppers,uci,0.7778,0.0046,12330,17,15.47,PASS,Accepted: AUC OLD=0.9297. Flag: PageValues was softleaked which was dropped and updated AUC was 0.7778
+diabetes_readmission,uci,0.6754,0.0049,50000,32,11.16,PASS,Binarize <30=1. Drop 15 near-constant drug cols. Subsample 101k->50k
+ACSIncome,folktables,0.9049,0.0017,50000,10,41.06,PASS,Target bool -> int. Subsample 195k->50k
+ACSPublicCoverage,folktables,0.7681,0.0055,50000,18,36.89,PASS,Drop ST (100% constant). Subsample 138k->50k
+Airbnb,cleanml,0.7193,0.0079,33145,39,67.69,PASS,"Target Y->1, N->0. LocationName high-card label-encoded"
+EEG,cleanml,0.9771,0.0023,14980,14,44.88,FAIL_TOO_HIGH,All numeric. No preprocessing needed
+assistments,tableshift,0.6417,0.0095,25000,9,67.64,FAIL_TOO_LOW,Binarize correct==1. Drop 23 leakage/ID/constant cols. Subsample 6.1M->25k

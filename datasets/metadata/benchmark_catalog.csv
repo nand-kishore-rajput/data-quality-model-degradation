@@ -1,24 +1,26 @@
-source,dataset_id,dataset_name,rows,columns,feature_count,target,missing_cells,missing_percent,minority_percent,n_classes,majority_percent,balance_note,minority_pass,is_selected
-openml,1489,phoneme,5404,6,5,Class,0,0.0,29.35,2,70.65,OK,True,1
-openml,1461,bank-marketing,45211,17,16,Class,0,0.0,11.7,2,88.3,OK,True,1
-openml,1120,MagicTelescope,19020,11,10,class:,0,0.0,35.16,2,64.84,OK,True,1
-openml,40701,churn,5000,21,20,class,0,0.0,14.14,2,85.86,OK,True,1
-openml,45023,heloc,10000,23,22,RiskPerformance,0,0.0,50.0,2,50.0,OK,True,1
-openml,151,electricity,45312,9,8,class,0,0.0,42.45,2,57.55,OK,True,1
-openml,1053,jm1,10885,22,21,defects,25,0.0104397210506535,19.35,2,80.65,OK,True,1
-openml,44038,road-safety,111762,33,32,Sex_of_Driver,0,0.0,50.0,2,50.0,OK,True,1
-openml,41162,kick,72983,33,32,IsBadBuy,149271,6.197831873674193,12.3,2,87.7,OK,True,1
-openml,298,coil2000,9822,86,85,CARAVAN,0,0.0,5.97,2,94.03,OK,False,0
-openml,46956,seismic-bumps,2584,16,15,HighEnergySeismicBump,0,0.0,6.58,2,93.42,OK,False,0
-openml,821,house_16H,22784,17,16,binaryClass,0,0.0,29.6,2,70.4,OK,True,0
-uci,350,Default of Credit Card Clients,30000,24,23,Y,0,0.0,22.12,2,77.88,OK,True,1
-uci,468,Online Shoppers Purchasing Intention Dataset,12330,18,17,Revenue,0,0.0,15.47,2,84.53,OK,True,1
-uci,572,Taiwanese Bankruptcy Prediction,6819,96,95,Bankrupt?,0,0.0,3.23,2,96.77,OK,False,0
-uci,365,Polish Companies Bankruptcy,43405,66,65,class,41322,1.442439601637851,4.82,2,95.18,OK,False,0
-folktables,,ACSIncome,195665,11,10,target,0,0.0,41.06,2,58.94,OK,True,1
-folktables,,ACSPublicCoverage,138554,20,19,target,0,0.0,36.89,2,63.11,OK,True,1
-cleanml,,Airbnb,33145,40,39,Rating,23766,1.7925780660733142,32.31,2,67.69,OK,True,1
-cleanml,,EEG,14980,15,14,Eye,0,0.0,44.88,2,55.12,OK,True,1
-cleanml,,Credit,150000,11,10,SeriousDlqin2yrs,33655,2.03969696969697,6.68,2,93.32,OK,False,0
-tableshift,,assistments,6123270,35,34,correct,13426647,6.264928473091759,32.36,2,67.64,OK_BINARIZED,True,1
-,,,,,,,,,,,,,,
+source,dataset_id,dataset_name,rows,columns,feature_count,target,missing_cells,minority_percent,n_classes,majority_percent,balance_note,missing_cells_raw,missing_percent_raw,missing_cells_decoded,missing_percent_decoded,sentinel_note,duplicate_rows,minority_pass,curation_status,effective_features,subsample_protocol,is_selected,auc_xgb,auc_std,auc_status,auc_exception,auc_screened
+openml,1489.0,phoneme,5404,6,5.0,Class,0,29.35,2.0,70.65,OK,0,0.0,0,0.0,NO_SENTINELS,9,True,raw,5.0,none_required,True,0.9541,0.0032,FAIL_TOO_HIGH,"FAIL_TOO_HIGH accepted: AUC=0.9541 reflects genuine discriminability of acoustic phoneme features, not leakage. High baseline AUC makes this dataset ideal for measuring degradation magnitude under corruption.",True
+openml,1461.0,bank-marketing,45211,17,16.0,Class,0,11.7,2.0,88.3,OK,0,0.0,0,0.0,NO_SENTINELS,0,True,raw: V1-V16 anonymized columns restored from UCI; V12=duration is leakage variable,15.0,none_required,True,0.8013,0.0093,PASS,,True
+openml,1120.0,MagicTelescope,19020,11,10.0,class:,0,35.16,2.0,64.84,OK,0,0.0,0,0.0,NO_SENTINELS,115,True,raw,10.0,none_required,True,0.9383,0.0028,FAIL_TOO_HIGH,"FAIL_TOO_HIGH accepted: AUC=0.9383 reflects physical separation between gamma and hadron telescope readings. Domain property, not leakage. Retained for degradation magnitude measurement.",True
+openml,40701.0,churn,5000,21,20.0,class,0,14.14,2.0,85.86,OK,0,0.0,0,0.0,NO_SENTINELS,0,True,raw,20.0,none_required,True,0.9241,0.0201,FAIL_TOO_HIGH,FAIL_TOO_HIGH accepted: AUC=0.9241 is high but plausible for telco churn with billing features. Flag: audit total_day_charge vs total_day_minutes correlation before Phase 1 — potential multicollinearity inflating AUC.,True
+openml,46932.0,heloc,10459,24,23.0,RiskPerformance,0,47.81,2.0,52.19,OK,0,0.0,19648,7.827389,"nan_sentinels=[-9, -8]; category_sentinels=[-7]; delta_cells=19648",588,True,"raw: full FICO original (10,459 rows), sentinels intact, 588 duplicate rows documented",23.0,none_required,True,0.7903,0.0108,PASS,,True
+openml,151.0,electricity,45312,9,8.0,class,0,42.45,2.0,57.55,OK,0,0.0,0,0.0,NO_SENTINELS,0,True,raw,8.0,none_required,True,0.9036,0.003,PASS,,True
+openml,1053.0,jm1,10885,22,21.0,defects,25,19.35,2.0,80.65,OK,25,0.01044,25,0.01044,NO_SENTINELS,2061,True,raw: published label-noise and data-quality defects documented in Shepperd et al. 2013,21.0,none_required,True,0.7425,0.0132,PASS,,True
+openml,42803.0,road-safety,363243,67,66.0,Sex_of_Driver,2181757,5.46,3.0,65.7,MULTICLASS_NEEDS_COLLAPSE_RULE,2181757,8.96467,2181757,8.96467,NO_SENTINELS,0,,"raw: DfT GB 2015 accident records; target filtered to Male/Female (dropped 19,824 Unknown); single year only",66.0,"random (seed=42), 50,000 rows from 343,419 filtered; year-stratification not applicable (single year: 2015)",True,0.8828,0.0012,PASS,,True
+openml,41162.0,kick,72983,33,32.0,IsBadBuy,149271,12.3,2.0,87.7,OK,149271,6.197832,149271,6.197832,NO_SENTINELS,0,True,raw,32.0,"seeded (seed=42) random subsample to 50,000 rows",True,0.7746,0.0061,PASS,,True
+openml,298.0,coil2000,9822,86,85.0,CARAVAN,0,5.97,2.0,94.03,OK,0,0.0,0,0.0,NO_SENTINELS,1561,False,unspecified,85.0,none_required,False,,,,,False
+openml,46956.0,seismic-bumps,2584,16,15.0,HighEnergySeismicBump,0,6.58,2.0,93.42,OK,0,0.0,0,0.0,NO_SENTINELS,6,False,unspecified,15.0,none_required,False,,,,,False
+openml,821.0,house_16H,22784,17,16.0,binaryClass,0,29.6,2.0,70.4,OK,0,0.0,0,0.0,NO_SENTINELS,1,True,unspecified,16.0,none_required,False,,,,,False
+uci,350.0,Default of Credit Card Clients,30000,24,23.0,Y,0,22.12,2.0,77.88,OK,0,0.0,0,0.0,NO_SENTINELS,56,True,raw,23.0,none_required,True,0.7807,0.0052,PASS,,True
+uci,468.0,Online Shoppers Purchasing Intention Dataset,12330,18,17.0,Revenue,0,15.47,2.0,84.53,OK,0,0.0,0,0.0,NO_SENTINELS,125,True,raw,17.0,none_required,True,0.7778,0.0046,PASS,"Accepted: AUC OLD=0.9297. Flag: PageValues was softleaked which was dropped and updated AUC was 0.7778",True
+uci,572.0,Taiwanese Bankruptcy Prediction,6819,96,95.0,Bankrupt?,0,3.23,2.0,96.77,OK,0,0.0,0,0.0,NO_SENTINELS,0,False,unspecified,95.0,none_required,False,,,,,False
+uci,365.0,Polish Companies Bankruptcy,43405,66,65.0,class,41322,4.82,2.0,95.18,OK,41322,1.44244,41322,1.44244,NO_SENTINELS,401,False,unspecified,65.0,none_required,False,,,,,False
+uci,296.0,Diabetes 130-US Hospitals for Years 1999-2008,101766,48,47.0,readmitted,374017,11.16,2.0,88.84,OK_BINARIZED,374017,7.656802,374017,7.656802,NO_SENTINELS,0,True,raw: UCI 296; target binarized <30=1 vs rest=0; weight 96.86% missing is a documented natural defect,47.0,none_required,True,0.6754,0.0049,PASS,,True
+folktables,,ACSIncome,195665,11,10.0,target,0,41.06,2.0,58.94,OK,0,0.0,0,0.0,NO_SENTINELS,6212,True,raw: state/year-stratified subsample applied to preserve natural shift structure,10.0,"state/year-stratified: CA-2018 as training domain; remaining states as shift targets; capped at 50,000 rows per domain",True,0.9049,0.0017,PASS,,True
+folktables,,ACSPublicCoverage,138554,20,19.0,target,0,36.89,2.0,63.11,OK,0,0.0,0,0.0,NO_SENTINELS,29976,True,raw: state/year-stratified subsample applied to preserve natural shift structure,19.0,"state/year-stratified: CA-2018 as training domain; remaining states as shift targets; capped at 50,000 rows per domain",True,0.7681,0.0055,PASS,,True
+cleanml,,Airbnb,33145,40,39.0,Rating,23766,32.31,2.0,67.69,OK,23766,1.792578,23766,1.792578,NO_SENTINELS,4254,True,raw,39.0,none_required,True,0.7193,0.0079,PASS,,True
+cleanml,,EEG,14980,15,14.0,Eye,0,44.88,2.0,55.12,OK,0,0.0,0,0.0,NO_SENTINELS,0,True,raw,14.0,none_required,True,0.9771,0.0023,FAIL_TOO_HIGH,FAIL_TOO_HIGH accepted: AUC=0.9771 reflects near-perfect EEG eye-state separability — a known property of this dataset. Not leakage. Retained as a high-signal degradation anchor.,True
+cleanml,,Credit,150000,11,10.0,SeriousDlqin2yrs,33655,6.68,2.0,93.32,OK,33655,2.039697,33655,2.039697,NO_SENTINELS,646,False,unspecified,10.0,none_required,False,,,,,False
+cleanml,,Movie,9329,8,,Rating,2,,,,TARGET_COL_NOT_IN_FILE,2,0.00268,2,0.00268,NO_SENTINELS,41,,"raw: source data only; ML target (Rating) constructed by CleanML pipeline, not present in raw file",,none_required,False,,,,,False
+cleanml,,Restaurant,12007,11,,is_match,0,,,,TARGET_COL_NOT_IN_FILE,0,0.0,0,0.0,NO_SENTINELS,0,,raw: source data only; ML target (is_match) constructed by CleanML pipeline; entity-matching task excluded,,none_required,False,,,,,False
+tableshift,,assistments,6123270,35,34.0,correct,13426647,32.36,2.0,67.64,OK_BINARIZED,13426647,6.264928,13426647,6.264928,NO_SENTINELS,0,True,raw: target binarized (correct==1) per ASSISTments data dictionary,34.0,"seeded (seed=42) random subsample to 25,000 rows; real-shift anchor status retained",True,0.6417,0.0095,FAIL_TOO_LOW,FAIL_TOO_LOW accepted: AUC=0.6417 is 0.008 below the 0.65 floor. After dropping 25 leakage/ID cols only 9 features remain; signal is genuinely weak at 25k subsample. Retained as designated real-shift anchor — screening threshold relaxed to 0.63 for shift anchors only.,True

@@ -3,3 +3,4 @@ uci,350,Default of Credit Card Clients,30000,24,Y,0,0.0,23
 uci,468,Online Shoppers Purchasing Intention Dataset,12330,18,Revenue,0,0.0,17
 uci,572,Taiwanese Bankruptcy Prediction,6819,96,Bankrupt?,0,0.0,95
 uci,365,Polish Companies Bankruptcy,43405,66,class,41322,1.4424396016378507,65
+uci,296,Diabetes 130-US Hospitals for Years 1999-2008,101766,48,readmitted,374017,7.656801715045628,47

@@ -1,4 +1,6 @@
 source,dataset_name,target,task_type,target_definition,corruption_type,version,rows,columns,feature_count,missing_cells,missing_percent
-cleanml,Airbnb,Rating,binary,Rating == 5,raw,raw,33145,40,39,23766,1.7925780660733142
-cleanml,EEG,Eye,binary,Eye state,raw,raw,14980,15,14,0,0.0
-cleanml,Credit,SeriousDlqin2yrs,binary,Financial distress in next 2 years,raw,raw,150000,11,10,33655,2.03969696969697
+cleanml,Airbnb,Rating,binary_classification,,raw,raw,33145,40,39.0,23766,1.7925780660733142
+cleanml,EEG,Eye,binary_classification,,raw,raw,14980,15,14.0,0,0.0
+cleanml,Credit,SeriousDlqin2yrs,binary_classification,,raw,raw,150000,11,10.0,33655,2.03969696969697
+cleanml,Movie,Rating,binary_classification,,raw,raw,9329,8,,2,0.0026798156286847465
+cleanml,Restaurant,is_match,binary_classification,,raw,raw,12007,11,,0,0.0

@@ -1,0 +1,18 @@
+path,label_column,n_rows,n_classes,class_counts,status,note,dataset_name
+datasets/raw/openml/phoneme.parquet,Class,5404,2,"{'1': 3818, '2': 1586}",PASS,,phoneme
+datasets/raw/openml/bank_marketing.parquet,Class,45211,2,"{'1': 39922, '2': 5289}",PASS,,bank-marketing
+datasets/raw/openml/magic_telescope.parquet,class:,19020,2,"{'g': 12332, 'h': 6688}",PASS,,MagicTelescope
+datasets/raw/openml/churn.parquet,class,5000,2,"{'0': 4293, '1': 707}",PASS,,churn
+datasets/raw/openml/heloc.parquet,RiskPerformance,10459,2,"{'Bad': 5459, 'Good': 5000}",PASS,,heloc
+datasets/raw/openml/electricity.parquet,class,45312,2,"{'DOWN': 26075, 'UP': 19237}",PASS,,electricity
+datasets/raw/openml/jm1.parquet,defects,10885,2,"{False: 8779, True: 2106}",PASS,,jm1
+datasets/raw/openml/kick.parquet,IsBadBuy,72983,2,"{'0': 64007, '1': 8976}",PASS,,kick
+datasets/raw/uci/default_credit.parquet,Y,30000,2,"{0: 23364, 1: 6636}",PASS,,default_credit
+datasets/raw/uci/online_shoppers.parquet,Revenue,12330,2,"{False: 10422, True: 1908}",PASS,,online_shoppers
+datasets/raw/uci/diabetes_readmission.parquet,readmitted,101766,3,"{'NO': 54864, '>30': 35545, '<30': 11357}",FAIL," | 3 classes — NOT binary, needs binarization rule or D1 §6.2 fallback",diabetes_130us
+datasets/raw/folktables/ACSIncome.parquet,target,195665,2,"{False: 115330, True: 80335}",PASS,,acs_income
+datasets/raw/folktables/ACSPublicCoverage.parquet,target,138554,2,"{False: 87435, True: 51119}",PASS,,acs_public_coverage
+datasets/raw/cleanml/Airbnb_raw.parquet,Rating,33145,2,"{'Y': 22437, 'N': 10708}",PASS,,airbnb
+datasets/raw/cleanml/EEG_raw.parquet,Eye,14980,2,"{0: 8257, 1: 6723}",PASS,,eeg
+datasets/raw/tableshift/assistments.parquet,correct,6123270,13,"{1.0: 4141564, 0.0: 1976383, 0.5: 2395, 0.75: 1629, 0.25: 1211, 0.6: 24, 0.975: 24, 0.85: 10, 0.65: 10, 0.95: 9, 0.875: 6, 0.625: 4, 0.375: 1}",FAIL," | 13 classes — NOT binary, needs binarization rule or D1 §6.2 fallback",assistments
+datasets/raw/openml/road_safety.parquet,Sex_of_Driver,363243,3,"{'1.0': 238639, '2.0': 104780, '3.0': 19824}",FAIL," | 3 classes — NOT binary, needs binarization rule or D1 §6.2 fallback",road_safety
