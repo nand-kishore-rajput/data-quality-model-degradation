@@ -1,0 +1,766 @@
+source,dataset,mechanism,severity,seed,status,validation_passed,achieved_rate,effective_sample_fraction,degenerate_resample
+cleanml,Airbnb,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.01835731683340943, 'psi_top_feature': 0.017689556770479675}",0.9795851423972683,False
+cleanml,Airbnb,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.020135952121768257, 'psi_top_feature': 0.019257681174702918}",0.9795851423972683,False
+cleanml,Airbnb,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.019655415865625525, 'psi_top_feature': 0.0192524578167311}",0.9795851423972683,False
+cleanml,Airbnb,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.07662902884721498, 'psi_top_feature': 0.06764832411830288}",0.9145302693217338,False
+cleanml,Airbnb,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.07535700242593765, 'psi_top_feature': 0.06651291665418016}",0.9145302693217338,False
+cleanml,Airbnb,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.0876648445585432, 'psi_top_feature': 0.07563799668768495}",0.9145302693217338,False
+cleanml,Airbnb,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.18300838576284661, 'psi_top_feature': 0.15779006724876285}",0.8066036998121934,False
+cleanml,Airbnb,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.2008317944427565, 'psi_top_feature': 0.17397324508296502}",0.8066036998121934,False
+cleanml,Airbnb,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.1771324820533423, 'psi_top_feature': 0.15201517545984322}",0.8066036998121934,False
+cleanml,Airbnb,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.3378211558735881, 'psi_top_feature': 0.3005628231177969}",0.6703268619856819,False
+cleanml,Airbnb,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.334014103056991, 'psi_top_feature': 0.2949704819783503}",0.6703268619856819,False
+cleanml,Airbnb,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.3480098421872525, 'psi_top_feature': 0.3105219146905584}",0.6703268619856819,False
+cleanml,Airbnb,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.5510215418918109, 'psi_top_feature': 0.49176313652139847}",0.5286853152283405,False
+cleanml,Airbnb,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.5434087428384644, 'psi_top_feature': 0.4893480842511335}",0.5286853152283405,False
+cleanml,Airbnb,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.528650624677226, 'psi_top_feature': 0.468981728792385}",0.5286853152283405,False
+cleanml,Airbnb,label,0.05,1,OK,True,"{'achieved_class_prior': 0.6480643539467069, 'target_class_prior': 0.6480926724137931}",,
+cleanml,Airbnb,label,0.05,2,OK,True,"{'achieved_class_prior': 0.6480643539467069, 'target_class_prior': 0.6480926724137931}",,
+cleanml,Airbnb,label,0.05,3,OK,True,"{'achieved_class_prior': 0.6480643539467069, 'target_class_prior': 0.6480926724137931}",,
+cleanml,Airbnb,label,0.1,1,OK,True,"{'achieved_class_prior': 0.6192056309703369, 'target_class_prior': 0.6192456896551725}",,
+cleanml,Airbnb,label,0.1,2,OK,True,"{'achieved_class_prior': 0.6192056309703369, 'target_class_prior': 0.6192456896551725}",,
+cleanml,Airbnb,label,0.1,3,OK,True,"{'achieved_class_prior': 0.6192056309703369, 'target_class_prior': 0.6192456896551725}",,
+cleanml,Airbnb,label,0.15,1,OK,True,"{'achieved_class_prior': 0.5904474610356963, 'target_class_prior': 0.5903987068965517}",,
+cleanml,Airbnb,label,0.15,2,OK,True,"{'achieved_class_prior': 0.5904474610356963, 'target_class_prior': 0.5903987068965517}",,
+cleanml,Airbnb,label,0.15,3,OK,True,"{'achieved_class_prior': 0.5904474610356963, 'target_class_prior': 0.5903987068965517}",,
+cleanml,Airbnb,label,0.2,1,OK,True,"{'achieved_class_prior': 0.5615887380593263, 'target_class_prior': 0.5615517241379311}",,
+cleanml,Airbnb,label,0.2,2,OK,True,"{'achieved_class_prior': 0.5615887380593263, 'target_class_prior': 0.5615517241379311}",,
+cleanml,Airbnb,label,0.2,3,OK,True,"{'achieved_class_prior': 0.5615887380593263, 'target_class_prior': 0.5615517241379311}",,
+cleanml,Airbnb,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5327300150829563, 'target_class_prior': 0.5327047413793103}",,
+cleanml,Airbnb,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5327300150829563, 'target_class_prior': 0.5327047413793103}",,
+cleanml,Airbnb,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5327300150829563, 'target_class_prior': 0.5327047413793103}",,
+cleanml,Airbnb,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.0483603842331898},,
+cleanml,Airbnb,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.05309181761399125},,
+cleanml,Airbnb,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.050970075633015456},,
+cleanml,Airbnb,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.0963895329579331},,
+cleanml,Airbnb,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09931292941911306},,
+cleanml,Airbnb,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.1081880960210457},,
+cleanml,Airbnb,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15104339185160648},,
+cleanml,Airbnb,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15396627108057465},,
+cleanml,Airbnb,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15060835251561985},,
+cleanml,Airbnb,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.20105995362702883},,
+cleanml,Airbnb,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20768269831355402},,
+cleanml,Airbnb,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.19598816178888523},,
+cleanml,Airbnb,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2543888704869162},,
+cleanml,Airbnb,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25109306683322924},,
+cleanml,Airbnb,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25353502137454786},,
+cleanml,EEG,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.0019387680222375217, 'psi_top_feature': 0.00639097761073117}",0.9995018303062818,False
+cleanml,EEG,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.0027821887720431908, 'psi_top_feature': 0.0025837378184504637}",0.9995018303062818,False
+cleanml,EEG,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.001003383541682175, 'psi_top_feature': 0.0020392697138553193}",0.9995018303062818,False
+cleanml,EEG,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.0046487325576983, 'psi_top_feature': 0.006009078605230138}",0.9979180385491306,False
+cleanml,EEG,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.004125128347872914, 'psi_top_feature': 0.003059251074017303}",0.9979180385491306,False
+cleanml,EEG,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.00366197829146904, 'psi_top_feature': 0.002789592721698379}",0.9979180385491306,False
+cleanml,EEG,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.004210754338309166, 'psi_top_feature': 0.003481743052658459}",0.9950990628832097,False
+cleanml,EEG,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.007532082359689874, 'psi_top_feature': 0.005529846797952388}",0.9950990628832097,False
+cleanml,EEG,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.006982321847101831, 'psi_top_feature': 0.006578004745967285}",0.9950990628832097,False
+cleanml,EEG,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.012433316298381129, 'psi_top_feature': 0.008080852368372712}",0.9908732068181975,False
+cleanml,EEG,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.0067927393645568455, 'psi_top_feature': 0.004354064966211053}",0.9908732068181975,False
+cleanml,EEG,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.0065268372113512765, 'psi_top_feature': 0.005341400335566812}",0.9908732068181975,False
+cleanml,EEG,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.01664682414104424, 'psi_top_feature': 0.012825263480102872}",0.9850455966802873,False
+cleanml,EEG,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.011595450307225759, 'psi_top_feature': 0.006321279126767502}",0.9850455966802873,False
+cleanml,EEG,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.011562281993914698, 'psi_top_feature': 0.01163442608417688}",0.9850455966802873,False
+cleanml,EEG,label,0.05,1,OK,True,"{'achieved_class_prior': 0.471412680756396, 'target_class_prior': 0.47139008106819263}",,
+cleanml,EEG,label,0.05,2,OK,True,"{'achieved_class_prior': 0.471412680756396, 'target_class_prior': 0.47139008106819263}",,
+cleanml,EEG,label,0.05,3,OK,True,"{'achieved_class_prior': 0.471412680756396, 'target_class_prior': 0.47139008106819263}",,
+cleanml,EEG,label,0.1,1,OK,True,"{'achieved_class_prior': 0.4938820912124583, 'target_class_prior': 0.4939484978540773}",,
+cleanml,EEG,label,0.1,2,OK,True,"{'achieved_class_prior': 0.4938820912124583, 'target_class_prior': 0.4939484978540773}",,
+cleanml,EEG,label,0.1,3,OK,True,"{'achieved_class_prior': 0.4938820912124583, 'target_class_prior': 0.4939484978540773}",,
+cleanml,EEG,label,0.15,1,OK,True,"{'achieved_class_prior': 0.5165739710789766, 'target_class_prior': 0.5165069146399619}",,
+cleanml,EEG,label,0.15,2,OK,True,"{'achieved_class_prior': 0.5165739710789766, 'target_class_prior': 0.5165069146399619}",,
+cleanml,EEG,label,0.15,3,OK,True,"{'achieved_class_prior': 0.5165739710789766, 'target_class_prior': 0.5165069146399619}",,
+cleanml,EEG,label,0.2,1,OK,True,"{'achieved_class_prior': 0.539043381535039, 'target_class_prior': 0.5390653314258466}",,
+cleanml,EEG,label,0.2,2,OK,True,"{'achieved_class_prior': 0.539043381535039, 'target_class_prior': 0.5390653314258466}",,
+cleanml,EEG,label,0.2,3,OK,True,"{'achieved_class_prior': 0.539043381535039, 'target_class_prior': 0.5390653314258466}",,
+cleanml,EEG,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5615127919911013, 'target_class_prior': 0.5616237482117311}",,
+cleanml,EEG,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5615127919911013, 'target_class_prior': 0.5616237482117311}",,
+cleanml,EEG,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5615127919911013, 'target_class_prior': 0.5616237482117311}",,
+cleanml,EEG,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05299860529986053},,
+cleanml,EEG,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04874551971326165},,
+cleanml,EEG,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05137751303052867},,
+cleanml,EEG,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.100418410041841},,
+cleanml,EEG,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.1039426523297491},,
+cleanml,EEG,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10498883097542815},,
+cleanml,EEG,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.14225941422594143},,
+cleanml,EEG,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15770609318996415},,
+cleanml,EEG,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15860014892032762},,
+cleanml,EEG,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.199442119944212},,
+cleanml,EEG,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.210752688172043},,
+cleanml,EEG,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.20625465376023827},,
+cleanml,EEG,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2496513249651325},,
+cleanml,EEG,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25734767025089605},,
+cleanml,EEG,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.2561429635145197},,
+folktables,ACSIncome,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.005628548115184147, 'psi_top_feature': 0.002098205465683278}",0.9952296156363686,False
+folktables,ACSIncome,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.006268199686487563, 'psi_top_feature': 0.0022273495191113056}",0.9952296156363686,False
+folktables,ACSIncome,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.004525197291005065, 'psi_top_feature': 0.0010947156603659234}",0.9952296156363686,False
+folktables,ACSIncome,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.02188805168474949, 'psi_top_feature': 0.010412063760238765}",0.98174822543893,False
+folktables,ACSIncome,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.01780762417493754, 'psi_top_feature': 0.008288757508735164}",0.98174822543893,False
+folktables,ACSIncome,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.016973239863082034, 'psi_top_feature': 0.007819580258665903}",0.98174822543893,False
+folktables,ACSIncome,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.04329913446566181, 'psi_top_feature': 0.024710808794855273}",0.9609818719727077,False
+folktables,ACSIncome,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.04459477962051298, 'psi_top_feature': 0.023545700408543237}",0.9609818719727077,False
+folktables,ACSIncome,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.03661593827599635, 'psi_top_feature': 0.019205809506588803}",0.9609818719727077,False
+folktables,ACSIncome,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.06229940172498939, 'psi_top_feature': 0.03212649367426163}",0.9344470969208903,False
+folktables,ACSIncome,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.07554886261114173, 'psi_top_feature': 0.03981383284560003}",0.9344470969208903,False
+folktables,ACSIncome,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.07259762144509724, 'psi_top_feature': 0.039864835769770623}",0.9344470969208903,False
+folktables,ACSIncome,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.10791118472644913, 'psi_top_feature': 0.0547751334564641}",0.9035996046848729,False
+folktables,ACSIncome,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.11608807165404368, 'psi_top_feature': 0.061888726183340445}",0.9035996046848729,False
+folktables,ACSIncome,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.10708717532525613, 'psi_top_feature': 0.0538752902520576}",0.9035996046848729,False
+folktables,ACSIncome,label,0.05,1,OK,True,"{'achieved_class_prior': 0.43777081527898143, 'target_class_prior': 0.43779550844309834}",,
+folktables,ACSIncome,label,0.05,2,OK,True,"{'achieved_class_prior': 0.43777081527898143, 'target_class_prior': 0.43779550844309834}",,
+folktables,ACSIncome,label,0.05,3,OK,True,"{'achieved_class_prior': 0.43777081527898143, 'target_class_prior': 0.43779550844309834}",,
+folktables,ACSIncome,label,0.1,1,OK,True,"{'achieved_class_prior': 0.46210252649823347, 'target_class_prior': 0.46212206063030375}",,
+folktables,ACSIncome,label,0.1,2,OK,True,"{'achieved_class_prior': 0.46210252649823347, 'target_class_prior': 0.46212206063030375}",,
+folktables,ACSIncome,label,0.1,3,OK,True,"{'achieved_class_prior': 0.46210252649823347, 'target_class_prior': 0.46212206063030375}",,
+folktables,ACSIncome,label,0.15,1,OK,True,"{'achieved_class_prior': 0.4864342377174855, 'target_class_prior': 0.48644861281750906}",,
+folktables,ACSIncome,label,0.15,2,OK,True,"{'achieved_class_prior': 0.4864342377174855, 'target_class_prior': 0.48644861281750906}",,
+folktables,ACSIncome,label,0.15,3,OK,True,"{'achieved_class_prior': 0.4864342377174855, 'target_class_prior': 0.48644861281750906}",,
+folktables,ACSIncome,label,0.2,1,OK,True,"{'achieved_class_prior': 0.5107659489367375, 'target_class_prior': 0.5107751650047144}",,
+folktables,ACSIncome,label,0.2,2,OK,True,"{'achieved_class_prior': 0.5107659489367375, 'target_class_prior': 0.5107751650047144}",,
+folktables,ACSIncome,label,0.2,3,OK,True,"{'achieved_class_prior': 0.5107659489367375, 'target_class_prior': 0.5107751650047144}",,
+folktables,ACSIncome,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5350976601559896, 'target_class_prior': 0.5351017171919198}",,
+folktables,ACSIncome,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5350976601559896, 'target_class_prior': 0.5351017171919198}",,
+folktables,ACSIncome,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5350976601559896, 'target_class_prior': 0.5351017171919198}",,
+folktables,ACSIncome,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05088105726872247},,
+folktables,ACSIncome,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.0472972972972973},,
+folktables,ACSIncome,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.054165760278442464},,
+folktables,ACSIncome,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10352422907488987},,
+folktables,ACSIncome,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09987331081081081},,
+folktables,ACSIncome,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.09941266043071569},,
+folktables,ACSIncome,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15088105726872247},,
+folktables,ACSIncome,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.14885979729729729},,
+folktables,ACSIncome,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15096802262345008},,
+folktables,ACSIncome,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2},,
+folktables,ACSIncome,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.19087837837837837},,
+folktables,ACSIncome,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.19926038720904937},,
+folktables,ACSIncome,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.25176211453744496},,
+folktables,ACSIncome,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.24556587837837837},,
+folktables,ACSIncome,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25016314988035676},,
+folktables,ACSPublicCoverage,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.008286229806474218, 'psi_top_feature': 0.0060645681793488225}",0.9926715715663451,False
+folktables,ACSPublicCoverage,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.009380155098372658, 'psi_top_feature': 0.005719121610327142}",0.9926715715663451,False
+folktables,ACSPublicCoverage,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.009081108932850756, 'psi_top_feature': 0.00865323378583207}",0.9926715715663451,False
+folktables,ACSPublicCoverage,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.027822113866134153, 'psi_top_feature': 0.020612459670886277}",0.9712145919176034,False
+folktables,ACSPublicCoverage,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.03182033693789772, 'psi_top_feature': 0.024884386174860745}",0.9712145919176034,False
+folktables,ACSPublicCoverage,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.03441598479918425, 'psi_top_feature': 0.02202069070465304}",0.9712145919176034,False
+folktables,ACSPublicCoverage,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.06411508166470413, 'psi_top_feature': 0.05196676151867626}",0.9372219165629697,False
+folktables,ACSPublicCoverage,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.06768148172915303, 'psi_top_feature': 0.05202851177594767}",0.9372219165629697,False
+folktables,ACSPublicCoverage,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.07356714751909593, 'psi_top_feature': 0.05535164302419439}",0.9372219165629697,False
+folktables,ACSPublicCoverage,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.12164774117415852, 'psi_top_feature': 0.08689763687857567}",0.8931729887043423,False
+folktables,ACSPublicCoverage,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.11940225416527125, 'psi_top_feature': 0.08376200093414721}",0.8931729887043423,False
+folktables,ACSPublicCoverage,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.12180516388313425, 'psi_top_feature': 0.08872588774669335}",0.8931729887043423,False
+folktables,ACSPublicCoverage,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.1704229071752482, 'psi_top_feature': 0.12792325559684417}",0.8420639573512597,False
+folktables,ACSPublicCoverage,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.18302653319307796, 'psi_top_feature': 0.12526282550281462}",0.8420639573512597,False
+folktables,ACSPublicCoverage,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.17240834822232, 'psi_top_feature': 0.12696994510125378}",0.8420639573512597,False
+folktables,ACSPublicCoverage,label,0.05,1,OK,True,"{'achieved_class_prior': 0.3952, 'target_class_prior': 0.39516999999999997}",,
+folktables,ACSPublicCoverage,label,0.05,2,OK,True,"{'achieved_class_prior': 0.3952, 'target_class_prior': 0.39516999999999997}",,
+folktables,ACSPublicCoverage,label,0.05,3,OK,True,"{'achieved_class_prior': 0.3952, 'target_class_prior': 0.39516999999999997}",,
+folktables,ACSPublicCoverage,label,0.1,1,OK,True,"{'achieved_class_prior': 0.42173333333333335, 'target_class_prior': 0.42174}",,
+folktables,ACSPublicCoverage,label,0.1,2,OK,True,"{'achieved_class_prior': 0.42173333333333335, 'target_class_prior': 0.42174}",,
+folktables,ACSPublicCoverage,label,0.1,3,OK,True,"{'achieved_class_prior': 0.42173333333333335, 'target_class_prior': 0.42174}",,
+folktables,ACSPublicCoverage,label,0.15,1,OK,True,"{'achieved_class_prior': 0.4483333333333333, 'target_class_prior': 0.44831}",,
+folktables,ACSPublicCoverage,label,0.15,2,OK,True,"{'achieved_class_prior': 0.4483333333333333, 'target_class_prior': 0.44831}",,
+folktables,ACSPublicCoverage,label,0.15,3,OK,True,"{'achieved_class_prior': 0.4483333333333333, 'target_class_prior': 0.44831}",,
+folktables,ACSPublicCoverage,label,0.2,1,OK,True,"{'achieved_class_prior': 0.47486666666666666, 'target_class_prior': 0.47487999999999997}",,
+folktables,ACSPublicCoverage,label,0.2,2,OK,True,"{'achieved_class_prior': 0.47486666666666666, 'target_class_prior': 0.47487999999999997}",,
+folktables,ACSPublicCoverage,label,0.2,3,OK,True,"{'achieved_class_prior': 0.47486666666666666, 'target_class_prior': 0.47487999999999997}",,
+folktables,ACSPublicCoverage,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5014666666666666, 'target_class_prior': 0.50145}",,
+folktables,ACSPublicCoverage,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5014666666666666, 'target_class_prior': 0.50145}",,
+folktables,ACSPublicCoverage,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5014666666666666, 'target_class_prior': 0.50145}",,
+folktables,ACSPublicCoverage,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.04711246200607903},,
+folktables,ACSPublicCoverage,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.049112670243499794},,
+folktables,ACSPublicCoverage,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05604719764011799},,
+folktables,ACSPublicCoverage,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.1033434650455927},,
+folktables,ACSPublicCoverage,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.10221488512862842},,
+folktables,ACSPublicCoverage,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10785398230088496},,
+folktables,ACSPublicCoverage,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15002171081198437},,
+folktables,ACSPublicCoverage,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15215297840143074},,
+folktables,ACSPublicCoverage,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1568952802359882},,
+folktables,ACSPublicCoverage,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.19908814589665655},,
+folktables,ACSPublicCoverage,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.19645068097399918},,
+folktables,ACSPublicCoverage,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.20446165191740412},,
+folktables,ACSPublicCoverage,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2496743378202345},,
+folktables,ACSPublicCoverage,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.24762690879075527},,
+folktables,ACSPublicCoverage,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25331858407079644},,
+openml,MagicTelescope,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.014426929670986898, 'psi_top_feature': 0.011502854633422368}",0.9886108673147681,False
+openml,MagicTelescope,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.013946109887745806, 'psi_top_feature': 0.014050758864383405}",0.9886108673147681,False
+openml,MagicTelescope,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.010878269272869502, 'psi_top_feature': 0.009842488440899109}",0.9886108673147681,False
+openml,MagicTelescope,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.03559342438555669, 'psi_top_feature': 0.03457041906159229}",0.9524716505255242,False
+openml,MagicTelescope,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.04351214924836411, 'psi_top_feature': 0.03722507589962245}",0.9524716505255242,False
+openml,MagicTelescope,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.05186179017639556, 'psi_top_feature': 0.04771243334410477}",0.9524716505255242,False
+openml,MagicTelescope,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.09043898190206584, 'psi_top_feature': 0.08194306830294178}",0.8904466719294818,False
+openml,MagicTelescope,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.10254813422591355, 'psi_top_feature': 0.09422980136934647}",0.8904466719294818,False
+openml,MagicTelescope,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.09564199790873681, 'psi_top_feature': 0.08110579115814251}",0.8904466719294818,False
+openml,MagicTelescope,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.17284237900251032, 'psi_top_feature': 0.15308523810813046}",0.8046733050812498,False
+openml,MagicTelescope,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.18721022865552084, 'psi_top_feature': 0.16778308962040028}",0.8046733050812498,False
+openml,MagicTelescope,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.1728122217602937, 'psi_top_feature': 0.14860115815750238}",0.8046733050812498,False
+openml,MagicTelescope,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.28496572231489575, 'psi_top_feature': 0.2567123082568558}",0.7010029963506519,False
+openml,MagicTelescope,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.3125989748169202, 'psi_top_feature': 0.273235178735714}",0.7010029963506519,False
+openml,MagicTelescope,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.2844563260639259, 'psi_top_feature': 0.25303924403612565}",0.7010029963506519,False
+openml,MagicTelescope,label,0.05,1,OK,True,"{'achieved_class_prior': 0.37900823550026286, 'target_class_prior': 0.3790306467362728}",,
+openml,MagicTelescope,label,0.05,2,OK,True,"{'achieved_class_prior': 0.37900823550026286, 'target_class_prior': 0.3790306467362728}",,
+openml,MagicTelescope,label,0.05,3,OK,True,"{'achieved_class_prior': 0.37900823550026286, 'target_class_prior': 0.3790306467362728}",,
+openml,MagicTelescope,label,0.1,1,OK,True,"{'achieved_class_prior': 0.40651831084632906, 'target_class_prior': 0.4064500863817322}",,
+openml,MagicTelescope,label,0.1,2,OK,True,"{'achieved_class_prior': 0.40651831084632906, 'target_class_prior': 0.4064500863817322}",,
+openml,MagicTelescope,label,0.1,3,OK,True,"{'achieved_class_prior': 0.40651831084632906, 'target_class_prior': 0.4064500863817322}",,
+openml,MagicTelescope,label,0.15,1,OK,True,"{'achieved_class_prior': 0.43385316278254776, 'target_class_prior': 0.4338695260271915}",,
+openml,MagicTelescope,label,0.15,2,OK,True,"{'achieved_class_prior': 0.43385316278254776, 'target_class_prior': 0.4338695260271915}",,
+openml,MagicTelescope,label,0.15,3,OK,True,"{'achieved_class_prior': 0.43385316278254776, 'target_class_prior': 0.4338695260271915}",,
+openml,MagicTelescope,label,0.2,1,OK,True,"{'achieved_class_prior': 0.46136323812861396, 'target_class_prior': 0.4612889656726509}",,
+openml,MagicTelescope,label,0.2,2,OK,True,"{'achieved_class_prior': 0.46136323812861396, 'target_class_prior': 0.4612889656726509}",,
+openml,MagicTelescope,label,0.2,3,OK,True,"{'achieved_class_prior': 0.46136323812861396, 'target_class_prior': 0.4612889656726509}",,
+openml,MagicTelescope,label,0.25,1,OK,True,"{'achieved_class_prior': 0.48869809006483267, 'target_class_prior': 0.4887084053181101}",,
+openml,MagicTelescope,label,0.25,2,OK,True,"{'achieved_class_prior': 0.48869809006483267, 'target_class_prior': 0.4887084053181101}",,
+openml,MagicTelescope,label,0.25,3,OK,True,"{'achieved_class_prior': 0.48869809006483267, 'target_class_prior': 0.4887084053181101}",,
+openml,MagicTelescope,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.04770017035775128},,
+openml,MagicTelescope,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.041312959818902095},,
+openml,MagicTelescope,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.050966608084358524},,
+openml,MagicTelescope,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.1033503691084611},,
+openml,MagicTelescope,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09451046972269384},,
+openml,MagicTelescope,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.11306385471587581},,
+openml,MagicTelescope,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.1567291311754685},,
+openml,MagicTelescope,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15336728919071874},,
+openml,MagicTelescope,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1611013473930873},,
+openml,MagicTelescope,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2067007382169222},,
+openml,MagicTelescope,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20316921335597057},,
+openml,MagicTelescope,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.20620972466315174},,
+openml,MagicTelescope,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2572402044293015},,
+openml,MagicTelescope,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25749858517260893},,
+openml,MagicTelescope,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.2507322788517868},,
+openml,bank-marketing,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.0029768659145932635, 'psi_top_feature': 0.002410251275567106}",0.9972163273563033,False
+openml,bank-marketing,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.0031924710758042983, 'psi_top_feature': 0.0019921553103025512}",0.9972163273563033,False
+openml,bank-marketing,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.0031088996827731987, 'psi_top_feature': 0.002410251275567106}",0.9972163273563033,False
+openml,bank-marketing,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.007990521414364779, 'psi_top_feature': 0.005322788702595159}",0.9898778928219929,False
+openml,bank-marketing,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.00936952747083418, 'psi_top_feature': 0.007241394902606204}",0.9898778928219929,False
+openml,bank-marketing,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.013259652438960717, 'psi_top_feature': 0.008797825270723671}",0.9898778928219929,False
+openml,bank-marketing,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.019327845539895507, 'psi_top_feature': 0.011131086600260406}",0.9791526954673692,False
+openml,bank-marketing,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.027635301230975712, 'psi_top_feature': 0.017767747174822993}",0.9791526954673692,False
+openml,bank-marketing,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.021325678783395516, 'psi_top_feature': 0.014930095681854728}",0.9791526954673692,False
+openml,bank-marketing,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.03287491725349806, 'psi_top_feature': 0.019346065305304114}",0.9658091193459877,False
+openml,bank-marketing,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.03151874629815631, 'psi_top_feature': 0.021100339898097356}",0.9658091193459877,False
+openml,bank-marketing,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.036316229019491254, 'psi_top_feature': 0.022107057412950083}",0.9658091193459877,False
+openml,bank-marketing,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.05258179124180302, 'psi_top_feature': 0.03372049878739935}",0.950289489132305,False
+openml,bank-marketing,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.05174641761976252, 'psi_top_feature': 0.03131663564459272}",0.950289489132305,False
+openml,bank-marketing,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.055012202451585446, 'psi_top_feature': 0.03459134154498293}",0.950289489132305,False
+openml,bank-marketing,label,0.05,1,OK,True,"{'achieved_class_prior': 0.15614862872309054, 'target_class_prior': 0.15612901696843304}",,
+openml,bank-marketing,label,0.05,2,OK,True,"{'achieved_class_prior': 0.15614862872309054, 'target_class_prior': 0.15612901696843304}",,
+openml,bank-marketing,label,0.05,3,OK,True,"{'achieved_class_prior': 0.15614862872309054, 'target_class_prior': 0.15612901696843304}",,
+openml,bank-marketing,label,0.1,1,OK,True,"{'achieved_class_prior': 0.19529637275140077, 'target_class_prior': 0.19528012133851552}",,
+openml,bank-marketing,label,0.1,2,OK,True,"{'achieved_class_prior': 0.19529637275140077, 'target_class_prior': 0.19528012133851552}",,
+openml,bank-marketing,label,0.1,3,OK,True,"{'achieved_class_prior': 0.19529637275140077, 'target_class_prior': 0.19528012133851552}",,
+openml,bank-marketing,label,0.15,1,OK,True,"{'achieved_class_prior': 0.234444116779711, 'target_class_prior': 0.23443122570859798}",,
+openml,bank-marketing,label,0.15,2,OK,True,"{'achieved_class_prior': 0.234444116779711, 'target_class_prior': 0.23443122570859798}",,
+openml,bank-marketing,label,0.15,3,OK,True,"{'achieved_class_prior': 0.234444116779711, 'target_class_prior': 0.23443122570859798}",,
+openml,bank-marketing,label,0.2,1,OK,True,"{'achieved_class_prior': 0.2735918608080212, 'target_class_prior': 0.2735823300786805}",,
+openml,bank-marketing,label,0.2,2,OK,True,"{'achieved_class_prior': 0.2735918608080212, 'target_class_prior': 0.2735823300786805}",,
+openml,bank-marketing,label,0.2,3,OK,True,"{'achieved_class_prior': 0.2735918608080212, 'target_class_prior': 0.2735823300786805}",,
+openml,bank-marketing,label,0.25,1,OK,True,"{'achieved_class_prior': 0.31273960483633145, 'target_class_prior': 0.3127334344487629}",,
+openml,bank-marketing,label,0.25,2,OK,True,"{'achieved_class_prior': 0.31273960483633145, 'target_class_prior': 0.3127334344487629}",,
+openml,bank-marketing,label,0.25,3,OK,True,"{'achieved_class_prior': 0.31273960483633145, 'target_class_prior': 0.3127334344487629}",,
+openml,bank-marketing,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05024630541871921},,
+openml,bank-marketing,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.052284387979477154},,
+openml,bank-marketing,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.058766626360338574},,
+openml,bank-marketing,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.09901477832512315},,
+openml,bank-marketing,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.11116540434888834},,
+openml,bank-marketing,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10858524788391777},,
+openml,bank-marketing,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15197044334975368},,
+openml,bank-marketing,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15929635963840705},,
+openml,bank-marketing,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15912938331318016},,
+openml,bank-marketing,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2022167487684729},,
+openml,bank-marketing,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.2064500366479355},,
+openml,bank-marketing,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.2060459492140266},,
+openml,bank-marketing,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2522167487684729},,
+openml,bank-marketing,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25800146591741996},,
+openml,bank-marketing,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.2599758162031439},,
+openml,churn,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.0041123739508705575, 'psi_top_feature': 0.0069060975463755}",0.9975408710169595,False
+openml,churn,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.007199938530914071, 'psi_top_feature': 0.019113382142190823}",0.9975408710169595,False
+openml,churn,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.014147681247030405, 'psi_top_feature': 0.014899351054987789}",0.9975408710169595,False
+openml,churn,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.009700245193800427, 'psi_top_feature': 0.009378688893953083}",0.9901858216127319,False
+openml,churn,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.019091462649952557, 'psi_top_feature': 0.017226357259016393}",0.9901858216127319,False
+openml,churn,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.014873748990506575, 'psi_top_feature': 0.018518200110469177}",0.9901858216127319,False
+openml,churn,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.03343896228291232, 'psi_top_feature': 0.01533259011112975}",0.9780193377951564,False
+openml,churn,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.04681882929748664, 'psi_top_feature': 0.02080329484143927}",0.9780193377951564,False
+openml,churn,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.03476140900906721, 'psi_top_feature': 0.027179343542963707}",0.9780193377951564,False
+openml,churn,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.058362177857197696, 'psi_top_feature': 0.008876010253549144}",0.9611916404114659,False
+openml,churn,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.05084563387165076, 'psi_top_feature': 0.018578243919851994}",0.9611916404114659,False
+openml,churn,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.0478076030477939, 'psi_top_feature': 0.04191119369279136}",0.9611916404114659,False
+openml,churn,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.06744997137998286, 'psi_top_feature': 0.007725283521015134}",0.9399155278160671,False
+openml,churn,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.08007545081191393, 'psi_top_feature': 0.010362379290316644}",0.9399155278160671,False
+openml,churn,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.09250792486117199, 'psi_top_feature': 0.026609273605394945}",0.9399155278160671,False
+openml,churn,label,0.05,1,OK,True,"{'achieved_class_prior': 0.17921385742838108, 'target_class_prior': 0.1791240354386968}",,
+openml,churn,label,0.05,2,OK,True,"{'achieved_class_prior': 0.17921385742838108, 'target_class_prior': 0.1791240354386968}",,
+openml,churn,label,0.05,3,OK,True,"{'achieved_class_prior': 0.17921385742838108, 'target_class_prior': 0.1791240354386968}",,
+openml,churn,label,0.1,1,OK,True,"{'achieved_class_prior': 0.2171885409726849, 'target_class_prior': 0.21706487567876537}",,
+openml,churn,label,0.1,2,OK,True,"{'achieved_class_prior': 0.2171885409726849, 'target_class_prior': 0.21706487567876537}",,
+openml,churn,label,0.1,3,OK,True,"{'achieved_class_prior': 0.2171885409726849, 'target_class_prior': 0.21706487567876537}",,
+openml,churn,label,0.15,1,OK,True,"{'achieved_class_prior': 0.2551632245169887, 'target_class_prior': 0.255005715918834}",,
+openml,churn,label,0.15,2,OK,True,"{'achieved_class_prior': 0.2551632245169887, 'target_class_prior': 0.255005715918834}",,
+openml,churn,label,0.15,3,OK,True,"{'achieved_class_prior': 0.2551632245169887, 'target_class_prior': 0.255005715918834}",,
+openml,churn,label,0.2,1,OK,True,"{'achieved_class_prior': 0.2931379080612925, 'target_class_prior': 0.2929465561589026}",,
+openml,churn,label,0.2,2,OK,True,"{'achieved_class_prior': 0.2931379080612925, 'target_class_prior': 0.2929465561589026}",,
+openml,churn,label,0.2,3,OK,True,"{'achieved_class_prior': 0.2931379080612925, 'target_class_prior': 0.2929465561589026}",,
+openml,churn,label,0.25,1,OK,True,"{'achieved_class_prior': 0.33111259160559625, 'target_class_prior': 0.33088739639897113}",,
+openml,churn,label,0.25,2,OK,True,"{'achieved_class_prior': 0.33111259160559625, 'target_class_prior': 0.33088739639897113}",,
+openml,churn,label,0.25,3,OK,True,"{'achieved_class_prior': 0.33111259160559625, 'target_class_prior': 0.33088739639897113}",,
+openml,churn,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.053811659192825115},,
+openml,churn,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04357298474945534},,
+openml,churn,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.060674157303370786},,
+openml,churn,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.09417040358744394},,
+openml,churn,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.10675381263616558},,
+openml,churn,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.1101123595505618},,
+openml,churn,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.1412556053811659},,
+openml,churn,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15904139433551198},,
+openml,churn,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1550561797752809},,
+openml,churn,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.1860986547085202},,
+openml,churn,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.23311546840958605},,
+openml,churn,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.21123595505617979},,
+openml,churn,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.24439461883408073},,
+openml,churn,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.2875816993464052},,
+openml,churn,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.2449438202247191},,
+openml,electricity,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.004368586844762946, 'psi_top_feature': 0.004042805999742833}",0.9941430382924972,False
+openml,electricity,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.005516364516462364, 'psi_top_feature': 0.006323796524164101}",0.9941430382924972,False
+openml,electricity,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.006318184079511234, 'psi_top_feature': 0.006565956712115853}",0.9941430382924972,False
+openml,electricity,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.027567827789493373, 'psi_top_feature': 0.021614276113574468}",0.9762789493816504,False
+openml,electricity,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.020050403785585848, 'psi_top_feature': 0.01582236501953395}",0.9762789493816504,False
+openml,electricity,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.018206770540839187, 'psi_top_feature': 0.0176895830149693}",0.9762789493816504,False
+openml,electricity,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.055050662834634084, 'psi_top_feature': 0.04381141463182327}",0.9450365454145232,False
+openml,electricity,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.04349138718523041, 'psi_top_feature': 0.034833177845309496}",0.9450365454145232,False
+openml,electricity,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.046408221623371854, 'psi_top_feature': 0.04056850139184974}",0.9450365454145232,False
+openml,electricity,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.0962913365583327, 'psi_top_feature': 0.07492589313660614}",0.8968341234852538,False
+openml,electricity,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.08338923455367828, 'psi_top_feature': 0.06557293389192427}",0.8968341234852538,False
+openml,electricity,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.08608487644954552, 'psi_top_feature': 0.06849961436910083}",0.8968341234852538,False
+openml,electricity,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.1393624468326182, 'psi_top_feature': 0.1047208606831825}",0.8247462685206755,False
+openml,electricity,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.1328730032961998, 'psi_top_feature': 0.10196319344008035}",0.8247462685206755,False
+openml,electricity,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.12491972652711067, 'psi_top_feature': 0.09758824424078895}",0.8247462685206755,False
+openml,electricity,label,0.05,1,OK,True,"{'achieved_class_prior': 0.44832659065833025, 'target_class_prior': 0.4483089510357221}",,
+openml,electricity,label,0.05,2,OK,True,"{'achieved_class_prior': 0.44832659065833025, 'target_class_prior': 0.4483089510357221}",,
+openml,electricity,label,0.05,3,OK,True,"{'achieved_class_prior': 0.44832659065833025, 'target_class_prior': 0.4483089510357221}",,
+openml,electricity,label,0.1,1,OK,True,"{'achieved_class_prior': 0.4720853254873115, 'target_class_prior': 0.47208216413910525}",,
+openml,electricity,label,0.1,2,OK,True,"{'achieved_class_prior': 0.4720853254873115, 'target_class_prior': 0.47208216413910525}",,
+openml,electricity,label,0.1,3,OK,True,"{'achieved_class_prior': 0.4720853254873115, 'target_class_prior': 0.47208216413910525}",,
+openml,electricity,label,0.15,1,OK,True,"{'achieved_class_prior': 0.49584406031629275, 'target_class_prior': 0.49585537724248824}",,
+openml,electricity,label,0.15,2,OK,True,"{'achieved_class_prior': 0.49584406031629275, 'target_class_prior': 0.49585537724248824}",,
+openml,electricity,label,0.15,3,OK,True,"{'achieved_class_prior': 0.49584406031629275, 'target_class_prior': 0.49585537724248824}",,
+openml,electricity,label,0.2,1,OK,True,"{'achieved_class_prior': 0.519602795145274, 'target_class_prior': 0.5196285903458714}",,
+openml,electricity,label,0.2,2,OK,True,"{'achieved_class_prior': 0.519602795145274, 'target_class_prior': 0.5196285903458714}",,
+openml,electricity,label,0.2,3,OK,True,"{'achieved_class_prior': 0.519602795145274, 'target_class_prior': 0.5196285903458714}",,
+openml,electricity,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5434350864288341, 'target_class_prior': 0.5434018034492544}",,
+openml,electricity,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5434350864288341, 'target_class_prior': 0.5434018034492544}",,
+openml,electricity,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5434350864288341, 'target_class_prior': 0.5434018034492544}",,
+openml,electricity,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05112173593232806},,
+openml,electricity,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.0460181516042439},,
+openml,electricity,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05662789211300013},,
+openml,electricity,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10091945568223612},,
+openml,electricity,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09893902594912438},,
+openml,electricity,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.11031573565128468},,
+openml,electricity,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15137918352335417},,
+openml,electricity,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15262686948740892},,
+openml,electricity,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15773999744343603},,
+openml,electricity,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2007355645457889},,
+openml,electricity,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20286335165537517},,
+openml,electricity,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.204908602837786},,
+openml,electricity,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.24979771974990805},,
+openml,electricity,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25412245941454686},,
+openml,electricity,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25744599258596446},,
+openml,heloc,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.01839194150618312, 'psi_top_feature': 0.02691941500233086}",0.9521567077279554,False
+openml,heloc,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.03498145320165225, 'psi_top_feature': 0.041529589957274286}",0.9521567077279554,False
+openml,heloc,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.027746272177971546, 'psi_top_feature': 0.034353490938702026}",0.9521567077279554,False
+openml,heloc,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.14191779062613746, 'psi_top_feature': 0.15882655838145576}",0.738863436972414,False
+openml,heloc,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.15881564671481027, 'psi_top_feature': 0.17326822553583554}",0.738863436972414,False
+openml,heloc,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.14781413969858967, 'psi_top_feature': 0.15491386213618666}",0.738863436972414,False
+openml,heloc,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.4627121312668427, 'psi_top_feature': 0.47313066743043036}",0.4338523490840534,False
+openml,heloc,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.43920583056384704, 'psi_top_feature': 0.4490846666258714}",0.4338523490840534,False
+openml,heloc,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.4447223557984623, 'psi_top_feature': 0.4714638507361871}",0.4338523490840534,False
+openml,heloc,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.9784889318725584, 'psi_top_feature': 1.015446314611241}",0.23098164576670696,False
+openml,heloc,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.9976092030255346, 'psi_top_feature': 1.044665138468256}",0.23098164576670696,False
+openml,heloc,covariate,0.2,3,OK,True,"{'psi_pc1_score': 1.049102829691801, 'psi_top_feature': 1.0523638170918737}",0.23098164576670696,False
+openml,heloc,covariate,0.25,1,OK,True,"{'psi_pc1_score': 1.673137194293739, 'psi_top_feature': 1.6766474415293542}",0.13679730339288143,False
+openml,heloc,covariate,0.25,2,OK,True,"{'psi_pc1_score': 1.804886970802797, 'psi_top_feature': 1.77967415610826}",0.13679730339288143,False
+openml,heloc,covariate,0.25,3,OK,True,"{'psi_pc1_score': 1.6950225561250902, 'psi_top_feature': 1.7246773270800595}",0.13679730339288143,False
+openml,heloc,label,0.05,1,OK,True,"{'achieved_class_prior': 0.5009560229445507, 'target_class_prior': 0.5008270728042616}",,
+openml,heloc,label,0.05,2,OK,True,"{'achieved_class_prior': 0.5009560229445507, 'target_class_prior': 0.5008270728042616}",,
+openml,heloc,label,0.05,3,OK,True,"{'achieved_class_prior': 0.5009560229445507, 'target_class_prior': 0.5008270728042616}",,
+openml,heloc,label,0.1,1,OK,True,"{'achieved_class_prior': 0.47960484384958574, 'target_class_prior': 0.47973091107772164}",,
+openml,heloc,label,0.1,2,OK,True,"{'achieved_class_prior': 0.47960484384958574, 'target_class_prior': 0.47973091107772164}",,
+openml,heloc,label,0.1,3,OK,True,"{'achieved_class_prior': 0.47960484384958574, 'target_class_prior': 0.47973091107772164}",,
+openml,heloc,label,0.15,1,OK,True,"{'achieved_class_prior': 0.458572339069471, 'target_class_prior': 0.45863474935118154}",,
+openml,heloc,label,0.15,2,OK,True,"{'achieved_class_prior': 0.458572339069471, 'target_class_prior': 0.45863474935118154}",,
+openml,heloc,label,0.15,3,OK,True,"{'achieved_class_prior': 0.458572339069471, 'target_class_prior': 0.45863474935118154}",,
+openml,heloc,label,0.2,1,OK,True,"{'achieved_class_prior': 0.4375398342893563, 'target_class_prior': 0.4375385876246415}",,
+openml,heloc,label,0.2,2,OK,True,"{'achieved_class_prior': 0.4375398342893563, 'target_class_prior': 0.4375385876246415}",,
+openml,heloc,label,0.2,3,OK,True,"{'achieved_class_prior': 0.4375398342893563, 'target_class_prior': 0.4375385876246415}",,
+openml,heloc,label,0.25,1,OK,True,"{'achieved_class_prior': 0.4165073295092416, 'target_class_prior': 0.4164424258981014}",,
+openml,heloc,label,0.25,2,OK,True,"{'achieved_class_prior': 0.4165073295092416, 'target_class_prior': 0.4164424258981014}",,
+openml,heloc,label,0.25,3,OK,True,"{'achieved_class_prior': 0.4165073295092416, 'target_class_prior': 0.4164424258981014}",,
+openml,heloc,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.057608695652173914},,
+openml,heloc,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04395604395604396},,
+openml,heloc,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.050920910075839654},,
+openml,heloc,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.1},,
+openml,heloc,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.1},,
+openml,heloc,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.11484290357529794},,
+openml,heloc,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15978260869565217},,
+openml,heloc,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.16043956043956045},,
+openml,heloc,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1635969664138678},,
+openml,heloc,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.19891304347826086},,
+openml,heloc,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.21868131868131868},,
+openml,heloc,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.19934994582881907},,
+openml,heloc,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.23695652173913043},,
+openml,heloc,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25824175824175827},,
+openml,heloc,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25677139761646806},,
+openml,jm1,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.02013805376048645, 'psi_top_feature': 0.028686932186929744}",0.9721733489197051,False
+openml,jm1,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.024474086746167655, 'psi_top_feature': 0.030316948477401448}",0.9721733489197051,False
+openml,jm1,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.015590947452007667, 'psi_top_feature': 0.022138601199050402}",0.9721733489197051,False
+openml,jm1,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.07011847618399439, 'psi_top_feature': 0.0771749649928681}",0.8079691657252234,False
+openml,jm1,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.07366445934301905, 'psi_top_feature': 0.08747894518840099}",0.8079691657252234,False
+openml,jm1,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.08035597670211922, 'psi_top_feature': 0.09549184608429688}",0.8079691657252234,False
+openml,jm1,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.24629844134477388, 'psi_top_feature': 0.2547773653817923}",0.43597893596583687,False
+openml,jm1,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.21552137308170682, 'psi_top_feature': 0.22766223967695742}",0.43597893596583687,False
+openml,jm1,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.24270222045477674, 'psi_top_feature': 0.24081859223352048}",0.43597893596583687,False
+openml,jm1,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.5654760821539822, 'psi_top_feature': 0.5691709460363648}",0.14678113474078386,False
+openml,jm1,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.6150113262738358, 'psi_top_feature': 0.6081582949800918}",0.14678113474078386,False
+openml,jm1,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.5932176568132823, 'psi_top_feature': 0.5966542540426161}",0.14678113474078386,False
+openml,jm1,covariate,0.25,1,OK,False,"{'psi_pc1_score': 1.1855822016838182, 'psi_top_feature': 1.1876619280885585}",0.046463643544666,True
+openml,jm1,covariate,0.25,2,OK,False,"{'psi_pc1_score': 1.2687365859968227, 'psi_top_feature': 1.2603947625370149}",0.046463643544666,True
+openml,jm1,covariate,0.25,3,OK,False,"{'psi_pc1_score': 1.2054611252038423, 'psi_top_feature': 1.2122230419760465}",0.046463643544666,True
+openml,jm1,label,0.05,1,OK,True,"{'achieved_class_prior': 0.22872014696876913, 'target_class_prior': 0.22879052369077307}",,
+openml,jm1,label,0.05,2,OK,True,"{'achieved_class_prior': 0.22872014696876913, 'target_class_prior': 0.22879052369077307}",,
+openml,jm1,label,0.05,3,OK,True,"{'achieved_class_prior': 0.22872014696876913, 'target_class_prior': 0.22879052369077307}",,
+openml,jm1,label,0.1,1,OK,True,"{'achieved_class_prior': 0.2642375995101041, 'target_class_prior': 0.264117338233364}",,
+openml,jm1,label,0.1,2,OK,True,"{'achieved_class_prior': 0.2642375995101041, 'target_class_prior': 0.264117338233364}",,
+openml,jm1,label,0.1,3,OK,True,"{'achieved_class_prior': 0.2642375995101041, 'target_class_prior': 0.264117338233364}",,
+openml,jm1,label,0.15,1,OK,True,"{'achieved_class_prior': 0.2994488671157379, 'target_class_prior': 0.2994441527759548}",,
+openml,jm1,label,0.15,2,OK,True,"{'achieved_class_prior': 0.2994488671157379, 'target_class_prior': 0.2994441527759548}",,
+openml,jm1,label,0.15,3,OK,True,"{'achieved_class_prior': 0.2994488671157379, 'target_class_prior': 0.2994441527759548}",,
+openml,jm1,label,0.2,1,OK,True,"{'achieved_class_prior': 0.3346601347213717, 'target_class_prior': 0.3347709673185458}",,
+openml,jm1,label,0.2,2,OK,True,"{'achieved_class_prior': 0.3346601347213717, 'target_class_prior': 0.3347709673185458}",,
+openml,jm1,label,0.2,3,OK,True,"{'achieved_class_prior': 0.3346601347213717, 'target_class_prior': 0.3347709673185458}",,
+openml,jm1,label,0.25,1,OK,True,"{'achieved_class_prior': 0.37017758726270666, 'target_class_prior': 0.3700977818611366}",,
+openml,jm1,label,0.25,2,OK,True,"{'achieved_class_prior': 0.37017758726270666, 'target_class_prior': 0.3700977818611366}",,
+openml,jm1,label,0.25,3,OK,True,"{'achieved_class_prior': 0.37017758726270666, 'target_class_prior': 0.3700977818611366}",,
+openml,jm1,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05461767626613704},,
+openml,jm1,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04069175991861648},,
+openml,jm1,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.06168549087749783},,
+openml,jm1,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10724925521350546},,
+openml,jm1,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09664292980671414},,
+openml,jm1,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.11989574283231973},,
+openml,jm1,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.16385302879841113},,
+openml,jm1,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15564598168870802},,
+openml,jm1,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.16594265855777585},,
+openml,jm1,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2035749751737835},,
+openml,jm1,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20854526958290945},,
+openml,jm1,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.21807124239791487},,
+openml,jm1,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2512413108242304},,
+openml,jm1,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.26042726347914547},,
+openml,jm1,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.263249348392702},,
+openml,kick,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.024859973344964672, 'psi_top_feature': 0.03074300451354756}",0.9789093943714248,False
+openml,kick,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.022659885093887933, 'psi_top_feature': 0.028084395506676435}",0.9789093943714248,False
+openml,kick,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.018992514318814192, 'psi_top_feature': 0.02476092227820892}",0.9789093943714248,False
+openml,kick,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.08596586978274663, 'psi_top_feature': 0.09245000440979996}",0.9208169633543809,False
+openml,kick,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.08813077113507427, 'psi_top_feature': 0.0969118855694231}",0.9208169633543809,False
+openml,kick,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.09110047522351071, 'psi_top_feature': 0.0979601081054271}",0.9208169633543809,False
+openml,kick,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.1825725807026267, 'psi_top_feature': 0.1893626480009524}",0.8365793664790524,False
+openml,kick,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.18763126090061394, 'psi_top_feature': 0.19376776414182895}",0.8365793664790524,False
+openml,kick,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.17944972635428336, 'psi_top_feature': 0.18710235136688175}",0.8365793664790524,False
+openml,kick,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.3233874063307615, 'psi_top_feature': 0.33024406801445727}",0.7384992609802018,False
+openml,kick,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.3356006491392146, 'psi_top_feature': 0.3399708639507596}",0.7384992609802018,False
+openml,kick,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.3115430279603193, 'psi_top_feature': 0.31097800884992777}",0.7384992609802018,False
+openml,kick,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.4736272122526961, 'psi_top_feature': 0.47509314134183667}",0.6373087786103803,False
+openml,kick,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.4693366671931669, 'psi_top_feature': 0.4706434913141919}",0.6373087786103803,False
+openml,kick,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.474833628338171, 'psi_top_feature': 0.4775716497295501}",0.6373087786103803,False
+openml,kick,label,0.05,1,OK,True,"{'achieved_class_prior': 0.16178921405239652, 'target_class_prior': 0.1617719077687934}",,
+openml,kick,label,0.05,2,OK,True,"{'achieved_class_prior': 0.16178921405239652, 'target_class_prior': 0.1617719077687934}",,
+openml,kick,label,0.05,3,OK,True,"{'achieved_class_prior': 0.16178921405239652, 'target_class_prior': 0.1617719077687934}",,
+openml,kick,label,0.1,1,OK,True,"{'achieved_class_prior': 0.20065328978068128, 'target_class_prior': 0.20062601788622533}",,
+openml,kick,label,0.1,2,OK,True,"{'achieved_class_prior': 0.20065328978068128, 'target_class_prior': 0.20062601788622533}",,
+openml,kick,label,0.1,3,OK,True,"{'achieved_class_prior': 0.20065328978068128, 'target_class_prior': 0.20062601788622533}",,
+openml,kick,label,0.15,1,OK,True,"{'achieved_class_prior': 0.23945070328644757, 'target_class_prior': 0.23948012800365726}",,
+openml,kick,label,0.15,2,OK,True,"{'achieved_class_prior': 0.23945070328644757, 'target_class_prior': 0.23948012800365726}",,
+openml,kick,label,0.15,3,OK,True,"{'achieved_class_prior': 0.23945070328644757, 'target_class_prior': 0.23948012800365726}",,
+openml,kick,label,0.2,1,OK,True,"{'achieved_class_prior': 0.27831477901473234, 'target_class_prior': 0.2783342381210892}",,
+openml,kick,label,0.2,2,OK,True,"{'achieved_class_prior': 0.27831477901473234, 'target_class_prior': 0.2783342381210892}",,
+openml,kick,label,0.2,3,OK,True,"{'achieved_class_prior': 0.27831477901473234, 'target_class_prior': 0.2783342381210892}",,
+openml,kick,label,0.25,1,OK,True,"{'achieved_class_prior': 0.31717885474301716, 'target_class_prior': 0.3171883482385211}",,
+openml,kick,label,0.25,2,OK,True,"{'achieved_class_prior': 0.31717885474301716, 'target_class_prior': 0.3171883482385211}",,
+openml,kick,label,0.25,3,OK,True,"{'achieved_class_prior': 0.31717885474301716, 'target_class_prior': 0.3171883482385211}",,
+openml,kick,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.04993282579489476},,
+openml,kick,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.0462942354774093},,
+openml,kick,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05629791894852136},,
+openml,kick,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.09896999552171966},,
+openml,kick,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09948809258847095},,
+openml,kick,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10646221248630887},,
+openml,kick,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.14755933721450962},,
+openml,kick,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15379479189850878},,
+openml,kick,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.152026286966046},,
+openml,kick,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.19905956112852666},,
+openml,kick,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20209214333407524},,
+openml,kick,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.20328587075575028},,
+openml,kick,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.24832064487236902},,
+openml,kick,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.2541731582461607},,
+openml,kick,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25191675794085433},,
+openml,phoneme,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.01041520905661254, 'psi_top_feature': 0.021617873013151042}",0.9965386605131835,False
+openml,phoneme,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.007214329633227472, 'psi_top_feature': 0.024325870486577614}",0.9965386605131835,False
+openml,phoneme,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.008749288358980008, 'psi_top_feature': 0.019638721309716407}",0.9965386605131835,False
+openml,phoneme,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.01771616794934514, 'psi_top_feature': 0.020455930983863554}",0.9864357047774428,False
+openml,phoneme,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.028940017169477708, 'psi_top_feature': 0.036494434688390295}",0.9864357047774428,False
+openml,phoneme,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.02341674878649239, 'psi_top_feature': 0.04050628220835519}",0.9864357047774428,False
+openml,phoneme,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.04001453581962473, 'psi_top_feature': 0.04696451521543979}",0.9703256330499203,False
+openml,phoneme,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.03295272639751431, 'psi_top_feature': 0.042112745315798984}",0.9703256330499203,False
+openml,phoneme,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.05406010291366703, 'psi_top_feature': 0.0600234786917671}",0.9703256330499203,False
+openml,phoneme,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.07454106919760682, 'psi_top_feature': 0.06723343482644105}",0.949058421227321,False
+openml,phoneme,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.0726508835942143, 'psi_top_feature': 0.08309842887330553}",0.949058421227321,False
+openml,phoneme,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.06746024872731397, 'psi_top_feature': 0.06945988029461615}",0.949058421227321,False
+openml,phoneme,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.07665999866861688, 'psi_top_feature': 0.08071968819406437}",0.9236051561586366,False
+openml,phoneme,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.08580854296035867, 'psi_top_feature': 0.07782051184494378}",0.9236051561586366,False
+openml,phoneme,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.07441186843742738, 'psi_top_feature': 0.08818969045055422}",0.9236051561586366,False
+openml,phoneme,label,0.05,1,OK,True,"{'achieved_class_prior': 0.32367447595561033, 'target_class_prior': 0.32382072977260706}",,
+openml,phoneme,label,0.05,2,OK,True,"{'achieved_class_prior': 0.32367447595561033, 'target_class_prior': 0.32382072977260706}",,
+openml,phoneme,label,0.05,3,OK,True,"{'achieved_class_prior': 0.32367447595561033, 'target_class_prior': 0.32382072977260706}",,
+openml,phoneme,label,0.1,1,OK,True,"{'achieved_class_prior': 0.35388409371146734, 'target_class_prior': 0.3541459545214173}",,
+openml,phoneme,label,0.1,2,OK,True,"{'achieved_class_prior': 0.35388409371146734, 'target_class_prior': 0.3541459545214173}",,
+openml,phoneme,label,0.1,3,OK,True,"{'achieved_class_prior': 0.35388409371146734, 'target_class_prior': 0.3541459545214173}",,
+openml,phoneme,label,0.15,1,OK,True,"{'achieved_class_prior': 0.3847102342786683, 'target_class_prior': 0.38447117927022745}",,
+openml,phoneme,label,0.15,2,OK,True,"{'achieved_class_prior': 0.3847102342786683, 'target_class_prior': 0.38447117927022745}",,
+openml,phoneme,label,0.15,3,OK,True,"{'achieved_class_prior': 0.3847102342786683, 'target_class_prior': 0.38447117927022745}",,
+openml,phoneme,label,0.2,1,OK,True,"{'achieved_class_prior': 0.4149198520345253, 'target_class_prior': 0.4147964040190376}",,
+openml,phoneme,label,0.2,2,OK,True,"{'achieved_class_prior': 0.4149198520345253, 'target_class_prior': 0.4147964040190376}",,
+openml,phoneme,label,0.2,3,OK,True,"{'achieved_class_prior': 0.4149198520345253, 'target_class_prior': 0.4147964040190376}",,
+openml,phoneme,label,0.25,1,OK,True,"{'achieved_class_prior': 0.44512946979038226, 'target_class_prior': 0.4451216287678477}",,
+openml,phoneme,label,0.25,2,OK,True,"{'achieved_class_prior': 0.44512946979038226, 'target_class_prior': 0.4451216287678477}",,
+openml,phoneme,label,0.25,3,OK,True,"{'achieved_class_prior': 0.44512946979038226, 'target_class_prior': 0.4451216287678477}",,
+openml,phoneme,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05223880597014925},,
+openml,phoneme,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.03929273084479371},,
+openml,phoneme,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05263157894736842},,
+openml,phoneme,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.09888059701492537},,
+openml,phoneme,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.0825147347740668},,
+openml,phoneme,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.12348178137651822},,
+openml,phoneme,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.1455223880597015},,
+openml,phoneme,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.14931237721021612},,
+openml,phoneme,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1720647773279352},,
+openml,phoneme,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.1921641791044776},,
+openml,phoneme,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.21218074656188604},,
+openml,phoneme,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.2125506072874494},,
+openml,phoneme,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2332089552238806},,
+openml,phoneme,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.26522593320235754},,
+openml,phoneme,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.24696356275303644},,
+openml,road-safety,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.0057372698374165716, 'psi_top_feature': 0.00029856402088234823}",0.9930344143690217,False
+openml,road-safety,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.00961796420661426, 'psi_top_feature': 0.0009660095720873737}",0.9930344143690217,False
+openml,road-safety,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.007785363428412628, 'psi_top_feature': 0.0006946135008366007}",0.9930344143690217,False
+openml,road-safety,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.026263132304703393, 'psi_top_feature': 0.003809772852715437}",0.9745712083057483,False
+openml,road-safety,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.026134563377514047, 'psi_top_feature': 0.002867790528973516}",0.9745712083057483,False
+openml,road-safety,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.023969599118436623, 'psi_top_feature': 0.004207552675956666}",0.9745712083057483,False
+openml,road-safety,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.04887856841318038, 'psi_top_feature': 0.007777956415203121}",0.9465522145663029,False
+openml,road-safety,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.05824828046156626, 'psi_top_feature': 0.008104681841707657}",0.9465522145663029,False
+openml,road-safety,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.055144532247660735, 'psi_top_feature': 0.009137649429983958}",0.9465522145663029,False
+openml,road-safety,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.09855563212574925, 'psi_top_feature': 0.018091489093340435}",0.9101256395511218,False
+openml,road-safety,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.08877554992368447, 'psi_top_feature': 0.01276718238265952}",0.9101256395511218,False
+openml,road-safety,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.08559383614389336, 'psi_top_feature': 0.01469560641944799}",0.9101256395511218,False
+openml,road-safety,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.14516593088652952, 'psi_top_feature': 0.024997857784729866}",0.8663371593552599,False
+openml,road-safety,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.1463447931867588, 'psi_top_feature': 0.02318432249688993}",0.8663371593552599,False
+openml,road-safety,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.1376757743565352, 'psi_top_feature': 0.019572845202751262}",0.8663371593552599,False
+openml,road-safety,label,0.05,1,OK,True,"{'achieved_class_prior': 0.3366442237184188, 'target_class_prior': 0.33665833309523124}",,
+openml,road-safety,label,0.05,2,OK,True,"{'achieved_class_prior': 0.3366442237184188, 'target_class_prior': 0.33665833309523124}",,
+openml,road-safety,label,0.05,3,OK,True,"{'achieved_class_prior': 0.3366442237184188, 'target_class_prior': 0.33665833309523124}",,
+openml,road-safety,label,0.1,1,OK,True,"{'achieved_class_prior': 0.3663089127391507, 'target_class_prior': 0.36630789451127177}",,
+openml,road-safety,label,0.1,2,OK,True,"{'achieved_class_prior': 0.3663089127391507, 'target_class_prior': 0.36630789451127177}",,
+openml,road-safety,label,0.1,3,OK,True,"{'achieved_class_prior': 0.3663089127391507, 'target_class_prior': 0.36630789451127177}",,
+openml,road-safety,label,0.15,1,OK,True,"{'achieved_class_prior': 0.39597360175988267, 'target_class_prior': 0.3959574559273122}",,
+openml,road-safety,label,0.15,2,OK,True,"{'achieved_class_prior': 0.39597360175988267, 'target_class_prior': 0.3959574559273122}",,
+openml,road-safety,label,0.15,3,OK,True,"{'achieved_class_prior': 0.39597360175988267, 'target_class_prior': 0.3959574559273122}",,
+openml,road-safety,label,0.2,1,OK,True,"{'achieved_class_prior': 0.4256382907806146, 'target_class_prior': 0.4256070173433527}",,
+openml,road-safety,label,0.2,2,OK,True,"{'achieved_class_prior': 0.4256382907806146, 'target_class_prior': 0.4256070173433527}",,
+openml,road-safety,label,0.2,3,OK,True,"{'achieved_class_prior': 0.4256382907806146, 'target_class_prior': 0.4256070173433527}",,
+openml,road-safety,label,0.25,1,OK,True,"{'achieved_class_prior': 0.4552363175788281, 'target_class_prior': 0.4552565787593931}",,
+openml,road-safety,label,0.25,2,OK,True,"{'achieved_class_prior': 0.4552363175788281, 'target_class_prior': 0.4552565787593931}",,
+openml,road-safety,label,0.25,3,OK,True,"{'achieved_class_prior': 0.4552363175788281, 'target_class_prior': 0.4552565787593931}",,
+openml,road-safety,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.0563631726600357},,
+openml,road-safety,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.05076802915907316},,
+openml,road-safety,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05244667503136763},,
+openml,road-safety,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10890079061463913},,
+openml,road-safety,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.10778443113772455},,
+openml,road-safety,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10338770388958594},,
+openml,road-safety,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.1578678908441724},,
+openml,road-safety,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.1564696693569383},,
+openml,road-safety,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15432873274780426},,
+openml,road-safety,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2088752869166029},,
+openml,road-safety,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.2074980473834939},,
+openml,road-safety,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.2030112923462986},,
+openml,road-safety,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2563121652639633},,
+openml,road-safety,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.26008851861494403},,
+openml,road-safety,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25244667503136764},,
+tableshift,assistments,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.004185929773855622, 'psi_top_feature': 0.003993428783990158}",0.9956179712268974,False
+tableshift,assistments,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.006113256569868127, 'psi_top_feature': 0.008225653663212248}",0.9956179712268974,False
+tableshift,assistments,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.00529459428300695, 'psi_top_feature': 0.006417853043484483}",0.9956179712268974,False
+tableshift,assistments,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.021469034463346776, 'psi_top_feature': 0.017607824700608427}",0.9827953301824663,False
+tableshift,assistments,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.024852059753479618, 'psi_top_feature': 0.021044409469993315}",0.9827953301824663,False
+tableshift,assistments,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.024231594665066556, 'psi_top_feature': 0.021408121982337606}",0.9827953301824663,False
+tableshift,assistments,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.04278231804772289, 'psi_top_feature': 0.0360302897041905}",0.962190302161922,False
+tableshift,assistments,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.04224562364630747, 'psi_top_feature': 0.03440167352223618}",0.962190302161922,False
+tableshift,assistments,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.036972807548420555, 'psi_top_feature': 0.03196479747361251}",0.962190302161922,False
+tableshift,assistments,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.07346602081189994, 'psi_top_feature': 0.056839816484861715}",0.9346013997673353,False
+tableshift,assistments,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.059451913961791, 'psi_top_feature': 0.04650307147978949}",0.9346013997673353,False
+tableshift,assistments,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.07073827341226731, 'psi_top_feature': 0.06031444119604189}",0.9346013997673353,False
+tableshift,assistments,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.11313129418251591, 'psi_top_feature': 0.09050480799415521}",0.9008572387890023,False
+tableshift,assistments,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.12048320212667021, 'psi_top_feature': 0.10401287250384204}",0.9008572387890023,False
+tableshift,assistments,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.09719942274034321, 'psi_top_feature': 0.08111325275611526}",0.9008572387890023,False
+tableshift,assistments,label,0.05,1,OK,True,"{'achieved_class_prior': 0.648313558192241, 'target_class_prior': 0.6483224755700325}",,
+tableshift,assistments,label,0.05,2,OK,True,"{'achieved_class_prior': 0.648313558192241, 'target_class_prior': 0.6483224755700325}",,
+tableshift,assistments,label,0.05,3,OK,True,"{'achieved_class_prior': 0.648313558192241, 'target_class_prior': 0.6483224755700325}",,
+tableshift,assistments,label,0.1,1,OK,True,"{'achieved_class_prior': 0.6195173976803093, 'target_class_prior': 0.619463397908452}",,
+tableshift,assistments,label,0.1,2,OK,True,"{'achieved_class_prior': 0.6195173976803093, 'target_class_prior': 0.619463397908452}",,
+tableshift,assistments,label,0.1,3,OK,True,"{'achieved_class_prior': 0.6195173976803093, 'target_class_prior': 0.619463397908452}",,
+tableshift,assistments,label,0.15,1,OK,True,"{'achieved_class_prior': 0.5905879216104519, 'target_class_prior': 0.5906043202468713}",,
+tableshift,assistments,label,0.15,2,OK,True,"{'achieved_class_prior': 0.5905879216104519, 'target_class_prior': 0.5906043202468713}",,
+tableshift,assistments,label,0.15,3,OK,True,"{'achieved_class_prior': 0.5905879216104519, 'target_class_prior': 0.5906043202468713}",,
+tableshift,assistments,label,0.2,1,OK,True,"{'achieved_class_prior': 0.5617917610985202, 'target_class_prior': 0.5617452425852906}",,
+tableshift,assistments,label,0.2,2,OK,True,"{'achieved_class_prior': 0.5617917610985202, 'target_class_prior': 0.5617452425852906}",,
+tableshift,assistments,label,0.2,3,OK,True,"{'achieved_class_prior': 0.5617917610985202, 'target_class_prior': 0.5617452425852906}",,
+tableshift,assistments,label,0.25,1,OK,True,"{'achieved_class_prior': 0.5328622850286628, 'target_class_prior': 0.5328861649237099}",,
+tableshift,assistments,label,0.25,2,OK,True,"{'achieved_class_prior': 0.5328622850286628, 'target_class_prior': 0.5328861649237099}",,
+tableshift,assistments,label,0.25,3,OK,True,"{'achieved_class_prior': 0.5328622850286628, 'target_class_prior': 0.5328861649237099}",,
+tableshift,assistments,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.049607275733774284},,
+tableshift,assistments,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04233511586452763},,
+tableshift,assistments,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05067715159458279},,
+tableshift,assistments,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10004133939644481},,
+tableshift,assistments,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.10204991087344029},,
+tableshift,assistments,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.0982961992136304},,
+tableshift,assistments,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.14799503927242663},,
+tableshift,assistments,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.1573083778966132},,
+tableshift,assistments,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.14460463084316294},,
+tableshift,assistments,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.1934683753617197},,
+tableshift,assistments,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20588235294117646},,
+tableshift,assistments,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.1913499344692005},,
+tableshift,assistments,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.24762298470442332},,
+tableshift,assistments,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.2606951871657754},,
+tableshift,assistments,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.23940585408475318},,
+uci,default_credit,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.02070137520046162, 'psi_top_feature': 0.014731117973508453}",0.9803106797426158,False
+uci,default_credit,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.013981570469343075, 'psi_top_feature': 0.009013545318428549}",0.9803106797426158,False
+uci,default_credit,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.02190534086220725, 'psi_top_feature': 0.014216022276466091}",0.9803106797426158,False
+uci,default_credit,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.07886438572433545, 'psi_top_feature': 0.059188758192464906}",0.9008571437526638,False
+uci,default_credit,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.05935227351749457, 'psi_top_feature': 0.046435334805898884}",0.9008571437526638,False
+uci,default_credit,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.07503649946057811, 'psi_top_feature': 0.05682955418010624}",0.9008571437526638,False
+uci,default_credit,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.17269366009714704, 'psi_top_feature': 0.1463220459611184}",0.72862150369387,False
+uci,default_credit,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.19029022818211253, 'psi_top_feature': 0.15401235765972487}",0.72862150369387,False
+uci,default_credit,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.1798976842719069, 'psi_top_feature': 0.14949489594059537}",0.72862150369387,False
+uci,default_credit,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.3447575235024265, 'psi_top_feature': 0.2903174366415485}",0.4773241030264475,False
+uci,default_credit,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.35331490128078064, 'psi_top_feature': 0.28913903092675286}",0.4773241030264475,False
+uci,default_credit,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.3591578686955167, 'psi_top_feature': 0.3012261131120823}",0.4773241030264475,False
+uci,default_credit,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.6108593250570986, 'psi_top_feature': 0.5291149117090268}",0.24787964725680367,False
+uci,default_credit,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.6099651412503259, 'psi_top_feature': 0.5216733963457679}",0.24787964725680367,False
+uci,default_credit,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.6242833519485151, 'psi_top_feature': 0.5456222626898981}",0.24787964725680367,False
+uci,default_credit,label,0.05,1,OK,True,"{'achieved_class_prior': 0.2551938673480724, 'target_class_prior': 0.25514095909329015}",,
+uci,default_credit,label,0.05,2,OK,True,"{'achieved_class_prior': 0.2551938673480724, 'target_class_prior': 0.25514095909329015}",,
+uci,default_credit,label,0.05,3,OK,True,"{'achieved_class_prior': 0.2551938673480724, 'target_class_prior': 0.25514095909329015}",,
+uci,default_credit,label,0.1,1,OK,True,"{'achieved_class_prior': 0.2890789912231974, 'target_class_prior': 0.28908090861469593}",,
+uci,default_credit,label,0.1,2,OK,True,"{'achieved_class_prior': 0.2890789912231974, 'target_class_prior': 0.28908090861469593}",,
+uci,default_credit,label,0.1,3,OK,True,"{'achieved_class_prior': 0.2890789912231974, 'target_class_prior': 0.28908090861469593}",,
+uci,default_credit,label,0.15,1,OK,True,"{'achieved_class_prior': 0.3230752138651261, 'target_class_prior': 0.3230208581361017}",,
+uci,default_credit,label,0.15,2,OK,True,"{'achieved_class_prior': 0.3230752138651261, 'target_class_prior': 0.3230208581361017}",,
+uci,default_credit,label,0.15,3,OK,True,"{'achieved_class_prior': 0.3230752138651261, 'target_class_prior': 0.3230208581361017}",,
+uci,default_credit,label,0.2,1,OK,True,"{'achieved_class_prior': 0.3569603377402511, 'target_class_prior': 0.35696080765750754}",,
+uci,default_credit,label,0.2,2,OK,True,"{'achieved_class_prior': 0.3569603377402511, 'target_class_prior': 0.35696080765750754}",,
+uci,default_credit,label,0.2,3,OK,True,"{'achieved_class_prior': 0.3569603377402511, 'target_class_prior': 0.35696080765750754}",,
+uci,default_credit,label,0.25,1,OK,True,"{'achieved_class_prior': 0.3908454616153761, 'target_class_prior': 0.39090075717891326}",,
+uci,default_credit,label,0.25,2,OK,True,"{'achieved_class_prior': 0.3908454616153761, 'target_class_prior': 0.39090075717891326}",,
+uci,default_credit,label,0.25,3,OK,True,"{'achieved_class_prior': 0.3908454616153761, 'target_class_prior': 0.39090075717891326}",,
+uci,default_credit,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05484731692855025},,
+uci,default_credit,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04897218863361548},,
+uci,default_credit,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05366889023650697},,
+uci,default_credit,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10791580195671509},,
+uci,default_credit,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.09975816203143893},,
+uci,default_credit,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10460885385081868},,
+uci,default_credit,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.16009487103468723},,
+uci,default_credit,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.15386940749697703},,
+uci,default_credit,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.1479684657368102},,
+uci,default_credit,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.20782686036169581},,
+uci,default_credit,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20223700120918983},,
+uci,default_credit,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.19254093389933294},,
+uci,default_credit,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.25852356952268013},,
+uci,default_credit,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25574365175332525},,
+uci,default_credit,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.23984232868405095},,
+uci,diabetes_readmission,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.003738141468641954, 'psi_top_feature': 0.0019480113465137655}",0.9945293075682915,False
+uci,diabetes_readmission,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.006595216766510625, 'psi_top_feature': 0.0034864937813724652}",0.9945293075682915,False
+uci,diabetes_readmission,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.004175462899566872, 'psi_top_feature': 0.0011329589947576693}",0.9945293075682915,False
+uci,diabetes_readmission,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.0230400701232805, 'psi_top_feature': 0.011435052987069285}",0.9769960521285039,False
+uci,diabetes_readmission,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.01912831333598236, 'psi_top_feature': 0.01095271130492315}",0.9769960521285039,False
+uci,diabetes_readmission,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.027483260329955198, 'psi_top_feature': 0.015066816889559083}",0.9769960521285039,False
+uci,diabetes_readmission,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.04836899440649892, 'psi_top_feature': 0.025576393183385844}",0.9458743724861807,False
+uci,diabetes_readmission,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.048213135680263475, 'psi_top_feature': 0.02761088884955948}",0.9458743724861807,False
+uci,diabetes_readmission,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.04893066197196025, 'psi_top_feature': 0.029102744787868458}",0.9458743724861807,False
+uci,diabetes_readmission,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.08676725787514925, 'psi_top_feature': 0.04832901999525543}",0.9000933608851227,False
+uci,diabetes_readmission,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.09048281416277143, 'psi_top_feature': 0.05262853906409129}",0.9000933608851227,False
+uci,diabetes_readmission,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.08678214009475513, 'psi_top_feature': 0.05091845604638792}",0.9000933608851227,False
+uci,diabetes_readmission,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.14951382800677154, 'psi_top_feature': 0.08788066596441385}",0.8394240011192495,False
+uci,diabetes_readmission,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.14055687788292529, 'psi_top_feature': 0.08732962023208585}",0.8394240011192495,False
+uci,diabetes_readmission,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.13819784978598837, 'psi_top_feature': 0.09066147849396114}",0.8394240011192495,False
+uci,diabetes_readmission,label,0.05,1,OK,True,"{'achieved_class_prior': 0.1511232584494367, 'target_class_prior': 0.15113160376010742}",,
+uci,diabetes_readmission,label,0.05,2,OK,True,"{'achieved_class_prior': 0.1511232584494367, 'target_class_prior': 0.15113160376010742}",,
+uci,diabetes_readmission,label,0.05,3,OK,True,"{'achieved_class_prior': 0.1511232584494367, 'target_class_prior': 0.15113160376010742}",,
+uci,diabetes_readmission,label,0.1,1,OK,True,"{'achieved_class_prior': 0.19052063195786947, 'target_class_prior': 0.1905457298779965}",,
+uci,diabetes_readmission,label,0.1,2,OK,True,"{'achieved_class_prior': 0.19052063195786947, 'target_class_prior': 0.1905457298779965}",,
+uci,diabetes_readmission,label,0.1,3,OK,True,"{'achieved_class_prior': 0.19052063195786947, 'target_class_prior': 0.1905457298779965}",,
+uci,diabetes_readmission,label,0.15,1,OK,True,"{'achieved_class_prior': 0.22998466768882075, 'target_class_prior': 0.2299598559958856}",,
+uci,diabetes_readmission,label,0.15,2,OK,True,"{'achieved_class_prior': 0.22998466768882075, 'target_class_prior': 0.2299598559958856}",,
+uci,diabetes_readmission,label,0.15,3,OK,True,"{'achieved_class_prior': 0.22998466768882075, 'target_class_prior': 0.2299598559958856}",,
+uci,diabetes_readmission,label,0.2,1,OK,True,"{'achieved_class_prior': 0.2693820411972535, 'target_class_prior': 0.2693739821137747}",,
+uci,diabetes_readmission,label,0.2,2,OK,True,"{'achieved_class_prior': 0.2693820411972535, 'target_class_prior': 0.2693739821137747}",,
+uci,diabetes_readmission,label,0.2,3,OK,True,"{'achieved_class_prior': 0.2693820411972535, 'target_class_prior': 0.2693739821137747}",,
+uci,diabetes_readmission,label,0.25,1,OK,True,"{'achieved_class_prior': 0.30877941470568626, 'target_class_prior': 0.30878810823166375}",,
+uci,diabetes_readmission,label,0.25,2,OK,True,"{'achieved_class_prior': 0.30877941470568626, 'target_class_prior': 0.30878810823166375}",,
+uci,diabetes_readmission,label,0.25,3,OK,True,"{'achieved_class_prior': 0.30877941470568626, 'target_class_prior': 0.30878810823166375}",,
+uci,diabetes_readmission,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.04782430213464696},,
+uci,diabetes_readmission,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.05297867663222686},,
+uci,diabetes_readmission,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05601881548000855},,
+uci,diabetes_readmission,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10303776683087028},,
+uci,diabetes_readmission,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.11079358100681469},,
+uci,diabetes_readmission,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.10861663459482575},,
+uci,diabetes_readmission,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15086206896551724},,
+uci,diabetes_readmission,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.1609144867003737},,
+uci,diabetes_readmission,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.15522771007055805},,
+uci,diabetes_readmission,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.1990968801313629},,
+uci,diabetes_readmission,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20641899318531545},,
+uci,diabetes_readmission,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.20290784691041266},,
+uci,diabetes_readmission,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.2532840722495895},,
+uci,diabetes_readmission,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.2550010991426687},,
+uci,diabetes_readmission,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.25122942056874065},,
+uci,online_shoppers,covariate,0.05,1,OK,True,"{'psi_pc1_score': 0.011004782014805465, 'psi_top_feature': 0.008543081298134384}",0.9924194657235079,False
+uci,online_shoppers,covariate,0.05,2,OK,True,"{'psi_pc1_score': 0.0073287487207727734, 'psi_top_feature': 0.010671808414906331}",0.9924194657235079,False
+uci,online_shoppers,covariate,0.05,3,OK,True,"{'psi_pc1_score': 0.010594164078082087, 'psi_top_feature': 0.010424633841102976}",0.9924194657235079,False
+uci,online_shoppers,covariate,0.1,1,OK,True,"{'psi_pc1_score': 0.025163854420234243, 'psi_top_feature': 0.017332727948385918}",0.965658666518254,False
+uci,online_shoppers,covariate,0.1,2,OK,True,"{'psi_pc1_score': 0.03789829918160793, 'psi_top_feature': 0.026185091317267217}",0.965658666518254,False
+uci,online_shoppers,covariate,0.1,3,OK,True,"{'psi_pc1_score': 0.03466441858558574, 'psi_top_feature': 0.01984555278355745}",0.965658666518254,False
+uci,online_shoppers,covariate,0.15,1,OK,True,"{'psi_pc1_score': 0.07027168205079873, 'psi_top_feature': 0.044498240747318465}",0.91170670709501,False
+uci,online_shoppers,covariate,0.15,2,OK,True,"{'psi_pc1_score': 0.053914393602971594, 'psi_top_feature': 0.03588796329276693}",0.91170670709501,False
+uci,online_shoppers,covariate,0.15,3,OK,True,"{'psi_pc1_score': 0.07052544155035509, 'psi_top_feature': 0.04762604458149259}",0.91170670709501,False
+uci,online_shoppers,covariate,0.2,1,OK,True,"{'psi_pc1_score': 0.13193850242396518, 'psi_top_feature': 0.08719727623450935}",0.8211365563401073,False
+uci,online_shoppers,covariate,0.2,2,OK,True,"{'psi_pc1_score': 0.13179386321185746, 'psi_top_feature': 0.08862927729985373}",0.8211365563401073,False
+uci,online_shoppers,covariate,0.2,3,OK,True,"{'psi_pc1_score': 0.11908924093269273, 'psi_top_feature': 0.07951024216810185}",0.8211365563401073,False
+uci,online_shoppers,covariate,0.25,1,OK,True,"{'psi_pc1_score': 0.19820054908255968, 'psi_top_feature': 0.12823418395512973}",0.6888072266546025,False
+uci,online_shoppers,covariate,0.25,2,OK,True,"{'psi_pc1_score': 0.2258087241387516, 'psi_top_feature': 0.1430420941404405}",0.6888072266546025,False
+uci,online_shoppers,covariate,0.25,3,OK,True,"{'psi_pc1_score': 0.21811742503915993, 'psi_top_feature': 0.1349468780322973}",0.6888072266546025,False
+uci,online_shoppers,label,0.05,1,OK,True,"{'achieved_class_prior': 0.1918918918918919, 'target_class_prior': 0.19195828505214368}",,
+uci,online_shoppers,label,0.05,2,OK,True,"{'achieved_class_prior': 0.1918918918918919, 'target_class_prior': 0.19195828505214368}",,
+uci,online_shoppers,label,0.05,3,OK,True,"{'achieved_class_prior': 0.1918918918918919, 'target_class_prior': 0.19195828505214368}",,
+uci,online_shoppers,label,0.1,1,OK,True,"{'achieved_class_prior': 0.22918918918918918, 'target_class_prior': 0.2292236384704519}",,
+uci,online_shoppers,label,0.1,2,OK,True,"{'achieved_class_prior': 0.22918918918918918, 'target_class_prior': 0.2292236384704519}",,
+uci,online_shoppers,label,0.1,3,OK,True,"{'achieved_class_prior': 0.22918918918918918, 'target_class_prior': 0.2292236384704519}",,
+uci,online_shoppers,label,0.15,1,OK,True,"{'achieved_class_prior': 0.2664864864864865, 'target_class_prior': 0.2664889918887602}",,
+uci,online_shoppers,label,0.15,2,OK,True,"{'achieved_class_prior': 0.2664864864864865, 'target_class_prior': 0.2664889918887602}",,
+uci,online_shoppers,label,0.15,3,OK,True,"{'achieved_class_prior': 0.2664864864864865, 'target_class_prior': 0.2664889918887602}",,
+uci,online_shoppers,label,0.2,1,OK,True,"{'achieved_class_prior': 0.3037837837837838, 'target_class_prior': 0.3037543453070684}",,
+uci,online_shoppers,label,0.2,2,OK,True,"{'achieved_class_prior': 0.3037837837837838, 'target_class_prior': 0.3037543453070684}",,
+uci,online_shoppers,label,0.2,3,OK,True,"{'achieved_class_prior': 0.3037837837837838, 'target_class_prior': 0.3037543453070684}",,
+uci,online_shoppers,label,0.25,1,OK,True,"{'achieved_class_prior': 0.3410810810810811, 'target_class_prior': 0.34101969872537663}",,
+uci,online_shoppers,label,0.25,2,OK,True,"{'achieved_class_prior': 0.3410810810810811, 'target_class_prior': 0.34101969872537663}",,
+uci,online_shoppers,label,0.25,3,OK,True,"{'achieved_class_prior': 0.3410810810810811, 'target_class_prior': 0.34101969872537663}",,
+uci,online_shoppers,concept,0.05,1,OK,True,{'within_slice_flip_rate': 0.05767599660729432},,
+uci,online_shoppers,concept,0.05,2,OK,True,{'within_slice_flip_rate': 0.04446460980036298},,
+uci,online_shoppers,concept,0.05,3,OK,True,{'within_slice_flip_rate': 0.05886909372579396},,
+uci,online_shoppers,concept,0.1,1,OK,True,{'within_slice_flip_rate': 0.10432569974554708},,
+uci,online_shoppers,concept,0.1,2,OK,True,{'within_slice_flip_rate': 0.08802177858439202},,
+uci,online_shoppers,concept,0.1,3,OK,True,{'within_slice_flip_rate': 0.12238574748257165},,
+uci,online_shoppers,concept,0.15,1,OK,True,{'within_slice_flip_rate': 0.15182357930449533},,
+uci,online_shoppers,concept,0.15,2,OK,True,{'within_slice_flip_rate': 0.1542649727767695},,
+uci,online_shoppers,concept,0.15,3,OK,True,{'within_slice_flip_rate': 0.17041053446940357},,
+uci,online_shoppers,concept,0.2,1,OK,True,{'within_slice_flip_rate': 0.2035623409669211},,
+uci,online_shoppers,concept,0.2,2,OK,True,{'within_slice_flip_rate': 0.20326678765880218},,
+uci,online_shoppers,concept,0.2,3,OK,True,{'within_slice_flip_rate': 0.21456235476374902},,
+uci,online_shoppers,concept,0.25,1,OK,True,{'within_slice_flip_rate': 0.24936386768447838},,
+uci,online_shoppers,concept,0.25,2,OK,True,{'within_slice_flip_rate': 0.25680580762250454},,
+uci,online_shoppers,concept,0.25,3,OK,True,{'within_slice_flip_rate': 0.2656855151045701},,

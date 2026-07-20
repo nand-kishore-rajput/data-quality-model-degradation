@@ -1,0 +1,165 @@
+source,dataset,column,constraint_type,n_non_null,n_natural_violations,natural_violation_rate
+cleanml,Airbnb,Bathrooms,no_negative,32697,0,0.0
+cleanml,Airbnb,Bedrooms,no_negative,29818,0,0.0
+cleanml,Airbnb,Beds,no_negative,32831,0,0.0
+cleanml,Airbnb,NumGuests,no_negative,32831,0,0.0
+cleanml,Airbnb,NumReviews,no_negative,32829,0,0.0
+cleanml,Airbnb,Price,no_negative,32507,0,0.0
+cleanml,Airbnb,latitude,"range:[-90,90]",33145,0,0.0
+cleanml,Airbnb,longitude,"range:[-180,180]",33145,0,0.0
+cleanml,Airbnb,pop2016,no_negative,33103,0,0.0
+cleanml,Airbnb,pop2010,no_negative,33103,0,0.0
+cleanml,Airbnb,pop2000,no_negative,33145,0,0.0
+cleanml,Airbnb,cost_living_index (US avg. = 100),no_negative,33103,0,0.0
+cleanml,Airbnb,land_area (sq.mi.),no_negative,33145,0,0.0
+cleanml,Airbnb,water_area (sq.mi.),no_negative,33145,0,0.0
+cleanml,Airbnb,pop_density (people per mile),no_negative,33145,0,0.0
+cleanml,Airbnb,number of males,no_negative,33145,0,0.0
+cleanml,Airbnb,number of females,no_negative,33145,0,0.0
+cleanml,Airbnb,prop taxes paid 2016,no_negative,33058,0,0.0
+cleanml,Airbnb,median taxes (with mortgage,no_negative,29524,0,0.0
+cleanml,Airbnb,median taxes (no mortgage),no_negative,29618,0,0.0
+cleanml,Airbnb,median house value,no_negative,29812,0,0.0
+cleanml,Airbnb,median houshold income,no_negative,33081,0,0.0
+cleanml,Airbnb,median monthly owner costs (with mortgage),no_negative,29784,0,0.0
+cleanml,Airbnb,median monthly owner costs (no mortgage),no_negative,29651,0,0.0
+cleanml,Airbnb,median gross rent,no_negative,32979,0,0.0
+cleanml,Airbnb,median asking price for vacant for-sale home/condo,no_negative,33027,0,0.0
+cleanml,Airbnb,unemployment (%),"range:[0,100]",33036,0,0.0
+cleanml,Airbnb,Number of Homes,no_negative,33103,0,0.0
+cleanml,Airbnb,Count of Abnb,no_negative,33145,0,0.0
+cleanml,Airbnb,Density of Abnb (%),no_negative,33103,0,0.0
+cleanml,Airbnb,Average Abnb Price (by zipcode),no_negative,33145,0,0.0
+cleanml,Airbnb,Average NumReviews (by zipcode),no_negative,33145,0,0.0
+cleanml,Airbnb,Average Rating (by zipcode),"range:[1,5]",33145,0,0.0
+cleanml,Airbnb,Average Number of Bathrooms (by zipcode),no_negative,33145,0,0.0
+cleanml,Airbnb,Average Number of Bedrooms (by zipcode),no_negative,33145,0,0.0
+cleanml,Airbnb,Average Number of Beds (by zipcode),no_negative,33145,0,0.0
+cleanml,Airbnb,Average Number of Guests (by zipcode),no_negative,33145,0,0.0
+folktables,ACSIncome,AGEP,"range:[0,115]",50000,0,0.0
+folktables,ACSIncome,WKHP,"range:[0,168]",50000,0,0.0
+folktables,ACSPublicCoverage,AGEP,"range:[0,115]",50000,0,0.0
+openml,MagicTelescope,fLength:,no_negative,19020,0,0.0
+openml,MagicTelescope,fWidth:,no_negative,19020,0,0.0
+openml,MagicTelescope,fSize:,no_negative,19020,0,0.0
+openml,MagicTelescope,fConc:,no_negative,19020,0,0.0
+openml,MagicTelescope,fConc1:,no_negative,19020,0,0.0
+openml,MagicTelescope,fAlpha:,no_negative,19020,0,0.0
+openml,MagicTelescope,fDist:,no_negative,19020,0,0.0
+openml,bank-marketing,V1,no_negative,45211,0,0.0
+openml,bank-marketing,V10,"range:[1,31]",45211,0,0.0
+openml,bank-marketing,V13,no_negative,45211,0,0.0
+openml,bank-marketing,V14,no_negative,45211,36954,0.8173674548229414
+openml,bank-marketing,V15,no_negative,45211,0,0.0
+openml,churn,account_length,no_negative,5000,0,0.0
+openml,churn,number_vmail_messages,no_negative,5000,0,0.0
+openml,churn,total_day_minutes,no_negative,5000,0,0.0
+openml,churn,total_day_calls,no_negative,5000,0,0.0
+openml,churn,total_eve_minutes,no_negative,5000,0,0.0
+openml,churn,total_eve_calls,no_negative,5000,0,0.0
+openml,churn,total_night_minutes,no_negative,5000,0,0.0
+openml,churn,total_night_calls,no_negative,5000,0,0.0
+openml,churn,total_intl_minutes,no_negative,5000,0,0.0
+openml,churn,total_intl_calls,no_negative,5000,0,0.0
+openml,electricity,period,"range:[0,1]",45312,0,0.0
+openml,electricity,nswprice,"range:[0,1]",45312,0,0.0
+openml,electricity,nswdemand,"range:[0,1]",45312,0,0.0
+openml,electricity,vicprice,"range:[0,1]",45312,0,0.0
+openml,electricity,vicdemand,"range:[0,1]",45312,0,0.0
+openml,electricity,transfer,"range:[0,1]",45312,0,0.0
+openml,heloc,ExternalRiskEstimate,no_negative,10459,598,0.057175638206329475
+openml,heloc,MSinceOldestTradeOpen,no_negative,10459,827,0.07907065685055932
+openml,heloc,MSinceMostRecentTradeOpen,no_negative,10459,588,0.056219523855053063
+openml,heloc,AverageMInFile,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumSatisfactoryTrades,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumTrades60Ever2DerogPubRec,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumTrades90Ever2DerogPubRec,no_negative,10459,588,0.056219523855053063
+openml,heloc,PercentTradesNeverDelq,no_negative,10459,588,0.056219523855053063
+openml,heloc,MSinceMostRecentDelq,no_negative,10459,5428,0.5189788698728368
+openml,heloc,MaxDelq2PublicRecLast12M,no_negative,10459,588,0.056219523855053063
+openml,heloc,MaxDelqEver,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumTotalTrades,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumTradesOpeninLast12M,no_negative,10459,588,0.056219523855053063
+openml,heloc,PercentInstallTrades,no_negative,10459,588,0.056219523855053063
+openml,heloc,MSinceMostRecentInqexcl7days,no_negative,10459,2919,0.27908977913758487
+openml,heloc,NumInqLast6M,no_negative,10459,588,0.056219523855053063
+openml,heloc,NumInqLast6Mexcl7days,no_negative,10459,588,0.056219523855053063
+openml,heloc,NetFractionRevolvingBurden,no_negative,10459,774,0.07400325078879434
+openml,heloc,NetFractionInstallBurden,no_negative,10459,4007,0.3831150205564586
+openml,heloc,NumRevolvingTradesWBalance,no_negative,10459,744,0.0711349077349651
+openml,heloc,NumInstallTradesWBalance,no_negative,10459,1449,0.1385409694999522
+openml,heloc,NumBank2NatlTradesWHighUtilization,no_negative,10459,1171,0.11196099053446792
+openml,heloc,PercentTradesWBalance,no_negative,10459,606,0.057940529687350605
+openml,jm1,loc,no_negative,10885,0,0.0
+openml,jm1,v(g),no_negative,10885,0,0.0
+openml,jm1,ev(g),no_negative,10885,0,0.0
+openml,jm1,iv(g),no_negative,10885,0,0.0
+openml,jm1,n,no_negative,10885,0,0.0
+openml,jm1,v,no_negative,10885,0,0.0
+openml,jm1,l,no_negative,10885,0,0.0
+openml,jm1,d,no_negative,10885,0,0.0
+openml,jm1,i,no_negative,10885,0,0.0
+openml,jm1,e,no_negative,10885,0,0.0
+openml,jm1,b,no_negative,10885,0,0.0
+openml,jm1,t,no_negative,10885,0,0.0
+openml,jm1,lOCode,no_negative,10885,0,0.0
+openml,jm1,lOComment,no_negative,10885,0,0.0
+openml,jm1,lOBlank,no_negative,10885,0,0.0
+openml,jm1,locCodeAndComment,no_negative,10885,0,0.0
+openml,jm1,uniq_Op,no_negative,10880,0,0.0
+openml,jm1,uniq_Opnd,no_negative,10880,0,0.0
+openml,jm1,total_Op,no_negative,10880,0,0.0
+openml,jm1,total_Opnd,no_negative,10880,0,0.0
+openml,jm1,branchCount,no_negative,10880,0,0.0
+openml,kick,VehYear,"range:[1990,2015]",50000,0,0.0
+openml,kick,VehicleAge,no_negative,50000,0,0.0
+openml,kick,VehOdo,no_negative,50000,0,0.0
+openml,kick,MMRAcquisitionAuctionAveragePrice,no_negative,49984,0,0.0
+openml,kick,MMRAcquisitionAuctionCleanPrice,no_negative,49984,0,0.0
+openml,kick,MMRAcquisitionRetailAveragePrice,no_negative,49984,0,0.0
+openml,kick,MMRAcquisitonRetailCleanPrice,no_negative,49984,0,0.0
+openml,kick,MMRCurrentAuctionAveragePrice,no_negative,49765,0,0.0
+openml,kick,MMRCurrentAuctionCleanPrice,no_negative,49765,0,0.0
+openml,kick,MMRCurrentRetailAveragePrice,no_negative,49765,0,0.0
+openml,kick,MMRCurrentRetailCleanPrice,no_negative,49765,0,0.0
+openml,kick,VehBCost,no_negative,49955,0,0.0
+openml,kick,WarrantyCost,no_negative,50000,0,0.0
+openml,road-safety,Age_of_Driver,"range:[0,110]",47513,0,0.0
+openml,road-safety,Engine_Capacity_(CC),no_negative,38207,0,0.0
+openml,road-safety,Age_of_Vehicle,no_negative,36281,0,0.0
+openml,road-safety,Location_Easting_OSGR,no_negative,44163,0,0.0
+openml,road-safety,Location_Northing_OSGR,no_negative,44163,0,0.0
+openml,road-safety,Longitude,"range:[-180,180]",44163,0,0.0
+openml,road-safety,Latitude,"range:[-90,90]",44163,0,0.0
+openml,road-safety,Number_of_Vehicles,no_negative,44171,0,0.0
+openml,road-safety,Number_of_Casualties,no_negative,44171,0,0.0
+openml,road-safety,1st_Road_Number,no_negative,44171,0,0.0
+openml,road-safety,Speed_limit,"range:[0,70]",44171,0,0.0
+openml,road-safety,2nd_Road_Number,no_negative,43962,0,0.0
+openml,road-safety,Age_of_Casualty,"range:[0,110]",49252,0,0.0
+tableshift,assistments,position,no_negative,25000,0,0.0
+uci,default_credit,X1,no_negative,30000,0,0.0
+uci,default_credit,X5,"range:[18,100]",30000,0,0.0
+uci,default_credit,X18,no_negative,30000,0,0.0
+uci,default_credit,X19,no_negative,30000,0,0.0
+uci,default_credit,X20,no_negative,30000,0,0.0
+uci,default_credit,X21,no_negative,30000,0,0.0
+uci,default_credit,X22,no_negative,30000,0,0.0
+uci,default_credit,X23,no_negative,30000,0,0.0
+uci,diabetes_readmission,time_in_hospital,no_negative,50000,0,0.0
+uci,diabetes_readmission,num_lab_procedures,no_negative,50000,0,0.0
+uci,diabetes_readmission,num_procedures,no_negative,50000,0,0.0
+uci,diabetes_readmission,num_medications,no_negative,50000,0,0.0
+uci,diabetes_readmission,number_outpatient,no_negative,50000,0,0.0
+uci,diabetes_readmission,number_emergency,no_negative,50000,0,0.0
+uci,diabetes_readmission,number_inpatient,no_negative,50000,0,0.0
+uci,diabetes_readmission,number_diagnoses,no_negative,50000,0,0.0
+uci,online_shoppers,Administrative,no_negative,12330,0,0.0
+uci,online_shoppers,Administrative_Duration,no_negative,12330,0,0.0
+uci,online_shoppers,Informational,no_negative,12330,0,0.0
+uci,online_shoppers,Informational_Duration,no_negative,12330,0,0.0
+uci,online_shoppers,ProductRelated,no_negative,12330,0,0.0
+uci,online_shoppers,ProductRelated_Duration,no_negative,12330,0,0.0
+uci,online_shoppers,BounceRates,"range:[0,1]",12330,0,0.0
+uci,online_shoppers,ExitRates,"range:[0,1]",12330,0,0.0
+uci,online_shoppers,SpecialDay,"range:[0,1]",12330,0,0.0

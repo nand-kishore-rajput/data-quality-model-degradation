@@ -1,0 +1,18 @@
+source,dataset,n_rows,missingness_max_rate,missingness_max_column,missingness_mean_rate,validity_max_violation_rate,validity_max_violation_column,validity_mean_violation_rate
+cleanml,Airbnb,33145,0.10924724694524061,median taxes (with mortgage,0.018385416062290404,0.0,Bathrooms,0.0
+cleanml,EEG,14980,0.0,AF3,0.0,0.0,,0.0
+folktables,ACSIncome,50000,0.0,AGEP,0.0,0.0,AGEP,0.0
+folktables,ACSPublicCoverage,50000,0.0,AGEP,0.0,0.0,AGEP,0.0
+openml,MagicTelescope,19020,0.0,fLength:,0.0,0.0,fLength:,0.0
+openml,bank-marketing,45211,0.0,V1,0.0,0.8173674548229414,V14,0.16347349096458827
+openml,churn,5000,0.0,state,0.0,0.0,account_length,0.0
+openml,electricity,45312,0.0,day,0.0,0.0,period,0.0
+openml,heloc,10459,0.0,ExternalRiskEstimate,0.0,0.5189788698728368,MSinceMostRecentDelq,0.10877671404282563
+openml,jm1,10885,0.00045934772622875517,uniq_Op,0.0001093685062449417,0.0,loc,0.0
+openml,kick,50000,0.95244,PRIMEUNIT,0.06604516129032259,0.0,VehYear,0.0
+openml,phoneme,5404,0.0,V1,0.0,0.0,,0.0
+openml,road-safety,50000,0.47734,2nd_Road_Class,0.08654062500000001,0.0,Age_of_Driver,0.0
+tableshift,assistments,25000,0.5648,skill,0.12399999999999999,0.0,position,0.0
+uci,default_credit,30000,0.0,X1,0.0,0.0,X1,0.0
+uci,diabetes_readmission,50000,0.96822,weight,0.114684375,0.0,time_in_hospital,0.0
+uci,online_shoppers,12330,0.0,Administrative,0.0,0.0,Administrative,0.0

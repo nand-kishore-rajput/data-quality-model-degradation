@@ -1,295 +1,146 @@
 """
-D1 §3 / §15 item 3 — Binary-label spot-check across the 17-dataset corpus.
-
-Purpose:
-    D1 assumes all 17 datasets are binary post-Phase-0-binarization. This is an
-    UNVERIFIED assumption per D1 §3. This script verifies it directly against
-    the raw/processed dataset files, per dataset, and reports:
-        - detected label column
-        - number of unique classes
-        - class counts / balance
-        - PASS (binary) / FAIL (not binary) / SKIP (couldn't locate label col)
-
-    A FAIL here is not a bug to silently patch — it blocks D3's label-noise
-    code and D4's severity grid for §6 (Label Noise) until resolved, per the
-    project's own decision log (D1 §15 item 3).
+Diagnostic script: is -9 (HELOC) / -1 (bank-marketing V14) a synchronized
+sentinel code, or just an independently-occurring negative value?
 
 Usage:
-    python binary_label_spotcheck.py --root datasets/raw --catalog phase0_data_notes.md
-    (catalog is optional; if omitted, the script infers label columns heuristically
-    and you should visually confirm flagged datasets)
+    python inspect_sentinels.py --heloc /path/to/heloc.csv --bank /path/to/bank-marketing.csv
 
-Output:
-    - Console summary table
-    - spotcheck_results.csv written to the working directory
+If you don't have local CSVs, this will try openml.org directly
+(requires `pip install openml --break-system-packages`).
+    - HELOC: OpenML dataset id 46932 (per project's canonical source decision)
+    - bank-marketing: OpenML dataset id 1461 (adjust if yours differs)
+
+What it checks and why it matters for the no_negative vs none decision:
+
+1. CO-OCCURRENCE: FICO's documented codes distinguish "no bureau record at all"
+   (-9, which should hit EVERY feature in that row simultaneously) from
+   "no usable trade of this specific type" (-8/-7, which would hit only
+   the features that depend on that specific trade type). If -9 rows are
+   synchronized across most/all columns, that's strong evidence it's a
+   deliberate record-level sentinel, not scattered noise -> supports
+   treating the *domain* constraint as no_negative (i.e. -9 is a known,
+   removable defect, not a real observation).
+
+2. ISOLATION FROM THE REST OF THE DISTRIBUTION: if -9 sits far below the
+   next-smallest real value (e.g. real values are 0-100, and the only
+   negative value is exactly -9, appearing nowhere else in that shape),
+   that's a classic sentinel signature vs. a naturally continuous negative
+   tail.
+
+3. For bank-marketing V14 (pdays): pdays=-1 should almost perfectly line up
+   with V15 (previous contacts) == 0, i.e. "never contacted before" logically
+   implies "days since last contact" is undefined. If that logical
+   consistency holds near-perfectly, it's a sentinel, not a real observation.
 """
-
 import argparse
-import json
-import sys
-from pathlib import Path
-
 import pandas as pd
 
-# ----------------------------------------------------------------------------
-# 1. Dataset registry
-#
-# Fill in explicit (path, label_column) pairs here for the 17 datasets in the
-# Phase 0 corpus. This is the authoritative source — heuristic detection below
-# is only a fallback for datasets not listed here, and should not be trusted
-# for the final record.
-#
-# Populate this from phase0_data_notes.md / build_benchmark_catalog.py output.
-# Paths are relative to --root's parent, adjust as needed.
-# ----------------------------------------------------------------------------
-KNOWN_LABEL_COLUMNS = {
-    # dataset_name -> label_column. Paths are NOT hardcoded here — discover_files()
-    # below scans the actual directory tree and matches files to these names.
-    "phoneme": "Class",
-    "bank-marketing": "Class",
-    "MagicTelescope": "class:",
-    "churn": "class",
-    "heloc": "RiskPerformance",
-    "electricity": "class",
-    "jm1": "defects",
-    "kick": "IsBadBuy",
-    "default_credit": "Y",
-    "online_shoppers": "Revenue",
-    "diabetes_130us": "readmitted",
-    "acs_income": "target",
-    "acs_public_coverage": "target",
-    "airbnb": "Rating",
-    "eeg": "Eye",
-    "assistments": "correct",
-    # FLAGGED — catalog fields contradict each other for this one:
-    #   n_classes=3.0 / balance_note=MULTICLASS_NEEDS_COLLAPSE_RULE
-    #   vs. curation_status text: "target filtered to Male/Female (dropped 19,824 Unknown)"
-    "road_safety": "Sex_of_Driver",
-}
-
-# Fuzzy match tokens: dataset_name -> substrings to look for in filenames on disk,
-# since actual filenames may not match dataset_name exactly (casing, separators, IDs).
-NAME_MATCH_TOKENS = {
-    "phoneme": ["phoneme"],
-    "bank-marketing": ["bank-marketing", "bank_marketing", "bankmarketing"],
-    "MagicTelescope": ["magictelescope", "magic-telescope", "magic_telescope"],
-    "churn": ["churn"],
-    "heloc": ["heloc", "46932"],
-    "electricity": ["electricity"],
-    "jm1": ["jm1"],
-    "kick": ["kick"],
-    "default_credit": ["default", "credit_card", "creditcard"],
-    "online_shoppers": ["online_shoppers", "shoppers", "purchasing_intention"],
-    "diabetes_130us": ["diabetes"],
-    "acs_income": ["acsincome", "acs_income"],
-    "acs_public_coverage": ["acspubliccoverage", "acs_public_coverage", "publiccoverage"],
-    "airbnb": ["airbnb"],
-    "eeg": ["eeg"],
-    "assistments": ["assistments", "assistment"],
-    "road_safety": ["road-safety", "road_safety", "roadsafety", "42803"],
-}
-
-
-def discover_files(root: Path) -> dict:
-    """
-    Search root recursively for all supported data files, and match each known
-    dataset name to a file on disk via substring matching (case-insensitive).
-    Returns {dataset_name: Path or None}.
-    """
-    all_files = find_candidate_files(root)
-    matched = {}
-    for name, tokens in NAME_MATCH_TOKENS.items():
-        hit = None
-        for f in all_files:
-            fname_lower = f.name.lower()
-            if any(tok.lower() in fname_lower for tok in tokens):
-                hit = f
-                break
-        matched[name] = hit
-    return matched
-
-# Candidate label-column names to try if a dataset isn't in the registry above.
-# Extend this list based on what you see in the fallback report.
-LABEL_NAME_CANDIDATES = [
-    "target", "label", "class", "y", "outcome", "Target", "Label", "Class",
-    "Y", "Outcome", "readmitted", "Revenue", "RiskPerformance",
-    "two_year_recid", "income", "default", "churn", "Churn",
+HELOC_COLS = [
+    'ExternalRiskEstimate','MSinceOldestTradeOpen','MSinceMostRecentTradeOpen','AverageMInFile',
+    'NumSatisfactoryTrades','NumTrades60Ever2DerogPubRec','NumTrades90Ever2DerogPubRec',
+    'PercentTradesNeverDelq','MSinceMostRecentDelq','MaxDelq2PublicRecLast12M','MaxDelqEver',
+    'NumTotalTrades','NumTradesOpeninLast12M','PercentInstallTrades','MSinceMostRecentInqexcl7days',
+    'NumInqLast6M','NumInqLast6Mexcl7days','NetFractionRevolvingBurden','NetFractionInstallBurden',
+    'NumRevolvingTradesWBalance','NumInstallTradesWBalance','NumBank2NatlTradesWHighUtilization',
+    'PercentTradesWBalance'
 ]
 
-SUPPORTED_EXTENSIONS = {".csv", ".parquet", ".tsv"}
-
-
-def load_dataframe(path: Path) -> pd.DataFrame:
-    if path.suffix == ".csv":
-        return pd.read_csv(path, low_memory=False)
-    if path.suffix == ".tsv":
-        return pd.read_csv(path, sep="\t", low_memory=False)
-    if path.suffix == ".parquet":
+def _read_any(path):
+    if path.endswith('.parquet'):
         return pd.read_parquet(path)
-    raise ValueError(f"Unsupported file type: {path.suffix}")
+    return pd.read_csv(path)
 
+def load_heloc(path):
+    if path:
+        return _read_any(path)
+    import openml
+    ds = openml.datasets.get_dataset(46932)
+    X, *_ = ds.get_data()
+    return X
 
-def detect_label_column(df: pd.DataFrame) -> str | None:
-    """Fallback heuristic: try known candidate names, else the last column."""
-    for cand in LABEL_NAME_CANDIDATES:
-        if cand in df.columns:
-            return cand
-    return None
+def load_bank(path):
+    if path:
+        return _read_any(path)
+    import openml
+    ds = openml.datasets.get_dataset(1461)
+    X, *_ = ds.get_data()
+    return X
 
+def inspect_heloc(df):
+    print("="*70)
+    print("HELOC: -9 co-occurrence and distribution-isolation check")
+    print("="*70)
+    cols = [c for c in HELOC_COLS if c in df.columns]
+    missing = [c for c in HELOC_COLS if c not in df.columns]
+    if missing:
+        print("WARNING - columns not found in file:", missing)
 
-def spot_check_file(path: Path, label_col: str | None) -> dict:
-    result = {
-        "path": str(path),
-        "label_column": label_col,
-        "n_rows": None,
-        "n_classes": None,
-        "class_counts": None,
-        "status": "SKIP",
-        "note": "",
-    }
-    try:
-        df = load_dataframe(path)
-    except Exception as e:
-        result["note"] = f"load error: {e}"
-        return result
+    n = len(df)
+    print(f"\nTotal rows: {n}\n")
 
-    result["n_rows"] = len(df)
+    # Per-column -9 rate
+    print("--- Per-column -9 rate ---")
+    rate = {}
+    for c in cols:
+        cnt = (df[c] == -9).sum()
+        rate[c] = cnt / n
+        print(f"{c:40s} -9 count={cnt:6d}  ({cnt/n:6.2%})")
 
-    if label_col is None:
-        label_col = detect_label_column(df)
-        if label_col is None:
-            result["note"] = "no label column found (registry + heuristics both failed)"
-            return result
-        result["note"] = f"label column auto-detected (verify manually): {label_col}"
+    # Co-occurrence: for rows where ExternalRiskEstimate == -9,
+    # what fraction of the OTHER columns are also -9 in that same row?
+    anchor = 'ExternalRiskEstimate'
+    if anchor in cols:
+        anchor_mask = df[anchor] == -9
+        print(f"\n--- Rows where {anchor} == -9: n={anchor_mask.sum()} ---")
+        if anchor_mask.sum() > 0:
+            sub = df.loc[anchor_mask, [c for c in cols if c != anchor]]
+            frac_also_sentinel = (sub == -9).mean().mean()
+            print(f"Average fraction of OTHER columns also == -9 in those rows: {frac_also_sentinel:.2%}")
+            print("(close to 100% => record-level sentinel / synchronized 'no bureau record'")
+            print(" close to individual per-column rates above => scattered, not synchronized)")
 
-    if label_col not in df.columns:
-        result["note"] = f"registered label column '{label_col}' not found in file"
-        return result
-
-    result["label_column"] = label_col
-
-    # Drop NaNs for class counting — missingness in the label itself is a
-    # separate Phase 0 issue, not what this spot-check is verifying.
-    counts = df[label_col].dropna().value_counts()
-    result["n_classes"] = int(counts.shape[0])
-    result["class_counts"] = counts.to_dict()
-
-    if result["n_classes"] == 2:
-        result["status"] = "PASS"
-    elif result["n_classes"] == 1:
-        result["status"] = "FAIL"
-        result["note"] += " | only 1 class present — degenerate, check filtering upstream"
-    else:
-        result["status"] = "FAIL"
-        result["note"] += f" | {result['n_classes']} classes — NOT binary, needs binarization rule or D1 §6.2 fallback"
-
-    return result
-
-
-def find_candidate_files(root: Path) -> list[Path]:
-    files = []
-    for ext in SUPPORTED_EXTENSIONS:
-        files.extend(root.rglob(f"*{ext}"))
-    return sorted(files)
-
-
-def main():
-    parser = argparse.ArgumentParser(description="D1 binary-label spot-check")
-    parser.add_argument("--root", type=str, default="datasets/raw",
-                         help="Root directory containing cleanml/folktables/openml/tableshift/uci subfolders")
-    parser.add_argument("--registry", type=str, default=None,
-                         help="Optional JSON file mapping dataset_name -> {label_column}, "
-                              "overrides/extends KNOWN_LABEL_COLUMNS. Paths are always discovered "
-                              "from --root, never taken from this file.")
-    parser.add_argument("--out", type=str, default="spotcheck_results.csv")
-    args = parser.parse_args()
-
-    root = Path(args.root)
-    if not root.exists():
-        print(f"ERROR: root path '{root}' does not exist. Run this on the machine/container "
-              f"where the dataset corpus actually lives.", file=sys.stderr)
-        sys.exit(1)
-
-    label_cols = dict(KNOWN_LABEL_COLUMNS)
-    if args.registry:
-        with open(args.registry) as f:
-            extra = json.load(f)
-        for name, entry in extra.items():
-            label_cols[name] = entry["label_column"]
-
-    print(f"Searching {root} for dataset files...\n")
-    matched_paths = discover_files(root)
-
-    unmatched = [name for name, path in matched_paths.items() if path is None]
-    if unmatched:
-        print(f"WARNING: could not locate a file for {len(unmatched)} dataset(s) via name matching:")
-        for name in unmatched:
-            print(f"    - {name}  (tokens tried: {NAME_MATCH_TOKENS[name]})")
-        print("  These will be marked SKIP below. Check NAME_MATCH_TOKENS or locate manually.\n")
-
-    all_files = find_candidate_files(root)
-    matched_file_set = {p for p in matched_paths.values() if p is not None}
-    leftover = [f for f in all_files if f not in matched_file_set]
-    if leftover:
-        print(f"NOTE: {len(leftover)} file(s) under {root} were not matched to any of the 17 "
-              f"known datasets (shown for awareness, not checked):")
-        for f in leftover[:20]:
-            print(f"    - {f}")
-        if len(leftover) > 20:
-            print(f"    ... and {len(leftover) - 20} more")
-        print()
-
-    results = []
-    for name, path in matched_paths.items():
-        label_col = label_cols.get(name)
-        if path is None:
-            results.append({
-                "dataset_name": name, "path": None, "label_column": label_col,
-                "n_rows": None, "n_classes": None, "class_counts": None,
-                "status": "SKIP", "note": "file not found on disk via name matching",
-            })
+    # Distribution isolation: gap between -9 and the next smallest real value
+    print("\n--- Distribution gap check (is -9 isolated from real values?) ---")
+    for c in cols:
+        vals = df[c]
+        real_vals = vals[vals != -9]
+        if len(real_vals) == 0:
             continue
-        r = spot_check_file(path, label_col)
-        r["dataset_name"] = name
-        results.append(r)
+        next_min = real_vals.min()
+        print(f"{c:40s} next-smallest non(-9) value = {next_min}")
 
-    df_results = pd.DataFrame(results)
-    df_results.to_csv(args.out, index=False)
+def inspect_bank(df):
+    print("\n" + "="*70)
+    print("bank-marketing: V14 (pdays) == -1 vs V15 (previous) == 0 consistency")
+    print("="*70)
+    # your processed file may have renamed V14/V15 to their semantic names
+    # (pdays / previous) rather than the raw OpenML V-codes -- try both.
+    col14 = 'V14' if 'V14' in df.columns else ('pdays' if 'pdays' in df.columns else None)
+    col15 = 'V15' if 'V15' in df.columns else ('previous' if 'previous' in df.columns else None)
+    if col14 is None or col15 is None:
+        print("WARNING: expected columns V14/V15 (or pdays/previous) not found; found:", list(df.columns))
+        return
+    print(f"(using columns: pdays-equivalent='{col14}', previous-equivalent='{col15}')")
+    n = len(df)
+    v14_neg1 = df[col14] == -1
+    v15_zero = df[col15] == 0
+    both = (v14_neg1 & v15_zero).sum()
+    print(f"n={n}")
+    print(f"V14==-1 count: {v14_neg1.sum()} ({v14_neg1.mean():.2%})")
+    print(f"V15==0  count: {v15_zero.sum()} ({v15_zero.mean():.2%})")
+    print(f"V14==-1 AND V15==0: {both} "
+          f"({both / max(v14_neg1.sum(),1):.2%} of V14==-1 rows also have V15==0)")
+    print("(close to 100% => -1 is a logical 'never contacted' sentinel tied to V15,")
+    print(" not an independent negative observation)")
 
-    # Console summary
-    print(f"\n{'='*90}")
-    print(f"BINARY-LABEL SPOT-CHECK — {len(results)} dataset(s) checked")
-    print(f"{'='*90}\n")
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--heloc', default=None, help='path to local HELOC csv (optional, else tries OpenML)')
+    ap.add_argument('--bank', default=None, help='path to local bank-marketing csv (optional, else tries OpenML)')
+    args = ap.parse_args()
 
-    for r in results:
-        status_flag = {"PASS": "✅", "FAIL": "❌", "SKIP": "⚠️ "}[r["status"]]
-        print(f"{status_flag} {r['dataset_name']:<30} label='{r['label_column']}'  "
-              f"classes={r['n_classes']}  rows={r['n_rows']}")
-        if r["status"] != "PASS":
-            print(f"     note: {r['note']}")
-        if r["class_counts"]:
-            print(f"     class_counts: {r['class_counts']}")
-        print()
+    heloc_df = load_heloc(args.heloc)
+    inspect_heloc(heloc_df)
 
-    n_pass = sum(1 for r in results if r["status"] == "PASS")
-    n_fail = sum(1 for r in results if r["status"] == "FAIL")
-    n_skip = sum(1 for r in results if r["status"] == "SKIP")
-
-    print(f"{'='*90}")
-    print(f"SUMMARY: {n_pass} PASS | {n_fail} FAIL | {n_skip} SKIP  (results written to {args.out})")
-    print(f"{'='*90}\n")
-
-    if n_fail > 0 or n_skip > 0:
-        print("ACTION REQUIRED: D1 §3's binary-corpus assumption does NOT hold for all datasets.")
-        print("  - FAIL datasets need either a documented binarization rule (update Phase 0 notes)")
-        print("    or explicit routing through D1 §6.2's multi-class fallback for label noise.")
-        print("  - SKIP datasets need a registry entry (path + label column) before this check")
-        print("    can be considered authoritative — do not treat SKIP as a silent pass.")
-        sys.exit(2)
-    else:
-        print("All checked datasets confirmed binary. D1 §3 assumption holds — D3 label-noise")
-        print("code and D4 severity grid for §6 are unblocked on this specific item.")
-
-
-if __name__ == "__main__":
-    main()
+    bank_df = load_bank(args.bank)
+    inspect_bank(bank_df)

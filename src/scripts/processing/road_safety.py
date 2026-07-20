@@ -49,7 +49,7 @@ print(f"Duplicate rows : {dupes}")
 # ----------------------------------------------------------------------
 # Save subsample to raw folder
 # ----------------------------------------------------------------------
-out_path = "datasets/processed/openml/road_safety.parquet"
+out_path = "datasets/processed/openml/road-safety.parquet"
 df_sample.to_parquet(out_path, index=False)
 print(f"\nSaved → {out_path}")
 print("Done.")
