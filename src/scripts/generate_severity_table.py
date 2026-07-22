@@ -7,29 +7,24 @@ D3's six runners have been using for smoke-testing (`[0.05, 0.10, 0.15, 0.20, 0.
 
 D4's mechanisms split into two categories:
 
-  CORPUS-WIDE FIXED alpha_max (11 of 14 sub-mechanisms): severity(l) =
+  CORPUS-WIDE FIXED alpha_max (13 of 14 sub-mechanisms): severity(l) =
     (l/10) * alpha_max, identical across all 17 datasets. No data pull
     needed -- these are the fixed constants D4 already decided (missingness
-    0.0865, feature noise 0.30, quantization's implicit 1.0, distribution
-    shift covariate 0.25 / concept 0.5, validity 0.1088, uniqueness 0.06).
+    0.0865, feature noise 0.30, quantization's implicit 1.0, label noise
+    0.10, distribution shift covariate 0.25 / concept 0.5, validity 0.1088,
+    uniqueness 0.06).
 
-  PER-DATASET alpha_max / extra parameters (3 of 14 sub-mechanisms):
-    - label_noise (uniform, class_conditional): alpha_max is a Cleanlab-
-      estimated overall label-noise rate per dataset (D4 Sec 2.3), clamped
-      to <= 0.45. Requires a Cleanlab pass per dataset -- this script
-      contains its own small, self-contained estimation function rather
-      than modifying label_noise.py's internals, which already have their
-      own tested behavior (estimating the ASYMMETRY RATIO, a different
-      parameter) and shouldn't be touched for this.
-    - distribution_shift/label: severity itself is corpus-wide (l/10,
-      matching D1's alpha interpolation weight directly), but needs each
-      dataset's natural class prior (directly computable, no Cleanlab) to
-      set rho_target per D4 Sec 2.4's rule.
+    Label noise was ORIGINALLY per-dataset (Cleanlab-estimated), but real-
+    corpus testing of that approach produced implausible rates (13%-56%,
+    inconsistent with Phase 0's own learnability screening) -- diagnosed as
+    probe underfitting from the logistic-regression probe, not genuine label
+    noise. Reverted to a fixed 0.10 default per David's review (2026-07-20).
+    See D4 Sec 2.3 and Future Work item 8.
 
-If Cleanlab is unavailable, label-noise rows are written with alpha_max
-left blank and a note explaining why, rather than silently defaulting to
-something -- consistent with label_noise.py's own no-silent-fallback
-philosophy for the same dependency.
+  PER-DATASET (1 of 14 sub-mechanisms): distribution_shift/label needs each
+    dataset's natural class prior (directly computable, no Cleanlab) to set
+    rho_target per D4 Sec 2.4's rule. Severity itself (l/10) is still
+    corpus-wide; only rho_target varies per dataset.
 
 Usage:
     python -m src.scripts.generate_severity_table --all
@@ -47,7 +42,7 @@ import pandas as pd
 
 warnings.filterwarnings("ignore")
 
-PROJECT_ROOT = Path("/workspace")  # for containerized runs; override with env var if needed
+PROJECT_ROOT = Path("/workspace")
 PROCESSED_DIR = PROJECT_ROOT / "datasets" / "processed"
 OUT_DIR = PROJECT_ROOT / "results" / "corruption_engine"
 OUT_TABLE = OUT_DIR / "severity_table.csv"
@@ -80,18 +75,36 @@ SEVERITY_LEVELS = list(range(1, 11))  # 1-10, per D4 Sec 1
 ALPHA_MAX = {
     "missingness": 0.0865,           # D4 Sec 2.1, road-safety anchor
     "feature_noise_rate": 0.30,      # D4 Sec 2.2, gaussian + categorical_swap
-    "feature_noise_quantization": 1.0,  # D4 Sec 2.2 -- severity IS the
-                                      # fraction of the k_max-to-k_min range;
-                                      # feature_noise.py computes k_max
-                                      # internally per call, nothing dataset-
-                                      # specific belongs in this table.
+    "feature_noise_quantization": 0.99,  # D4 Sec 2.2 -- fixed 2026-07-21:
+                                      # originally 1.0, which made severity
+                                      # level 10 compute to EXACTLY 1.0 --
+                                      # violating D1 Sec 3's "severity never
+                                      # approaches 1" rule that every
+                                      # corrupt() implementation enforces
+                                      # (severity must be < 1). Surfaced when
+                                      # wiring this table into the runners:
+                                      # every quantization call at level 10
+                                      # raised ValueError. 0.99 keeps level
+                                      # 10 just under the boundary while
+                                      # leaving every other level unaffected.
+    "label_noise": 0.10,             # D4 Sec 2.3 -- REVISED (David,
+                                      # 2026-07-20) from a per-dataset
+                                      # Cleanlab estimate to a fixed corpus-
+                                      # wide default. Real-corpus testing of
+                                      # the original approach produced
+                                      # implausible per-dataset rates
+                                      # (13%-56%, inconsistent with Phase 0's
+                                      # learnability screening) -- see D4
+                                      # Sec 2.3 for the full diagnosis. This
+                                      # is a stopgap, not a measured anchor;
+                                      # D4 Future Work item 8 covers fixing
+                                      # the estimation methodology properly.
     "distribution_shift_covariate": 0.25,   # D4 Sec 2.4
     "distribution_shift_concept": 0.5,      # D4 Sec 2.4
     "validity_violations": 0.1088,   # D4 Sec 2.5, HELOC anchor
     "uniqueness": 0.06,              # D4 Sec 2.6, HELOC anchor (Q2)
 }
 
-LABEL_NOISE_MAX_CLAMP = 0.45  # D4 Sec 2.3
 LABEL_SHIFT_MINORITY_FLOOR_FRACTION = 0.05  # D4 Sec 2.4, per David's review
 
 # The 14 sub-mechanisms, tagged with which alpha_max category they use.
@@ -102,8 +115,8 @@ SUB_MECHANISMS = [
     ("feature_noise", "gaussian", "corpus_wide", "feature_noise_rate"),
     ("feature_noise", "categorical_swap", "corpus_wide", "feature_noise_rate"),
     ("feature_noise", "quantization", "corpus_wide", "feature_noise_quantization"),
-    ("label_noise", "uniform", "per_dataset_cleanlab", None),
-    ("label_noise", "class_conditional", "per_dataset_cleanlab", None),
+    ("label_noise", "uniform", "corpus_wide", "label_noise"),
+    ("label_noise", "class_conditional", "corpus_wide", "label_noise"),
     ("distribution_shift", "covariate", "corpus_wide", "distribution_shift_covariate"),
     ("distribution_shift", "label", "per_dataset_prior", None),
     ("distribution_shift", "concept", "corpus_wide", "distribution_shift_concept"),
@@ -136,40 +149,6 @@ def discover_datasets():
     return found
 
 
-def estimate_label_noise_alpha_max(df: pd.DataFrame, target_col: str, feature_cols: list) -> float:
-    """
-    Self-contained Cleanlab-based estimate of the OVERALL label-noise rate
-    (not the asymmetry ratio label_noise.py's internals estimate) --
-    intentionally a separate, small implementation rather than reusing or
-    modifying label_noise.py's _estimate_asymmetry_ratio_cleanlab, which
-    already has its own tested purpose (a different parameter) and
-    shouldn't be touched for this.
-
-    Estimated rate = (sum of confident-joint off-diagonal counts) / n --
-    the fraction of labels Cleanlab's confident learning pass flags as
-    likely mislabeled, directly derivable from the same confident_joint
-    matrix used elsewhere for the ratio.
-    """
-    from cleanlab.count import compute_confident_joint
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.model_selection import cross_val_predict
-
-    X = df[feature_cols].select_dtypes(include=[np.number]).fillna(0)
-    y = df[target_col].to_numpy()
-    if X.shape[1] == 0:
-        raise ValueError("No numeric feature columns available for the Cleanlab probe.")
-
-    Xs = StandardScaler().fit_transform(X)
-    clf = LogisticRegression(max_iter=1000)
-    pred_probs = cross_val_predict(clf, Xs, y, cv=3, method="predict_proba")
-    cj = compute_confident_joint(labels=y.astype(int), pred_probs=pred_probs)
-
-    off_diagonal_total = int(cj.sum()) - int(np.trace(cj))
-    n = len(y)
-    return off_diagonal_total / n if n else 0.0
-
-
 def compute_natural_prior_and_target(df: pd.DataFrame, target_col: str):
     """
     Natural class prior rho = P(Y=1) (using whichever class is coded 1, per
@@ -190,7 +169,7 @@ def compute_natural_prior_and_target(df: pd.DataFrame, target_col: str):
     return rho, rho_target
 
 
-def build_rows_for_dataset(source, name, df, target_col, label_noise_alpha_max, natural_rho, rho_target):
+def build_rows_for_dataset(source, name, df, target_col, natural_rho, rho_target):
     rows = []
     for mech_class, sub_mech, category, alpha_key in SUB_MECHANISMS:
         for level in SEVERITY_LEVELS:
@@ -205,19 +184,12 @@ def build_rows_for_dataset(source, name, df, target_col, label_noise_alpha_max, 
                 row["alpha_max_used"] = ALPHA_MAX[alpha_key]
                 row["alpha_max_source"] = "corpus_wide_fixed_D4"
                 row["note"] = None
-            elif category == "per_dataset_cleanlab":
-                if label_noise_alpha_max is None:
-                    row["severity_value"] = None
-                    row["alpha_max_used"] = None
-                    row["alpha_max_source"] = "UNAVAILABLE"
-                    row["note"] = "Cleanlab estimation failed or unavailable for this dataset"
-                else:
-                    row["severity_value"] = round(frac * label_noise_alpha_max, 6)
-                    row["alpha_max_used"] = round(label_noise_alpha_max, 6)
-                    row["alpha_max_source"] = "cleanlab_estimated_per_dataset"
-                    row["note"] = None
             elif category == "per_dataset_prior":
-                row["severity_value"] = frac  # alpha itself, per D1's interpolation formula
+                # Fixed 2026-07-21: cap at 0.99, same boundary issue as
+                # quantization above -- frac=1.0 at level 10 would violate
+                # D1 Sec 3's severity<1 requirement, which distribution_shift.py
+                # enforces directly.
+                row["severity_value"] = min(frac, 0.99)
                 row["alpha_max_used"] = None
                 row["alpha_max_source"] = "not_applicable_uses_rho_target_instead"
                 row["note"] = (f"natural_rho={natural_rho:.4f}, rho_target={rho_target:.4f}"
@@ -251,18 +223,6 @@ def run_one_dataset(source, name, path, all_rows):
 
     feature_cols = [c for c in df.columns if c != target_col]
 
-    # Label noise: per-dataset Cleanlab estimate.
-    label_noise_alpha_max = None
-    try:
-        raw_estimate = estimate_label_noise_alpha_max(df, target_col, feature_cols)
-        label_noise_alpha_max = min(raw_estimate, LABEL_NOISE_MAX_CLAMP)
-        clamped_note = " (clamped)" if raw_estimate > LABEL_NOISE_MAX_CLAMP else ""
-        log(f"  label_noise alpha_max: {label_noise_alpha_max:.4f}{clamped_note} (raw estimate: {raw_estimate:.4f})")
-    except ImportError as e:
-        log(f"  !! Cleanlab unavailable — label_noise severity rows will be blank for this dataset: {str(e)[:150]}")
-    except Exception as e:
-        log(f"  !! Label-noise estimation failed — rows will be blank: {str(e)[:150]}")
-
     # Distribution shift / label: natural prior + rho_target.
     natural_rho, rho_target = compute_natural_prior_and_target(df, target_col)
     if natural_rho is not None:
@@ -270,8 +230,7 @@ def run_one_dataset(source, name, path, all_rows):
     else:
         log(f"  !! distribution_shift/label: target not binary — rows will note this.")
 
-    rows = build_rows_for_dataset(source, name, df, target_col,
-                                   label_noise_alpha_max, natural_rho, rho_target)
+    rows = build_rows_for_dataset(source, name, df, target_col, natural_rho, rho_target)
     all_rows.extend(rows)
     log(f"  {len(rows)} rows generated (14 sub-mechanisms x 10 severity levels)")
 
@@ -319,8 +278,6 @@ def main():
     log("=" * 70)
     log(f"Total rows generated: {len(table)}")
     if not table.empty:
-        n_blank_label_noise = table[(table["mechanism_class"] == "label_noise") & (table["severity_value"].isna())].shape[0]
-        log(f"Label-noise rows with no value (Cleanlab unavailable/failed): {n_blank_label_noise}")
         log()
         log("Sample (severity_level=5, one row per sub-mechanism, first dataset):")
         first_dataset = table["dataset"].iloc[0]

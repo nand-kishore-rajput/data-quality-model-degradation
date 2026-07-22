@@ -44,6 +44,8 @@ from scipy import stats
 from .base import (
     CorruptionMetadata,
     select_frozen_slice_bounds,
+    derive_call_seed,
+    reference_variance_issue,
 )
 
 MechanismName = Literal["covariate", "label", "concept"]
@@ -132,19 +134,49 @@ def corrupt_covariate(
     (D2 Decision 4) and applied to the test fold.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
-    feature_cols = _numeric_feature_cols(train_fold_reference, target_col)
+    call_seed = derive_call_seed(seed, dataset_name, "covariate", severity)
+    rng = np.random.default_rng(call_seed)
+    candidate_cols = _numeric_feature_cols(train_fold_reference, target_col)
+
+    # Fixed 2026-07-21: exclude near-constant train-fold columns from PC1's
+    # feature set entirely, rather than only guarding against EXACTLY zero
+    # variance. Real-corpus testing found EEG's covariate shift totally
+    # degenerate (effective_sample_fraction=0.000) at EVERY severity level,
+    # immediately -- worse than jm1's earlier residual case, which degraded
+    # gradually with severity. Root cause, confirmed by reproduction: a
+    # channel (almost certainly AF3, already flagged elsewhere in this
+    # project for borderline signal properties) with a train-fold std small
+    # enough that a handful of genuine EEG artifact spikes in the test fold
+    # produce enormous z-scores, dominating PC1's loading. G_CLIP_Z clipping
+    # doesn't help here because it clips to a multiple of g_centered's OWN
+    # std, which is itself inflated by the same extreme points -- a non-
+    # robust statistic chasing the outliers it's meant to bound, rather than
+    # anchoring to the bulk of well-behaved data. Excluding near-constant
+    # reference columns upstream, before PC1 is ever computed, addresses the
+    # root cause directly rather than patching the symptom further downstream.
+    excluded_features = {}
+    feature_cols = []
+    for col in candidate_cols:
+        issue = reference_variance_issue(train_fold_reference, col)
+        if issue is not None:
+            excluded_features[col] = issue
+        else:
+            feature_cols.append(col)
+
     if len(feature_cols) < 1:
         raise RuntimeError(
-            f"Covariate shift needs at least one numeric feature for PC1; "
-            f"dataset='{dataset_name}' has none."
+            f"Covariate shift needs at least one numeric feature for PC1 with "
+            f"non-degenerate train-fold variance; dataset='{dataset_name}' has "
+            f"none. Excluded: {excluded_features}"
         )
 
     # Fit standardization + PC1 on the train fold.
     ref_X = train_fold_reference[feature_cols].to_numpy(dtype=float)
     ref_mean = np.nanmean(ref_X, axis=0)
     ref_std = np.nanstd(ref_X, axis=0)
-    ref_std[ref_std == 0] = 1.0  # guard constant columns
+    ref_std[ref_std == 0] = 1.0  # belt-and-suspenders: reference_variance_issue
+        # already excludes near-zero-variance columns above; this guard only
+        # matters if MIN_REFERENCE_STD itself is ever set to exactly 0.
 
     ref_Xs = (ref_X - ref_mean) / ref_std
     ref_Xs = np.nan_to_num(ref_Xs, nan=0.0)  # pre-existing NaN -> 0 (mean) for PCA fit
@@ -176,9 +208,27 @@ def corrupt_covariate(
     # own standard deviations keeps the mechanism's INTENT (select more
     # strongly toward one tail as severity rises) while preventing any single
     # point from capturing the entire probability mass.
-    g_std = g_centered.std()
-    if g_std > 0:
-        g_clip = G_CLIP_Z * g_std
+    #
+    # Fixed 2026-07-21: g_std (plain standard deviation) is itself NOT robust
+    # to the same outliers it's meant to bound against -- surfaced by EEG,
+    # whose covariate shift collapsed totally (effective_sample_fraction
+    # exactly 0.000) at EVERY severity level, immediately, unlike jm1's
+    # gradual degradation. Root cause: a channel with disproportionately
+    # tiny scale relative to the others (not degenerate/constant -- excluding
+    # near-constant columns doesn't catch this) meant a handful of genuine
+    # small artifacts, once z-scored, produced g values so extreme that they
+    # inflated g_centered.std() itself, so the clip bound scaled up right
+    # along with the outliers instead of bounding relative to the well-
+    # behaved bulk of the distribution -- a classic non-robust-statistic-
+    # chasing-its-own-outliers failure. Replaced with a MAD-based robust
+    # scale estimate, which is far less sensitive to a small number of
+    # extreme points, so the clip bound stays anchored to the bulk of the
+    # data regardless of how extreme the outliers get.
+    median_g = np.median(g_centered)
+    mad = np.median(np.abs(g_centered - median_g))
+    g_scale = 1.4826 * mad  # scaled so MAD approximates std under normality
+    if g_scale > 0:
+        g_clip = G_CLIP_Z * g_scale
         g_centered = np.clip(g_centered, -g_clip, g_clip)
     weights = np.exp(severity * g_centered)
     weights = weights / weights.sum()
@@ -206,6 +256,7 @@ def corrupt_covariate(
         seed=seed,
         conditioning_feature=f"PC1(top_loading={top_feature})",
         achieved_rate={"psi_pc1_score": psi_pc1, "psi_top_feature": psi_top},
+        excluded_columns=excluded_features if excluded_features else None,
         validation_passed=(psi_pc1 >= 0) and not degenerate_resample,
         validation_details={
             "pc1_top_loading_feature": top_feature,
@@ -214,6 +265,7 @@ def corrupt_covariate(
             "effective_sample_size": effective_sample_size,
             "effective_sample_fraction": ess_fraction,
             "degenerate_resample": degenerate_resample,
+            "excluded_from_pc1": excluded_features if excluded_features else None,
             "conditional_label_preserved_by_construction": True,
             "note": "P(Y|X) unchanged because resampling preserves each row's own (x,y) pairing.",
         },
@@ -252,7 +304,8 @@ def corrupt_label(
     degenerate, not high severity.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "label", severity)
+    rng = np.random.default_rng(call_seed)
 
     classes = sorted(fold[target_col].dropna().unique())
     if len(classes) != 2:
@@ -359,7 +412,8 @@ def corrupt_concept(
     that shared source is the structural guarantee the two mechanisms align.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "concept", severity)
+    rng = np.random.default_rng(call_seed)
 
     classes = sorted(fold[target_col].dropna().unique())
     if len(classes) != 2:

@@ -35,7 +35,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from .base import CorruptionMetadata, rate_tolerance, nan_adjusted_target
+from .base import CorruptionMetadata, rate_tolerance, nan_adjusted_target, derive_call_seed
 
 ConstraintType = Literal["no_negative", "range", "none", "categorical"]
 
@@ -143,7 +143,8 @@ def corrupt(
     dataset_name : for metadata/logging only.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "validity_violations", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
 
     if columns is None:

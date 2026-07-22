@@ -1,30 +1,34 @@
 """
 run_missingness_corruption.py
 
-Smoke-test / validation runner for D3's missingness.py module (MCAR/MAR/MNAR)
-against the real processed corpus.
+Full-scale runner for D3's missingness.py module (MCAR/MAR/MNAR) against the
+real processed corpus.
 
-NOT the final Phase 2 experiment runner. D4's severity grid isn't frozen yet,
-so PLACEHOLDER_SEVERITIES below is illustrative only, for validating the
-corruption engine mechanically — swap in D4's real grid once it exists.
+CHANGES FROM SMOKETEST VERSION (D7 pre-flight review):
+  1. MAX_CORRUPTED_COLUMNS cap REMOVED. The smoketest capped every call at 5
+     columns regardless of dataset size, so high-feature-count datasets
+     (road-safety: 61 features, Airbnb: 39) never had more than 5 columns
+     corrupted. D10's mean/max aggregation metrics need the whole dataset,
+     not an arbitrary 5-column subset — required before this run counts as
+     real experiment data, not optional polish.
+  2. conditioning_feature and validation_details_raw added to the manifest
+     row. base.py's CorruptionMetadata computes both (MAR's conditioning
+     feature, per-column association diagnostics) but the smoketest version
+     of this script discarded them before they reached CSV.
+  3. Seed count supplied at the command line for the real run:
+     --seeds 1 2 3 4 5 (D1's 5-seed budget).
+  4. BUG FOUND AND FIXED (2026-07-22, first full-scale run): online_shoppers'
+     'Weekend' column is boolean dtype. pandas' is_numeric_dtype() returns
+     True for bool, so it was passed to missingness.corrupt() as an eligible
+     column -- but bool columns cannot hold NaN without an explicit cast,
+     raising "Invalid value 'nan' for dtype 'bool'". All 150 online_shoppers
+     rows (3 mechanisms x 10 severities x 5 seeds) failed with this exact
+     error on the first full-scale run. Invisible under the old column cap,
+     since 'Weekend' is the 14th of 14 columns and the cap never reached it.
+     Fixed by excluding bool-dtype columns explicitly in eligible_columns().
 
-What it does, per dataset:
-  1. Load datasets/processed/<source>/<name>.parquet
-  2. Split into train/test folds (D2 Decision 1: split before corrupt).
-     Split ratio and stratification (SPLIT_RATIO, SPLIT_SEED below) are new
-     decisions this script makes explicitly — not yet specified anywhere in
-     D1/D2/D4 — flagged here rather than silently assumed.
-  3. For each mechanism (mcar, mar, mnar) x placeholder severity x seed:
-     corrupt the test fold via src.corruption_engine.missingness.corrupt,
-     using the train fold as train_fold_reference (D2 Decision 4).
-  4. Log every result (achieved rate, validation status, errors) to a
-     manifest CSV, immediately after each call — matching the live-logging
-     pattern already used in preprocess_to_processed.py.
-
-Usage:
-    python -m src.scripts.run_missingness_corruption --datasets phoneme churn
-    python -m src.scripts.run_missingness_corruption --all
-    python -m src.scripts.run_missingness_corruption --all --severities 0.1 0.2 --seeds 1 2 3
+Usage (full-scale):
+    python -m src.scripts.run_missingness_corruption --all --seeds 1 2 3 4 5
 """
 
 import argparse
@@ -37,6 +41,7 @@ import numpy as np
 import pandas as pd
 
 from src.corruption_engine.missingness import corrupt
+from src.corruption_engine.base import derive_call_seed
 
 warnings.filterwarnings("ignore")
 
@@ -46,6 +51,7 @@ warnings.filterwarnings("ignore")
 PROJECT_ROOT = Path("/workspace")
 PROCESSED_DIR = PROJECT_ROOT / "datasets" / "processed"
 OUT_DIR = PROJECT_ROOT / "results" / "corruption_engine"
+SEVERITY_TABLE_PATH = OUT_DIR / "severity_table.csv"
 OUT_MANIFEST = OUT_DIR / "missingness_smoketest_manifest.csv"
 OUT_LOG = OUT_DIR / "missingness_smoketest_run.log"
 
@@ -79,15 +85,54 @@ TARGET_COLUMNS = {
 }
 
 # ----------------------------------------------------------------------
-# Placeholder config — explicitly NOT canonical, see module docstring.
+# Config
 # ----------------------------------------------------------------------
-SPLIT_RATIO = 0.7          # 70% train / 30% test, new decision, flag for confirmation
+SPLIT_RATIO = 0.7          # 70% train / 30% test
 SPLIT_SEED = 42            # matches the project's standing seed=42 convention
-PLACEHOLDER_SEVERITIES = [0.05, 0.10, 0.15, 0.20, 0.25]  # NOT D4's real grid
-PLACEHOLDER_SEEDS = [1, 2, 3]                            # NOT D1's real 5-seed budget
+PLACEHOLDER_SEVERITIES = [0.05, 0.10, 0.15, 0.20, 0.25]  # fallback ONLY if
+    # severity_table.csv is missing, or --severities overrides it for a quick
+    # manual test. D4's real grid (loaded below) is used by default.
+PLACEHOLDER_SEEDS = [1, 2, 3]  # overridden via --seeds 1 2 3 4 5 for the real run
 MECHANISMS = ["mcar", "mar", "mnar"]
-MAX_CORRUPTED_COLUMNS = 5  # cap columns touched per call, keeps the smoke test fast;
-                           # remove this cap for the real experiment run
+
+# MAX_CORRUPTED_COLUMNS removed (was: 5). Every eligible numeric column is
+# now corrupted per call — required for D10's mean/max aggregation metrics
+# to reflect the whole dataset rather than an arbitrary 5-column subset.
+
+_severity_table_cache = None
+_severities_overridden = False
+
+
+def load_severity_table():
+    """Loads D4's real severity table (generate_severity_table.py's output),
+    cached after first read. Raises clearly if it doesn't exist rather than
+    silently falling back — D4's real grid should be used whenever available;
+    the placeholder grid is a fallback for a missing file or a manual
+    --severities override only."""
+    global _severity_table_cache
+    if _severity_table_cache is None:
+        if not SEVERITY_TABLE_PATH.exists():
+            raise FileNotFoundError(
+                f"D4's severity table not found at {SEVERITY_TABLE_PATH}. "
+                f"Run `python -m src.scripts.generate_severity_table --all` first, "
+                f"or pass --severities to use the placeholder grid explicitly."
+            )
+        _severity_table_cache = pd.read_csv(SEVERITY_TABLE_PATH)
+    return _severity_table_cache
+
+
+def get_severities_for(dataset_name: str, sub_mechanism: str) -> list:
+    """Returns the 10 real severity values (level 1-10, in order) for this
+    dataset/sub_mechanism from D4's table."""
+    table = load_severity_table()
+    rows = table[(table["dataset"] == dataset_name) & (table["sub_mechanism"] == sub_mechanism)]
+    rows = rows.sort_values("severity_level")
+    if rows.empty:
+        raise ValueError(
+            f"No severity table rows for dataset='{dataset_name}', "
+            f"sub_mechanism='{sub_mechanism}'. Check severity_table.csv covers this combination."
+        )
+    return rows["severity_value"].tolist()
 
 _log_file = None
 
@@ -110,18 +155,25 @@ def discover_datasets():
         if not source_dir.is_dir():
             continue
         for f in sorted(source_dir.glob("*.parquet")):
-            key = (source_dir.name, f.stem)
             found.append((source_dir.name, f.stem, f))
     return found
 
 
-def split_train_test(df: pd.DataFrame, target_col: str, ratio: float, seed: int):
+def split_train_test(df: pd.DataFrame, target_col: str, ratio: float, seed: int, dataset_name: str):
     """
     D2 Decision 1 (split before corrupt), stratified by target to preserve
     class balance in both folds. Fixed once per dataset (D2's split is not
     redrawn per corruption seed — D11 Decision 8's same reasoning applies here).
+
+    Uses derive_call_seed rather than np.random.default_rng(seed) directly
+    -- fixed 2026-07-21, same root cause as the corruption engine's per-call
+    seeding bug: SPLIT_SEED=42 is the SAME literal value reused across all
+    17 datasets, and a fresh Generator from that literal seed each time
+    means every dataset's split draws from the same starting PRNG prefix,
+    just shuffling arrays of different sizes.
     """
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "train_test_split", 0.0)
+    rng = np.random.default_rng(call_seed)
     train_idx_parts, test_idx_parts = [], []
     for cls, group in df.groupby(target_col):
         idx = group.index.to_numpy().copy()  # .copy() required: to_numpy() can
@@ -145,14 +197,29 @@ MIN_COLUMN_STD = 1e-8  # matches missingness.py's MIN_REFERENCE_STD — columns
     # columns that are legitimately unsuitable for a z-score-based mechanism).
 
 
-def eligible_columns(train_fold: pd.DataFrame, target_col: str, max_cols: int):
-    """Numeric, non-target, non-near-constant columns. See script-level note
-    on the separate categorical-column limitation this inherits from
-    missingness.py."""
+def eligible_columns(train_fold: pd.DataFrame, target_col: str):
+    """Numeric, non-target, non-near-constant columns. No cap applied — every
+    eligible column is corrupted per call (cap removed for the full-scale
+    run; see module docstring).
+
+    Excludes boolean-dtype columns explicitly (2026-07-22 fix): pandas'
+    is_numeric_dtype() returns True for bool columns, but a bool column
+    cannot hold NaN without an explicit cast -- injecting missingness into
+    one raises "Invalid value 'nan' for dtype 'bool'" rather than silently
+    upcasting. Confirmed on online_shoppers' 'Weekend' column, which is bool
+    and sits last (14th of 14) in that dataset's column order -- the
+    MAX_CORRUPTED_COLUMNS=5 cap in the smoketest version of this script
+    never reached it, so this bug was invisible until the cap was removed
+    for the full-scale run. All 150 online_shoppers failures (3 mechanisms
+    x 10 severities x 5 seeds) traced to this single root cause."""
     cols = []
     skipped_constant = []
+    skipped_bool = []
     for c in train_fold.columns:
         if c == target_col or not pd.api.types.is_numeric_dtype(train_fold[c]):
+            continue
+        if pd.api.types.is_bool_dtype(train_fold[c]):
+            skipped_bool.append(c)
             continue
         if train_fold[c].std() < MIN_COLUMN_STD:
             skipped_constant.append(c)
@@ -160,7 +227,9 @@ def eligible_columns(train_fold: pd.DataFrame, target_col: str, max_cols: int):
         cols.append(c)
     if skipped_constant:
         log(f"  Skipping near-constant column(s) (train-fold std < {MIN_COLUMN_STD}): {skipped_constant}")
-    return cols[:max_cols]
+    if skipped_bool:
+        log(f"  Skipping boolean-dtype column(s) (cannot hold NaN without an explicit cast): {skipped_bool}")
+    return cols
 
 
 def run_one_dataset(source: str, name: str, path: Path, results: list):
@@ -194,8 +263,8 @@ def run_one_dataset(source: str, name: str, path: Path, results: list):
                          "severity": None, "seed": None, "status": "TARGET_COL_NOT_FOUND"})
         return
 
-    train_fold, test_fold = split_train_test(df, target_col, SPLIT_RATIO, SPLIT_SEED)
-    columns = eligible_columns(train_fold, target_col, MAX_CORRUPTED_COLUMNS)
+    train_fold, test_fold = split_train_test(df, target_col, SPLIT_RATIO, SPLIT_SEED, name)
+    columns = eligible_columns(train_fold, target_col)
 
     if not columns:
         log(f"  !! No eligible numeric columns to corrupt — skipping.")
@@ -204,10 +273,11 @@ def run_one_dataset(source: str, name: str, path: Path, results: list):
         return
 
     log(f"  train={len(train_fold)} test={len(test_fold)} "
-        f"columns={columns}")
+        f"n_columns={len(columns)} columns={columns}")
 
     for mechanism in MECHANISMS:
-        for severity in PLACEHOLDER_SEVERITIES:
+        severities = PLACEHOLDER_SEVERITIES if _severities_overridden else get_severities_for(name, mechanism)
+        for severity in severities:
             for seed in PLACEHOLDER_SEEDS:
                 row = {
                     "source": source, "dataset": name, "mechanism": mechanism,
@@ -230,6 +300,10 @@ def run_one_dataset(source: str, name: str, path: Path, results: list):
                     row["validation_passed"] = meta.validation_passed
                     row["achieved_rate"] = str(meta.achieved_rate)
                     row["excluded_columns"] = str(meta.excluded_columns) if meta.excluded_columns else None
+                    # --- D7 pre-flight additions: previously computed but discarded ---
+                    row["conditioning_feature"] = meta.conditioning_feature
+                    row["validation_details_raw"] = str(meta.validation_details)
+                    # -------------------------------------------------------------------
                     if meta.excluded_columns:
                         log(f"    -- {mechanism} sev={severity} seed={seed}: excluded {list(meta.excluded_columns.keys())}")
                 except RuntimeError as e:
@@ -240,23 +314,27 @@ def run_one_dataset(source: str, name: str, path: Path, results: list):
                     row["status"] = "ALL_COLUMNS_FAILED"
                     row["validation_passed"] = False
                     row["achieved_rate"] = None
+                    row["conditioning_feature"] = None
+                    row["validation_details_raw"] = None
                     row["error"] = str(e)[:500]
                     log(f"    !! {mechanism} sev={severity} seed={seed}: {str(e)[:150]}")
                 except Exception as e:
                     row["status"] = f"UNEXPECTED_ERROR: {type(e).__name__}"
                     row["validation_passed"] = False
                     row["achieved_rate"] = None
+                    row["conditioning_feature"] = None
+                    row["validation_details_raw"] = None
                     row["error"] = str(e)[:500]
 
                 results.append(row)
 
         n_ok = sum(1 for r in results if r["dataset"] == name and r["mechanism"] == mechanism and r["status"] in ("OK", "PARTIAL_SUCCESS"))
-        n_total = len(PLACEHOLDER_SEVERITIES) * len(PLACEHOLDER_SEEDS)
+        n_total = len(severities) * len(PLACEHOLDER_SEEDS)
         log(f"  {mechanism}: {n_ok}/{n_total} OK")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Smoke-test D3's missingness module against real processed data.")
+    parser = argparse.ArgumentParser(description="Run D3's missingness module against real processed data (full scale).")
     parser.add_argument("--datasets", nargs="*", default=None,
                          help="Dataset names to run (e.g. phoneme churn). Default: first 3 discovered.")
     parser.add_argument("--all", action="store_true", help="Run all discovered datasets.")
@@ -264,7 +342,8 @@ def main():
     parser.add_argument("--seeds", nargs="*", type=int, default=None)
     args = parser.parse_args()
 
-    global PLACEHOLDER_SEVERITIES, PLACEHOLDER_SEEDS, _log_file
+    global PLACEHOLDER_SEVERITIES, PLACEHOLDER_SEEDS, _log_file, _severities_overridden
+    _severities_overridden = bool(args.severities)
     if args.severities:
         PLACEHOLDER_SEVERITIES = args.severities
     if args.seeds:
@@ -289,10 +368,13 @@ def main():
         selected = discovered[:3]
         log(f"No --datasets or --all given; defaulting to first 3: {[d[1] for d in selected]}")
 
-    log(f"MISSINGNESS SMOKE TEST — {len(selected)} dataset(s), "
-        f"{len(MECHANISMS)} mechanisms, {len(PLACEHOLDER_SEVERITIES)} severities, "
-        f"{len(PLACEHOLDER_SEEDS)} seeds")
-    log(f"Severities (PLACEHOLDER, not D4's real grid): {PLACEHOLDER_SEVERITIES}")
+    log(f"MISSINGNESS FULL RUN — {len(selected)} dataset(s), "
+        f"{len(MECHANISMS)} mechanisms, 10 severity levels per D4's real grid, "
+        f"{len(PLACEHOLDER_SEEDS)} seeds, NO column cap")
+    if _severities_overridden:
+        log(f"Severities: OVERRIDDEN via --severities, NOT D4's real grid: {PLACEHOLDER_SEVERITIES}")
+    else:
+        log(f"Severities: D4's real per-dataset grid, loaded from {SEVERITY_TABLE_PATH}")
     log(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
     results = []

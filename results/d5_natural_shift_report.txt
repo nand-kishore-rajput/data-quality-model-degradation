@@ -1,0 +1,70 @@
+
+======================================================================
+road-safety: REAL natural-shift measurement
+======================================================================
+  Population A (train): 27001 rows | Population B (eval): 17170 rows
+  logistic_regression: M_clean=0.7376, M_shifted=0.7433, Relative_dM=-0.0077
+  random_forest: M_clean=0.8453, M_shifted=0.8219, Relative_dM=0.0277
+  mlp: M_clean=0.7680, M_shifted=0.7447, Relative_dM=0.0304
+  xgboost: M_clean=0.8640, M_shifted=0.8587, Relative_dM=0.0061
+
+======================================================================
+road-safety: SYNTHETIC concept-shift severity sweep
+======================================================================
+  logistic_regression: 0.050:+0.0142, 0.100:+0.0258, 0.150:+0.0372, 0.200:+0.0473, 0.250:+0.0618, 0.300:+0.0752, 0.350:+0.0872, 0.400:+0.0959, 0.450:+0.1067, 0.500:+0.1171
+  random_forest: 0.050:+0.0175, 0.100:+0.0318, 0.150:+0.0469, 0.200:+0.0600, 0.250:+0.0748, 0.300:+0.0904, 0.350:+0.1049, 0.400:+0.1186, 0.450:+0.1304, 0.500:+0.1458
+  mlp: 0.050:+0.0162, 0.100:+0.0291, 0.150:+0.0428, 0.200:+0.0562, 0.250:+0.0682, 0.300:+0.0844, 0.350:+0.0936, 0.400:+0.1065, 0.450:+0.1221, 0.500:+0.1371
+  xgboost: 0.050:+0.0170, 0.100:+0.0317, 0.150:+0.0471, 0.200:+0.0599, 0.250:+0.0746, 0.300:+0.0903, 0.350:+0.1050, 0.400:+0.1170, 0.450:+0.1303, 0.500:+0.1456
+
+======================================================================
+road-safety: COMPARISON -- real natural-shift vs synthetic concept-shift
+======================================================================
+  Real natural-shift Relative_dM (averaged across families): +0.0141
+    severity=0.050: synthetic avg Relative_dM=+0.0162, gap=0.0021  <-- closest so far
+    severity=0.100: synthetic avg Relative_dM=+0.0296, gap=0.0155
+    severity=0.150: synthetic avg Relative_dM=+0.0435, gap=0.0294
+    severity=0.200: synthetic avg Relative_dM=+0.0559, gap=0.0417
+    severity=0.250: synthetic avg Relative_dM=+0.0699, gap=0.0557
+    severity=0.300: synthetic avg Relative_dM=+0.0851, gap=0.0709
+    severity=0.350: synthetic avg Relative_dM=+0.0977, gap=0.0835
+    severity=0.400: synthetic avg Relative_dM=+0.1095, gap=0.0954
+    severity=0.450: synthetic avg Relative_dM=+0.1224, gap=0.1083
+    severity=0.500: synthetic avg Relative_dM=+0.1364, gap=0.1223
+
+  BEST MATCH: severity=0.050 (gap=0.0021)
+  Reasonable match -- supports D4's current concept-shift calibration for 'road-safety'.
+
+======================================================================
+diabetes_readmission: REAL natural-shift measurement
+======================================================================
+  Population A (train): 28245 rows | Population B (eval): 18280 rows
+  logistic_regression: M_clean=0.6347, M_shifted=0.6163, Relative_dM=0.0290
+  random_forest: M_clean=0.6449, M_shifted=0.6219, Relative_dM=0.0355
+  mlp: M_clean=0.5684, M_shifted=0.5362, Relative_dM=0.0567
+  xgboost: M_clean=0.6277, M_shifted=0.6195, Relative_dM=0.0130
+
+======================================================================
+diabetes_readmission: SYNTHETIC concept-shift severity sweep
+======================================================================
+  logistic_regression: 0.050:+0.0270, 0.100:+0.0461, 0.150:+0.0661, 0.200:+0.0781, 0.250:+0.0954, 0.300:+0.0976, 0.350:+0.1123, 0.400:+0.1230, 0.450:+0.1290, 0.500:+0.1355
+  random_forest: 0.050:+0.0297, 0.100:+0.0579, 0.150:+0.0797, 0.200:+0.0963, 0.250:+0.1145, 0.300:+0.1253, 0.350:+0.1340, 0.400:+0.1489, 0.450:+0.1563, 0.500:+0.1663
+  mlp: 0.050:+0.0062, 0.100:+0.0176, 0.150:+0.0190, 0.200:+0.0264, 0.250:+0.0332, 0.300:+0.0246, 0.350:+0.0358, 0.400:+0.0308, 0.450:+0.0368, 0.500:+0.0382
+  xgboost: 0.050:+0.0260, 0.100:+0.0494, 0.150:+0.0727, 0.200:+0.0859, 0.250:+0.0982, 0.300:+0.1019, 0.350:+0.1161, 0.400:+0.1298, 0.450:+0.1387, 0.500:+0.1409
+
+======================================================================
+diabetes_readmission: COMPARISON -- real natural-shift vs synthetic concept-shift
+======================================================================
+  Real natural-shift Relative_dM (averaged across families): +0.0335
+    severity=0.050: synthetic avg Relative_dM=+0.0222, gap=0.0113  <-- closest so far
+    severity=0.100: synthetic avg Relative_dM=+0.0428, gap=0.0092  <-- closest so far
+    severity=0.150: synthetic avg Relative_dM=+0.0594, gap=0.0258
+    severity=0.200: synthetic avg Relative_dM=+0.0717, gap=0.0381
+    severity=0.250: synthetic avg Relative_dM=+0.0853, gap=0.0518
+    severity=0.300: synthetic avg Relative_dM=+0.0873, gap=0.0538
+    severity=0.350: synthetic avg Relative_dM=+0.0995, gap=0.0660
+    severity=0.400: synthetic avg Relative_dM=+0.1081, gap=0.0746
+    severity=0.450: synthetic avg Relative_dM=+0.1152, gap=0.0817
+    severity=0.500: synthetic avg Relative_dM=+0.1202, gap=0.0867
+
+  BEST MATCH: severity=0.100 (gap=0.0092)
+  Reasonable match -- supports D4's current concept-shift calibration for 'diabetes_readmission'.

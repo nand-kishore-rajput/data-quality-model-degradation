@@ -44,7 +44,7 @@ from typing import Optional, Literal, Tuple
 import numpy as np
 import pandas as pd
 
-from .base import CorruptionMetadata, rate_tolerance
+from .base import CorruptionMetadata, rate_tolerance, derive_call_seed
 
 MechanismName = Literal["uniform", "class_conditional", "boundary_aware"]
 
@@ -109,7 +109,8 @@ def corrupt_uniform(
     uniform noise).
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "uniform", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
     c0, c1 = _get_binary_classes(fold[target_col])
 
@@ -267,7 +268,8 @@ def corrupt_class_conditional(
     so D4's severity grid is comparable across both.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "class_conditional", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
     c0, c1 = _get_binary_classes(fold[target_col])
 

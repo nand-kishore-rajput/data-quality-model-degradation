@@ -1,29 +1,30 @@
 """
 run_distribution_shift_corruption.py
 
-Smoke-test / validation runner for D3's distribution_shift.py module
-(Covariate 7.1, Label 7.2, Concept 7.3) against the real processed corpus.
-Companion to the missingness / feature_noise / label_noise runners.
+Full-scale runner for D3's distribution_shift.py module (Covariate 7.1,
+Label 7.2, Concept 7.3) against the real processed corpus.
 
-NOT the final Phase 2 experiment runner — PLACEHOLDER_SEVERITIES is
-illustrative, not D4's frozen grid, and target_prior for label shift is left
-at the module default (D4 supplies the real rho_target).
+CHANGE FROM SMOKETEST VERSION (D7 pre-flight review): conditioning_feature
+and validation_details_raw added to the manifest row. distribution_shift's
+concept-shift mechanism does not set conditioning_feature (that's set by
+uniqueness.py's slice_conditional path instead, per base.py), so this field
+will be None here — included for schema consistency across all six
+manifests. validation_details_raw captures the full diagnostic dict
+(psi_pc1_score, effective_sample_fraction, etc.) rather than only the
+specific keys this runner already extracts into named columns.
 
 Structural notes specific to distribution shift:
   - All three sub-mechanisms operate on the whole fold (not per-column), so
     there's no column-type routing or per-column exclusion here.
   - Covariate (7.1) and Label (7.2) shift RESAMPLE rows — the output row
     multiset differs from the input. Concept (7.3) preserves rows and changes
-    only some labels within the frozen slice S. The runner records which
-    mode each mechanism used so the manifest is unambiguous.
+    only some labels within the frozen slice S.
   - 7.1's core validation property (PSI rises monotonically with severity) is
-    a CROSS-severity property, not checkable from a single call — so this
-    runner additionally checks per-dataset PSI monotonicity across the
-    severity sweep and logs it explicitly.
+    a CROSS-severity property — this runner additionally checks per-dataset
+    PSI monotonicity across the severity sweep and logs it explicitly.
 
-Usage:
-    python -m src.scripts.run_distribution_shift_corruption --datasets phoneme churn
-    python -m src.scripts.run_distribution_shift_corruption --all
+Usage (full-scale):
+    python -m src.scripts.run_distribution_shift_corruption --all --seeds 1 2 3 4 5
 """
 
 import argparse
@@ -36,12 +37,14 @@ import numpy as np
 import pandas as pd
 
 from src.corruption_engine.distribution_shift import corrupt
+from src.corruption_engine.base import derive_call_seed
 
 warnings.filterwarnings("ignore")
 
 PROJECT_ROOT = Path("/workspace")
 PROCESSED_DIR = PROJECT_ROOT / "datasets" / "processed"
 OUT_DIR = PROJECT_ROOT / "results" / "corruption_engine"
+SEVERITY_TABLE_PATH = OUT_DIR / "severity_table.csv"
 OUT_MANIFEST = OUT_DIR / "distribution_shift_smoketest_manifest.csv"
 OUT_LOG = OUT_DIR / "distribution_shift_smoketest_run.log"
 
@@ -68,8 +71,43 @@ TARGET_COLUMNS = {
 SPLIT_RATIO = 0.7
 SPLIT_SEED = 42
 PLACEHOLDER_SEVERITIES = [0.05, 0.10, 0.15, 0.20, 0.25]
-PLACEHOLDER_SEEDS = [1, 2, 3]
+PLACEHOLDER_SEEDS = [1, 2, 3]  # overridden via --seeds 1 2 3 4 5 for the real run
 MECHANISMS = ["covariate", "label", "concept"]
+
+_severity_table_cache = None
+_severities_overridden = False
+
+
+def load_severity_table():
+    """Loads D4's real severity table (generate_severity_table.py's output),
+    cached after first read. Raises clearly if it doesn't exist rather than
+    silently falling back -- D4's real grid should be used whenever
+    available; the placeholder grid is a fallback for a missing file or a
+    manual --severities override only."""
+    global _severity_table_cache
+    if _severity_table_cache is None:
+        if not SEVERITY_TABLE_PATH.exists():
+            raise FileNotFoundError(
+                f"D4's severity table not found at {SEVERITY_TABLE_PATH}. "
+                f"Run `python -m src.scripts.generate_severity_table --all` first, "
+                f"or pass --severities to use the placeholder grid explicitly."
+            )
+        _severity_table_cache = pd.read_csv(SEVERITY_TABLE_PATH)
+    return _severity_table_cache
+
+
+def get_severities_for(dataset_name: str, sub_mechanism: str) -> list:
+    """Returns the 10 real severity values (level 1-10, in order) for this
+    dataset/sub_mechanism from D4's table."""
+    table = load_severity_table()
+    rows = table[(table["dataset"] == dataset_name) & (table["sub_mechanism"] == sub_mechanism)]
+    rows = rows.sort_values("severity_level")
+    if rows.empty:
+        raise ValueError(
+            f"No severity table rows for dataset='{dataset_name}', "
+            f"sub_mechanism='{sub_mechanism}'. Check severity_table.csv covers this combination."
+        )
+    return rows["severity_value"].tolist()
 
 _log_file = None
 
@@ -95,8 +133,22 @@ def discover_datasets():
     return found
 
 
-def split_train_test(df, target_col, ratio, seed):
-    rng = np.random.default_rng(seed)
+def split_train_test(df, target_col, ratio, seed, dataset_name):
+    """
+    D2 Decision 1 (split before corrupt), stratified by target.
+
+    Uses derive_call_seed rather than np.random.default_rng(seed) directly
+    -- fixed 2026-07-21, same root cause as the corruption engine's per-call
+    seeding bug: SPLIT_SEED=42 is the SAME literal value reused across all
+    17 datasets, and a fresh Generator created from that literal seed each
+    time means every dataset's split draws from the same starting PRNG
+    prefix, just shuffling arrays of different sizes. Structurally identical
+    to the missingness/*.py seed-correlation bug found via real-corpus
+    testing -- fixed the same way, by deriving a seed unique to
+    (seed, dataset_name) rather than reusing the raw seed value directly.
+    """
+    call_seed = derive_call_seed(seed, dataset_name, "train_test_split", 0.0)
+    rng = np.random.default_rng(call_seed)
     train_idx_parts, test_idx_parts = [], []
     for cls, group in df.groupby(target_col):
         idx = group.index.to_numpy().copy()
@@ -139,7 +191,7 @@ def run_one_dataset(source, name, path, results):
                          "severity": None, "seed": None, "status": "TARGET_COL_NOT_FOUND"})
         return
 
-    train_fold, test_fold = split_train_test(df, target_col, SPLIT_RATIO, SPLIT_SEED)
+    train_fold, test_fold = split_train_test(df, target_col, SPLIT_RATIO, SPLIT_SEED, name)
     n_classes = df[target_col].nunique(dropna=True)
     log(f"  train={len(train_fold)} test={len(test_fold)} target='{target_col}' n_classes={n_classes}")
 
@@ -154,7 +206,8 @@ def run_one_dataset(source, name, path, results):
         # the monotonicity property D1 Sec 7.1 requires.
         covariate_psi_by_severity = {}
 
-        for severity in PLACEHOLDER_SEVERITIES:
+        severities = PLACEHOLDER_SEVERITIES if _severities_overridden else get_severities_for(name, mechanism)
+        for severity in severities:
             for seed in PLACEHOLDER_SEEDS:
                 row = {"source": source, "dataset": name, "mechanism": mechanism,
                        "severity": severity, "seed": seed}
@@ -165,6 +218,10 @@ def run_one_dataset(source, name, path, results):
                     row["status"] = "OK"
                     row["validation_passed"] = meta.validation_passed
                     row["achieved_rate"] = str(meta.achieved_rate)
+                    # --- D7 pre-flight additions: previously computed but discarded ---
+                    row["conditioning_feature"] = meta.conditioning_feature
+                    row["validation_details_raw"] = str(meta.validation_details)
+                    # -------------------------------------------------------------------
                     if mechanism == "covariate":
                         d = meta.validation_details
                         row["effective_sample_fraction"] = d.get("effective_sample_fraction")
@@ -177,21 +234,27 @@ def run_one_dataset(source, name, path, results):
                 except NotImplementedError as e:
                     row["status"] = "NOT_IMPLEMENTED"
                     row["validation_passed"] = None
+                    row["conditioning_feature"] = None
+                    row["validation_details_raw"] = None
                     row["error"] = str(e)[:300]
                 except (ValueError, RuntimeError) as e:
                     row["status"] = "CORRUPTION_ERROR"
                     row["validation_passed"] = False
+                    row["conditioning_feature"] = None
+                    row["validation_details_raw"] = None
                     row["error"] = str(e)[:400]
                     log(f"    !! {mechanism} sev={severity} seed={seed}: {str(e)[:150]}")
                 except Exception as e:
                     row["status"] = f"UNEXPECTED_ERROR: {type(e).__name__}"
                     row["validation_passed"] = False
+                    row["conditioning_feature"] = None
+                    row["validation_details_raw"] = None
                     row["error"] = str(e)[:400]
                     log(f"    !! UNEXPECTED {mechanism} sev={severity} seed={seed}: {str(e)[:150]}")
                 results.append(row)
 
         n_ok = sum(1 for r in results if r["dataset"] == name and r["mechanism"] == mechanism and r["status"] == "OK")
-        n_total = len(PLACEHOLDER_SEVERITIES) * len(PLACEHOLDER_SEEDS)
+        n_total = len(severities) * len(PLACEHOLDER_SEEDS)
         log(f"  {mechanism}: {n_ok}/{n_total} OK")
 
         # Covariate-specific: verify PSI monotonicity across the severity sweep.
@@ -208,14 +271,15 @@ def run_one_dataset(source, name, path, results):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Smoke-test D3's distribution_shift module against real processed data.")
+    parser = argparse.ArgumentParser(description="Run D3's distribution_shift module against real processed data (full scale).")
     parser.add_argument("--datasets", nargs="*", default=None)
     parser.add_argument("--all", action="store_true")
     parser.add_argument("--severities", nargs="*", type=float, default=None)
     parser.add_argument("--seeds", nargs="*", type=int, default=None)
     args = parser.parse_args()
 
-    global PLACEHOLDER_SEVERITIES, PLACEHOLDER_SEEDS, _log_file
+    global PLACEHOLDER_SEVERITIES, PLACEHOLDER_SEEDS, _log_file, _severities_overridden
+    _severities_overridden = bool(args.severities)
     if args.severities:
         PLACEHOLDER_SEVERITIES = args.severities
     if args.seeds:
@@ -240,10 +304,13 @@ def main():
         selected = discovered[:3]
         log(f"No --datasets or --all given; defaulting to first 3: {[d[1] for d in selected]}")
 
-    log(f"DISTRIBUTION SHIFT SMOKE TEST — {len(selected)} dataset(s), "
-        f"{len(MECHANISMS)} mechanisms, {len(PLACEHOLDER_SEVERITIES)} severities, "
+    log(f"DISTRIBUTION SHIFT FULL RUN — {len(selected)} dataset(s), "
+        f"{len(MECHANISMS)} mechanisms, 10 severity levels per D4's real grid, "
         f"{len(PLACEHOLDER_SEEDS)} seeds")
-    log(f"Severities (PLACEHOLDER, not D4's real grid): {PLACEHOLDER_SEVERITIES}")
+    if _severities_overridden:
+        log(f"Severities: OVERRIDDEN via --severities, NOT D4's real grid: {PLACEHOLDER_SEVERITIES}")
+    else:
+        log(f"Severities: D4's real per-dataset grid, loaded from {SEVERITY_TABLE_PATH}")
     log(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
     results = []

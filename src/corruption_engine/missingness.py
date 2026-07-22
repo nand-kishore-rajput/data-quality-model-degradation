@@ -38,7 +38,7 @@ from scipy import stats
 
 from .base import (
     CorruptionMetadata, sigmoid, reference_zscore, solve_logit_offset_for_target_rate,
-    rate_tolerance, reference_variance_issue, nan_adjusted_target,
+    rate_tolerance, reference_variance_issue, nan_adjusted_target, derive_call_seed,
 )
 
 MechanismName = Literal["mcar", "mar", "mnar"]
@@ -143,7 +143,8 @@ def corrupt_mcar(
     conditioning structure to estimate.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "mcar", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
     achieved_rate = {}
 
@@ -197,7 +198,8 @@ def corrupt_mar(
     column fails — i.e. nothing in this call could be validly corrupted.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "mar", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
     achieved_rate = {}
     conditioning_used = {}
@@ -288,7 +290,8 @@ def corrupt_mnar(
     column fails.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "mnar", severity)
+    rng = np.random.default_rng(call_seed)
     corrupted = fold.copy()
     achieved_rate = {}
     assoc_checks = {}

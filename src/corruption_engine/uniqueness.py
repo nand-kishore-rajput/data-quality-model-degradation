@@ -44,7 +44,7 @@ from typing import Optional, Literal, Tuple
 import numpy as np
 import pandas as pd
 
-from .base import CorruptionMetadata, select_frozen_slice_bounds
+from .base import CorruptionMetadata, select_frozen_slice_bounds, derive_call_seed
 
 MechanismName = Literal["global", "slice_conditional"]
 
@@ -75,7 +75,8 @@ def corrupt_global(
     their position at the end of the DataFrame.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "global", severity)
+    rng = np.random.default_rng(call_seed)
     n = len(fold)
     k = round(severity * n)
 
@@ -142,7 +143,8 @@ def corrupt_slice_conditional(
     outside S is ever touched or sampled from.
     """
     _validate_severity(severity)
-    rng = np.random.default_rng(seed)
+    call_seed = derive_call_seed(seed, dataset_name, "slice_conditional", severity)
+    rng = np.random.default_rng(call_seed)
 
     bounds = select_frozen_slice_bounds(train_fold_reference, seed, dataset_name)
     sf = bounds["slice_feature"]
